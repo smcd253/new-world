@@ -1,0 +1,193 @@
+/* define hexagon and sub objects*/
+.hexagon {
+    right: 0;
+    width: 300px; 
+    height: 173.21px;
+    margin: 86.60px 0;
+    background-size: auto 346.4102px;
+    background-position: center;
+    transform: scale(0.75)
+}
+
+.hexTop,
+.hexBottom {
+    position: absolute;
+    z-index: 1;
+    width: 212.13px;
+    height: 212.13px;
+    overflow: hidden;
+    -webkit-transform: scaleY(0.5774) rotate(-45deg);
+    -ms-transform: scaleY(0.5774) rotate(-45deg);
+    transform: scaleY(0.5774) rotate(-45deg);
+    background: inherit;
+    left: 43.93px;
+}
+
+/*counter transform the bg image on the caps*/
+.hexTop:after,
+.hexBottom:after {
+    content: "";
+    position: absolute;
+    width: 300.0000px;
+    height: 173.20508075688775px;
+    -webkit-transform:  rotate(45deg) scaleY(1.7321) translateY(-86.6025px);
+    -ms-transform:      rotate(45deg) scaleY(1.7321) translateY(-86.6025px);
+    transform:          rotate(45deg) scaleY(1.7321) translateY(-86.6025px);
+    -webkit-transform-origin: 0 0;
+    -ms-transform-origin: 0 0;
+    transform-origin: 0 0;
+    background: inherit;
+}
+
+.hexTop {
+    top: -106.0660px;
+}
+
+.hexTop:after {
+    background-position: center top;
+}
+
+.hexBottom {
+    bottom: -106.0660px;
+}
+
+.hexBottom:after {
+    background-position: center bottom;
+}
+
+.hexagon:after {
+    content: "";
+    position: absolute;
+    top: 0.0000px;
+    left: 0;
+    width: 300.0000px;
+    height: 173.2051px;
+    z-index: 2;
+    background: inherit;
+}
+
+/* define specific tiles */
+/* line 1 */
+#wheat1.hexagon {
+    position: fixed;
+    top: 200px;
+    left: 400px;
+    background-image: url("../images/wheat.jpg");
+}
+#wheat2.hexagon {
+    position: fixed;
+    top: 200px;
+    left: 640px;
+    background-image: url("../images/wheat.jpg");
+}
+#wheat3.hexagon {
+    position: fixed;
+    top: 200px;
+    left: 880px;
+    background-image: url("../images/wheat.jpg");
+}
+
+/* line 2 */
+#wheat4.hexagon {
+    position: fixed;
+    top: 405px;
+    left: 280px;
+    background-image: url("../images/wheat.jpg");
+}
+#sheep1.hexagon {
+    position: fixed;
+    top: 405px;
+    left: 520px;
+    background-image: url("../images/sheep.jpg");
+}
+#sheep2.hexagon {
+    position: fixed;
+    top: 405px;
+    left: 760px;
+    background-image: url("../images/sheep.jpg");
+}
+#sheep3.hexagon {
+    position: fixed;
+    top: 405px;
+    left: 1000px;
+    background-image: url("../images/sheep.jpg");
+}
+
+/* line 3 */
+#sheep4.hexagon {
+    position: fixed;
+    top: 610px;
+    left: 160px;
+    background-image: url("../images/sheep.jpg");
+}
+#ore1.hexagon {
+    position: fixed;
+    top: 610px;
+    left: 400px;
+    background-image: url("../images/ore.jpg");
+}
+#ore2.hexagon {
+    position: fixed;
+    top: 610px;
+    left: 640px;
+    background-image: url("../images/ore.jpg");
+}
+#ore3.hexagon {
+    position: fixed;
+    top: 610px;
+    left: 880px;
+    background-image: url("../images/ore.jpg");
+}
+#brick1.hexagon {
+    position: fixed;
+    top: 610px;
+    left: 1120px;
+    background-image: url("../images/brick.jpeg");
+}
+
+/* line 4 */
+#brick2.hexagon {
+    position: fixed;
+    top: 815px;
+    left: 280px;
+    background-image: url("../images/brick.jpeg");
+}
+#brick3.hexagon {
+    position: fixed;
+    top: 815px;
+    left: 520px;
+    background-image: url("../images/brick.jpeg");
+}
+
+#wood1.hexagon {
+    position: fixed;
+    top: 815px;
+    left: 760px;
+    background-image: url("../images/wood.jpeg");
+}
+#wood2.hexagon {
+    position: fixed;
+    top: 815px;
+    left: 1000px;
+    background-image: url("../images/wood.jpeg");
+}
+
+/* line 5 */
+#wood3.hexagon {
+    position: fixed;
+    top: 1020px;
+    left: 400px;
+    background-image: url("../images/wood.jpeg");
+}
+#wood4.hexagon {
+    position: fixed;
+    top: 1020px;
+    left: 640px;
+    background-image: url("../images/wood.jpeg");
+}
+#desert.hexagon {
+    position: fixed;
+    top: 1020px;
+    left: 880px;
+    background-image: url("../images/desert.jpeg");
+}
