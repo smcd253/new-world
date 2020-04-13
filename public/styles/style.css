@@ -68,126 +68,125 @@
 
 /* define specific tiles */
 /* line 1 */
-#wheat1.hexagon {
+#tile1.hexagon {
     position: fixed;
-    top: 200px;
+    top: 100px;
     left: 400px;
     background-image: url("../images/wheat.jpg");
 }
-#wheat2.hexagon {
+#tile2.hexagon {
     position: fixed;
-    top: 200px;
+    top: 100px;
     left: 640px;
     background-image: url("../images/wheat.jpg");
 }
-#wheat3.hexagon {
+#tile3.hexagon {
     position: fixed;
-    top: 200px;
+    top: 100px;
     left: 880px;
     background-image: url("../images/wheat.jpg");
 }
 
 /* line 2 */
-#wheat4.hexagon {
+#tile4.hexagon {
     position: fixed;
-    top: 405px;
+    top: 305px;
     left: 280px;
     background-image: url("../images/wheat.jpg");
 }
-#sheep1.hexagon {
+#tile5.hexagon {
     position: fixed;
-    top: 405px;
+    top: 305px;
     left: 520px;
     background-image: url("../images/sheep.jpg");
 }
-#sheep2.hexagon {
+#tile6.hexagon {
     position: fixed;
-    top: 405px;
+    top: 305px;
     left: 760px;
     background-image: url("../images/sheep.jpg");
 }
-#sheep3.hexagon {
+#tile7.hexagon {
     position: fixed;
-    top: 405px;
+    top: 305px;
     left: 1000px;
     background-image: url("../images/sheep.jpg");
 }
 
 /* line 3 */
-#sheep4.hexagon {
+#tile8.hexagon {
     position: fixed;
-    top: 610px;
+    top: 510px;
     left: 160px;
     background-image: url("../images/sheep.jpg");
 }
-#ore1.hexagon {
+#tile9.hexagon {
     position: fixed;
-    top: 610px;
+    top: 510px;
     left: 400px;
     background-image: url("../images/ore.jpg");
 }
-#ore2.hexagon {
+#tile10.hexagon {
     position: fixed;
-    top: 610px;
+    top: 510px;
     left: 640px;
     background-image: url("../images/ore.jpg");
 }
-#ore3.hexagon {
+#tile11.hexagon {
     position: fixed;
-    top: 610px;
+    top: 510px;
     left: 880px;
     background-image: url("../images/ore.jpg");
 }
-#brick1.hexagon {
+#tile12.hexagon {
     position: fixed;
-    top: 610px;
+    top: 510px;
     left: 1120px;
     background-image: url("../images/brick.jpeg");
 }
 
 /* line 4 */
-#brick2.hexagon {
+#tile13.hexagon {
     position: fixed;
-    top: 815px;
+    top: 715px;
     left: 280px;
     background-image: url("../images/brick.jpeg");
 }
-#brick3.hexagon {
+#tile14.hexagon {
     position: fixed;
-    top: 815px;
+    top: 715px;
     left: 520px;
     background-image: url("../images/brick.jpeg");
 }
-
-#wood1.hexagon {
+#tile15.hexagon {
     position: fixed;
-    top: 815px;
+    top: 715px;
     left: 760px;
     background-image: url("../images/wood.jpeg");
 }
-#wood2.hexagon {
+#tile16.hexagon {
     position: fixed;
-    top: 815px;
+    top: 715px;
     left: 1000px;
     background-image: url("../images/wood.jpeg");
 }
 
 /* line 5 */
-#wood3.hexagon {
+#tile17.hexagon {
     position: fixed;
-    top: 1020px;
+    top: 920px;
     left: 400px;
     background-image: url("../images/wood.jpeg");
 }
-#wood4.hexagon {
+#tile18.hexagon {
     position: fixed;
-    top: 1020px;
+    top: 920px;
     left: 640px;
     background-image: url("../images/wood.jpeg");
 }
-#desert.hexagon {
+#tile19.hexagon {
     position: fixed;
-    top: 1020px;
+    top: 920px;
     left: 880px;
     background-image: url("../images/desert.jpeg");
 }

@@ -10,6 +10,7 @@ const port = 5000
 app.set('port', port);
 app.use('/static', express.static(__dirname + '/static'));
 app.use(express.static(path.join(__dirname, '/public')));
+
 // Main Page
 app.get('/', function(request, response) {
     response.sendFile(path.join(__dirname, 'index.html'));
@@ -23,36 +24,80 @@ server.listen(port, function() {
 // WebSocket handlers
 io.on('connection', function(socket) {
 });
-// setInterval(function() {
-//     io.sockets.emit('message', 'hi!');
-//   }, 1000);
 
+// send message to client every 1s
+setInterval(function() {
+    io.sockets.emit('message', 'hi!');
+  }, 1000);
+
+// object to contain all player info
 let players = {};
+// server board object
+let board = [
+  {name: "wheat1",  type: "wheat",  number: 2},
+  {name: "wheat2",  type: "wheat",  number: 3},
+  {name: "wheat3",  type: "wheat",  number: 3},
+  {name: "wheat4",  type: "wheat",  number: 4},
+  {name: "sheep1",  type: "sheep",  number: 4},
+  {name: "sheep2",  type: "sheep",  number: 5},
+  {name: "sheep3",  type: "sheep",  number: 5},
+  {name: "sheep4",  type: "sheep",  number: 6},
+  {name: "ore1",    type: "ore",    number: 6},
+  {name: "ore2",    type: "ore",    number: 8},
+  {name: "ore3",    type: "ore",    number: 8},
+  {name: "brick1",  type: "brick",  number: 9},
+  {name: "brick2",  type: "brick",  number: 9},
+  {name: "brick3",  type: "brick",  number: 10},
+  {name: "wood1",   type: "wood",   number: 10},
+  {name: "wood2",   type: "wood",   number: 11},
+  {name: "wood3",   type: "wood",   number: 11},
+  {name: "wood4",   type: "wood",   number: 12},
+  {name: "desert",  type: "wheat",  number: 0},
+];
+
+
+
+// src: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+function shuffle(array) {
+  let currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+
+
+// every time a request is made
 io.on('connection', function(socket) {
-    socket.on('new player', function() {
-        players[socket.id] = {
-        x: 300,
-        y: 300
-        };
-    });
-    socket.on('movement', function(data) {
-        let player = players[socket.id] || {};
-        if (data.left) {
-        player.x -= 5;
-        }
-        if (data.up) {
-        player.y -= 5;
-        }
-        if (data.right) {
-        player.x += 5;
-        }
-        if (data.down) {
-        player.y += 5;
-        }
-    });
+  // if it is a new player (new instance of game.js)
+  socket.on('new player', function() {
+    board[socket.id] = {
+      x: 300,
+      y: 300
+    };
+  });
+
+  // if message is "shuffle"
+  socket.on('shuffle', function() {
+    board = shuffle(board);
+    io.sockets.emit('state', board);
+  });
 });
 
-setInterval(function() {
-    io.sockets.emit('state', players);
-  }, 1000 / 60);
+// send state of all players back to all connections
+// setInterval(function() {
+//     io.sockets.emit('state', players);
+//   }, 1000 / 60);
 
