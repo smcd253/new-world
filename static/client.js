@@ -1,3 +1,6 @@
+// game dependencies
+const game = require(["../public/game/game.js"])
+
 // establish connection to server
 let socket = io();
 
@@ -6,8 +9,80 @@ socket.on('message', function(data) {
   console.log(data);
 });
 
-// send server message: 'new player' when a new connection (this script) is formed
-socket.emit('new player');
+// player's hand
+class Hand {
+  constructor() {
+    this.total = 0;
+    let wheat = 0;
+    let sheep = 0;
+    let ore = 0;
+    let brick = 0;
+    let wood = 0;
+  }
+  
+  get_wheat() {
+    return this.wheat;
+  }
+
+  get_sheep() {
+    return this.sheep;
+  }
+
+  get_ore() {
+    return this.ore;
+  }
+
+  get_brick() {
+    return this.brick;
+  }
+
+  get_wood() {
+    return this.wood;
+  }
+}
+  
+// player info
+class Player {
+  constructor(name, color) {
+      this.player_number = -1;
+      this.name = name;
+      this.color = color;
+      this.points_visible = 0;
+      let points_actual = 0; // + vp dev_cards
+      this.settlements = 5;
+      this.cities = 4;
+      this.roads = 15;
+      this.dev_cards = 0;
+      this.hand = new Hand();
+  }
+
+  get_points_actual() {
+      return this.points_actual;
+  }
+}
+
+// players object
+let players = {};
+
+// create new player
+let name = "Spencer"; // TODO: source this from html
+let color = "Blue"; // TODO: source this from html
+
+// send server message: 'new player' and new player info when a new connection (this script) is formed
+socket.emit('new player', name, color);
+
+// create client instance of player
+my_player = new Player(name, color);
+
+// callback to update player socket id
+socket.on("player number", function(socket_id) {
+  my_player.player_number = socket_id;
+});
+
+// debug
+console.log("client player instance")
+console.log(my_player)
+
 
 // client board object
 let board = [
@@ -44,6 +119,7 @@ function shuffle_board() {
 
 // debug print
 socket.on('debug', function(data) {
+  console.log("------------------------- Server Debug Msg -------------------------")
   console.log(data);
 });
 
