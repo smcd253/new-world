@@ -1,5 +1,7 @@
 /* define hexagon and sub objects*/
 .hexagon {
+    position: fixed;
+    z-index: -1;
     right: 0;
     width: 300px; 
     height: 173.21px;
@@ -11,7 +13,7 @@
 
 .hexTop,
 .hexBottom {
-    position: absolute;
+    position: inherit;
     z-index: 1;
     width: 212.13px;
     height: 212.13px;
@@ -27,7 +29,7 @@
 .hexTop:after,
 .hexBottom:after {
     content: "";
-    position: absolute;
+    position: inherit;
     width: 300.0000px;
     height: 173.20508075688775px;
     -webkit-transform:  rotate(45deg) scaleY(1.7321) translateY(-86.6025px);
@@ -57,7 +59,7 @@
 
 .hexagon:after {
     content: "";
-    position: absolute;
+    position: inherit;
     top: 0.0000px;
     left: 0;
     width: 300.0000px;
@@ -66,22 +68,34 @@
     background: inherit;
 }
 
+/*circle for numbers*/
+.circle {
+    position: relative;
+    z-index: 3;
+    margin: auto;
+    width: 25%;
+    height: 42%;
+    font-size: 300%;
+    border-radius: 50%;
+    color: #fff;
+    text-align: center;
+    background: #000
+}
+
+
 /* define specific tiles */
 /* line 1 */
 #tile1.hexagon {
-    position: fixed;
     top: 100px;
     left: 400px;
     background-image: url("../images/wheat.jpg");
 }
 #tile2.hexagon {
-    position: fixed;
     top: 100px;
     left: 640px;
     background-image: url("../images/wheat.jpg");
 }
 #tile3.hexagon {
-    position: fixed;
     top: 100px;
     left: 880px;
     background-image: url("../images/wheat.jpg");
@@ -89,25 +103,21 @@
 
 /* line 2 */
 #tile4.hexagon {
-    position: fixed;
     top: 305px;
     left: 280px;
     background-image: url("../images/wheat.jpg");
 }
 #tile5.hexagon {
-    position: fixed;
     top: 305px;
     left: 520px;
     background-image: url("../images/sheep.jpg");
 }
 #tile6.hexagon {
-    position: fixed;
     top: 305px;
     left: 760px;
     background-image: url("../images/sheep.jpg");
 }
 #tile7.hexagon {
-    position: fixed;
     top: 305px;
     left: 1000px;
     background-image: url("../images/sheep.jpg");
@@ -115,31 +125,26 @@
 
 /* line 3 */
 #tile8.hexagon {
-    position: fixed;
     top: 510px;
     left: 160px;
     background-image: url("../images/sheep.jpg");
 }
 #tile9.hexagon {
-    position: fixed;
     top: 510px;
     left: 400px;
     background-image: url("../images/ore.jpg");
 }
 #tile10.hexagon {
-    position: fixed;
     top: 510px;
     left: 640px;
     background-image: url("../images/ore.jpg");
 }
 #tile11.hexagon {
-    position: fixed;
     top: 510px;
     left: 880px;
     background-image: url("../images/ore.jpg");
 }
 #tile12.hexagon {
-    position: fixed;
     top: 510px;
     left: 1120px;
     background-image: url("../images/brick.jpeg");
@@ -147,25 +152,21 @@
 
 /* line 4 */
 #tile13.hexagon {
-    position: fixed;
     top: 715px;
     left: 280px;
     background-image: url("../images/brick.jpeg");
 }
 #tile14.hexagon {
-    position: fixed;
     top: 715px;
     left: 520px;
     background-image: url("../images/brick.jpeg");
 }
 #tile15.hexagon {
-    position: fixed;
     top: 715px;
     left: 760px;
     background-image: url("../images/wood.jpeg");
 }
 #tile16.hexagon {
-    position: fixed;
     top: 715px;
     left: 1000px;
     background-image: url("../images/wood.jpeg");
@@ -173,19 +174,19 @@
 
 /* line 5 */
 #tile17.hexagon {
-    position: fixed;
+    
     top: 920px;
     left: 400px;
     background-image: url("../images/wood.jpeg");
 }
 #tile18.hexagon {
-    position: fixed;
+    
     top: 920px;
     left: 640px;
     background-image: url("../images/wood.jpeg");
 }
 #tile19.hexagon {
-    position: fixed;
+    
     top: 920px;
     left: 880px;
     background-image: url("../images/desert.jpeg");
