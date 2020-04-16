@@ -1,8 +1,3 @@
-.board {
-    position: absolute;
-    
-}
-
 /* define hexagon and sub objects*/
 .hexagon {
     object-fit: contain;
