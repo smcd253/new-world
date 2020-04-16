@@ -1,5 +1,11 @@
+.board {
+    position: absolute;
+    
+}
+
 /* define hexagon and sub objects*/
 .hexagon {
+    object-fit: contain;
     position: fixed;
     z-index: -1;
     right: 0;
@@ -13,6 +19,7 @@
 
 .hexTop,
 .hexBottom {
+    object-fit: inherit;
     position: inherit;
     z-index: 1;
     width: 212.13px;
@@ -29,6 +36,7 @@
 .hexTop:after,
 .hexBottom:after {
     content: "";
+    object-fit: inherit;
     position: inherit;
     width: 300.0000px;
     height: 173.20508075688775px;
@@ -59,6 +67,7 @@
 
 .hexagon:after {
     content: "";
+    object-fit: inherit;
     position: inherit;
     top: 0.0000px;
     left: 0;
@@ -70,6 +79,7 @@
 
 /*circle for numbers*/
 .circle {
+    object-fit: contain;
     position: relative;
     z-index: 3;
     margin: auto;
