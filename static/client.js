@@ -1,4 +1,5 @@
 // establish connection to server
+// note: socketIO uses JSON.stringify() natively to send and receive any objects
 let socket = io();
 
 // log any messages from server
@@ -41,7 +42,6 @@ socket.on('debug', function(data) {
 
 // receive new state from server, draw new components
 socket.on('state', function(layout) {
-  // board = new_board
   draw_new_board(layout);
 });
 
@@ -50,24 +50,28 @@ function draw_new_board(layout) {
   let tiles = document.getElementsByClassName("hexagon")
   let i = 0
   for (let i = 0; i < tiles.length; i++) {
-    if(layout[i].type === "wheat") {
-      tiles[i].style.backgroundImage = "url('../images/wheat.jpg')";
-    }
-    else if(layout[i].type === "sheep") {
-      tiles[i].style.backgroundImage = "url('../images/sheep.jpg')";
-    }
-    else if(layout[i].type === "ore") {
-      tiles[i].style.backgroundImage = "url('../images/ore.jpg')";
-    }
-    else if(layout[i].type === "brick") {
-      tiles[i].style.backgroundImage = "url('../images/brick.jpeg')";
-    }
-    else if(layout[i].type === "wood") {
-      tiles[i].style.backgroundImage = "url('../images/wood.jpeg')";
-    }
-    else if(layout[i].type === "desert") {
+    if(layout[i].type === "desert") {
       tiles[i].style.backgroundImage = "url('../images/desert.jpeg')";
+      tiles[i].getElementsByClassName("circle")[0].style.visibility = "hidden";
     }
-    tiles[i].getElementsByClassName("circle")[0].textContent = layout[i].number;
+    else {
+      if(layout[i].type === "wheat") {
+        tiles[i].style.backgroundImage = "url('../images/wheat.jpg')";
+      }
+      else if(layout[i].type === "sheep") {
+        tiles[i].style.backgroundImage = "url('../images/sheep.jpg')";
+      }
+      else if(layout[i].type === "ore") {
+        tiles[i].style.backgroundImage = "url('../images/ore.jpg')";
+      }
+      else if(layout[i].type === "brick") {
+        tiles[i].style.backgroundImage = "url('../images/brick.jpeg')";
+      }
+      else if(layout[i].type === "wood") {
+        tiles[i].style.backgroundImage = "url('../images/wood.jpeg')";
+      }
+      tiles[i].getElementsByClassName("circle")[0].style.visibility = "visible";
+      tiles[i].getElementsByClassName("circle")[0].textContent = layout[i].number;
+    }
   }
 }

@@ -2,6 +2,7 @@
 const express = require('express');
 const http = require('http');
 const path = require('path');
+// note: socketIO uses JSON.stringify() natively to send and receive any objects
 const socketIO = require('socket.io');
 const app = express();
 const server = http.Server(app);

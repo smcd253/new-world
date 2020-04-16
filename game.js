@@ -87,7 +87,6 @@ class Tile {
 
 class Board {
     constructor() {
-        this.board_name = "board";
         // create an array of tiles
         this.tiles = [];
         for(let i = 0; i < _tiles.length; i++) {
