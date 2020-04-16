@@ -72,11 +72,7 @@ io.on('connection', function(socket) {
 
   // if message is "shuffle"
   socket.on('shuffle', function() {
-    console.log(board.board_name)
-    console.log(board.tiles[0].name)
-
     shuffle(board.tiles);
     io.sockets.emit('state', board.tiles);
-    // io.sockets.emit('debug', board.tiles[0].name);
   });
 });
