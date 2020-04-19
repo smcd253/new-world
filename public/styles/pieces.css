@@ -63,7 +63,7 @@ outline:1px solid transparent; /* fix for jagged edges in FF on hover transition
 }
 
 
-/* roads and houses */
+/* roads */
 .piece road {
     width: 2%;
     height: 35%;
@@ -103,7 +103,35 @@ outline:1px solid transparent; /* fix for jagged edges in FF on hover transition
     background: rgb(0, 0, 0);
 }
 
+/* settlements */
+.piece settlement { 
+    width: 10%;
+    height: 10%;
+    background: rgb(0, 0, 0);
+}
+.roof {
+    width: 10%;
+    height: 0;    
+    padding-left:10%;
+    padding-bottom: 10%;
+    overflow: hidden;
+    transform: scale(5);
+}
+.roof:after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    margin-left:-500px;
+    border-left: 500px solid transparent;
+    border-right: 500px solid transparent;
+    border-bottom: 500px black;
+}
 
+.settlement1 {
+    top: 50%;
+    left: 75%;
+}
 /*** HEX CONTENT **********************************************************************/
 .piece img {
 left: -100%;
