@@ -1,114 +1,208 @@
-<!DOCTYPE html>
-<!--source: https://hackernoon.com/how-to-build-a-multiplayer-browser-game-4a793818c29b-->>
+<!-- src: https://github.com/web-tiki/responsive-grid-of-hexagons/blob/master/index.html -->
+<!doctype html>
 <html>
   <head>
-    <title>CATAN FOR THE BOYS</title>
+    <meta charset="utf-8">
+    <title></title>
     <script src="/socket.io/socket.io.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="./styles/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Raleway:300' rel='stylesheet' type='text/css'>
   </head>
   <body>
-    <link rel="stylesheet" type="text/css" href="./styles/style.css">
-    <button onclick="shuffle_board()">Shuffle Board</button>
-    <div class="hexagon" id="tile1">
-      <div class="hexTop"></div>
-      <div class="hexBottom"></div>
-      <div class="circle"></div>
-    </div>
-    <div class="hexagon" id="tile2">
-      <div class="hexTop"></div>
-      <div class="hexBottom"></div>
-      <div class="circle"></div>
-    </div>
-    <div class="hexagon" id="tile3">
-      <div class="hexTop"></div>
-      <div class="hexBottom"></div>
-      <div class="circle"></div>
-    </div>
-    <div class="hexagon" id="tile4">
-      <div class="hexTop"></div>
-      <div class="hexBottom"></div>
-      <div class="circle"></div>
-    </div>
-
-    <div class="hexagon" id="tile5">
-      <div class="hexTop"></div>
-      <div class="hexBottom"></div>
-      <div class="circle"></div>
-    </div>
-    <div class="hexagon" id="tile6">
-      <div class="hexTop"></div>
-      <div class="hexBottom"></div>
-      <div class="circle"></div>
-    </div>
-    <div class="hexagon" id="tile7">
-      <div class="hexTop"></div>
-      <div class="hexBottom"></div>
-      <div class="circle"></div>
-    </div>
-    <div class="hexagon" id="tile8">
-      <div class="hexTop"></div>
-      <div class="hexBottom"></div>
-      <div class="circle"></div>
-    </div>
-  
-    <div class="hexagon" id="tile9">
-      <div class="hexTop"></div>
-      <div class="hexBottom"></div>
-      <div class="circle"></div>
-    </div>
-    <div class="hexagon" id="tile10">
-      <div class="hexTop"></div>
-      <div class="hexBottom"></div>
-      <div class="circle"></div>
-    </div>
-    <div class="hexagon" id="tile11">
-      <div class="hexTop"></div>
-      <div class="hexBottom"></div>
-      <div class="circle"></div>
-    </div>
-  
-    <div class="hexagon" id="tile12">
-      <div class="hexTop"></div>
-      <div class="hexBottom"></div>
-      <div class="circle"></div>
-    </div>
-    <div class="hexagon" id="tile13">
-      <div class="hexTop"></div>
-      <div class="hexBottom"></div>
-      <div class="circle"></div>
-    </div>
-    <div class="hexagon" id="tile14">
-      <div class="hexTop"></div>
-      <div class="hexBottom"></div>
-      <div class="circle"></div>
-    </div>
-  
-    <div class="hexagon" id="tile15">
-      <div class="hexTop"></div>
-      <div class="hexBottom"></div>
-      <div class="circle"></div>
-    </div>
-    <div class="hexagon" id="tile16">
-      <div class="hexTop"></div>
-      <div class="hexBottom"></div>
-      <div class="circle"></div>
-    </div>
-    <div class="hexagon" id="tile17">
-      <div class="hexTop"></div>
-      <div class="hexBottom"></div>
-      <div class="circle"></div>
-    </div>
-    <div class="hexagon" id="tile18">
-      <div class="hexTop"></div>
-      <div class="hexBottom"></div>
-      <div class="circle"></div>
-    </div>
-    <div class="hexagon" id="tile19">
-      <div class="hexTop"></div>
-      <div class="hexBottom"></div>
-      <div class="circle"></div>
-    </div>
     <script src="/static/client.js"></script>
+    <button onclick="shuffle_board()">Shuffle Board</button>
+    <ul id="hexGrid">
+      <li class="hex">
+        <div class="hexIn">
+          <a class="hexLink" href="#">
+            <img src="./images/dirt.jpg" alt="" />
+            <h1>This is a title</h1>
+            <p>Some sample text about the article this hexagon leads to</p>
+            <circle></circle>
+          </a>
+        </div>
+      </li>
+      <li class="hex">
+        <div class="hexIn">
+          <a class="hexLink" href="#">
+            <img src="./images/dirt.jpg" alt="" />
+            <h1>This is a title</h1>
+            <p>Some sample text about the article this hexagon leads to</p>
+            <circle></circle>
+          </a>
+        </div>
+      </li>
+      <li class="hex">
+        <div class="hexIn">
+          <a class="hexLink" href="#">
+            <img src="./images/dirt.jpg" alt="" />
+            <h1>This is a title</h1>
+            <p>Some sample text about the article this hexagon leads to</p>
+            <circle></circle>
+          </a>
+        </div>
+      </li>
+      <li class="hex">
+        <div class="hexIn">
+          <a class="hexLink" href="#">
+            <img src="./images/dirt.jpg" alt="" />
+            <h1>This is a title</h1>
+            <p>Some sample text about the article this hexagon leads to</p>
+            <circle></circle>
+          </a>
+        </div>
+      </li>
+      <li class="hex">
+        <div class="hexIn">
+          <a class="hexLink" href="#">
+            <img src="./images/dirt.jpg" alt="" />
+            <h1>This is a title</h1>
+            <p>Some sample text about the article this hexagon leads to</p>
+            <circle></circle>
+          </a>
+        </div>
+      </li>
+      <li class="hex">
+        <div class="hexIn">
+          <a class="hexLink" href="#">
+            <img src="./images/dirt.jpg" alt="" />
+            <h1>This is a title</h1>
+            <p>Some sample text about the article this hexagon leads to</p>
+            <circle></circle>
+          </a>
+        </div>
+      </li>
+      <li class="hex">
+        <div class="hexIn">
+          <a class="hexLink" href="#">
+            <img src="./images/dirt.jpg" alt="" />
+            <h1>This is a title</h1>
+            <p>Some sample text about the article this hexagon leads to</p>
+            <circle></circle>
+          </a>
+        </div>
+      </li>
+      <li class="hex">
+        <div class="hexIn">
+          <a class="hexLink" href="#">
+            <img src="./images/dirt.jpg" alt="" />
+            <h1>This is a title</h1>
+            <p>Some sample text about the article this hexagon leads to</p>
+            <circle></circle>
+          </a>
+        </div>
+      </li>
+      <li class="hex">
+        <div class="hexIn">
+          <a class="hexLink" href="#">
+            <img src="./images/dirt.jpg" alt="" />
+            <h1>This is a title</h1>
+            <p>Some sample text about the article this hexagon leads to</p>
+            <circle></circle>
+          </a>
+        </div>
+      </li>
+      <li class="hex">
+        <div class="hexIn">
+          <a class="hexLink" href="#">
+            <img src="./images/dirt.jpg" alt="" />
+            <h1>This is a title</h1>
+            <p>Some sample text about the article this hexagon leads to</p>
+            <circle></circle>
+          </a>
+        </div>
+      </li>
+      <li class="hex">
+        <div class="hexIn">
+          <a class="hexLink" href="#">
+            <img src="./images/dirt.jpg" alt="" />
+            <h1>This is a title</h1>
+            <p>Some sample text about the article this hexagon leads to</p>
+            <circle></circle>
+          </a>
+        </div>
+      </li>
+      <li class="hex">
+        <div class="hexIn">
+          <a class="hexLink" href="#">
+            <img src="./images/dirt.jpg" alt="" />
+            <h1>This is a title</h1>
+            <p>Some sample text about the article this hexagon leads to</p>
+            <circle></circle>
+          </a>
+        </div>
+      </li>
+      <li class="hex">
+        <div class="hexIn">
+          <a class="hexLink" href="#">
+            <img src="./images/dirt.jpg" alt="" />
+            <h1>This is a title</h1>
+            <p>Some sample text about the article this hexagon leads to</p>
+            <circle></circle>
+          </a>
+        </div>
+      </li>
+      <li class="hex">
+        <div class="hexIn">
+          <a class="hexLink" href="#">
+            <img src="./images/dirt.jpg" alt="" />
+            <h1>This is a title</h1>
+            <p>Some sample text about the article this hexagon leads to</p>
+            <circle></circle>
+          </a>
+        </div>
+      </li>
+      <li class="hex">
+        <div class="hexIn">
+          <a class="hexLink" href="#">
+            <img src="./images/dirt.jpg" alt="" />
+            <h1>This is a title</h1>
+            <p>Some sample text about the article this hexagon leads to</p>
+            <circle></circle>
+          </a>
+        </div>
+      </li>
+      <li class="hex">
+        <div class="hexIn">
+          <a class="hexLink" href="#">
+            <img src="./images/dirt.jpg" alt="" />
+            <h1>This is a title</h1>
+            <p>Some sample text about the article this hexagon leads to</p>
+            <circle></circle>
+          </a>
+        </div>
+      </li>
+      <li class="hex">
+        <div class="hexIn">
+          <a class="hexLink" href="#">
+            <img src="./images/dirt.jpg" alt="" />
+            <h1>This is a title</h1>
+            <p>Some sample text about the article this hexagon leads to</p>
+            <circle></circle>
+          </a>
+        </div>
+      </li>
+      <li class="hex">
+        <div class="hexIn">
+          <a class="hexLink" href="#">
+            <img src="./images/dirt.jpg" alt="" />
+            <h1>This is a title</h1>
+            <p>Some sample text about the article this hexagon leads to</p>
+            <circle></circle>
+          </a>
+        </div>
+      </li>
+      <li class="hex">
+        <div class="hexIn">
+          <a class="hexLink" href="#">
+            <img src="./images/dirt.jpg" alt="" />
+            <h1>This is a title</h1>
+            <p>Some sample text about the article this hexagon leads to</p>
+            <circle></circle>
+          </a>
+        </div>
+      </li>
+    </ul>
   </body>
-  <!--source: https://csshexagon.com/-->
 </html>
-

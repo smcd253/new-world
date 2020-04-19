@@ -13,6 +13,8 @@ const port = 5000
 const game = require("./game.js");
 
 app.set('port', port);
+
+// included directories for html and css
 app.use('/static', express.static(__dirname + '/static'));
 app.use(express.static(path.join(__dirname, '/public')));
 

@@ -47,31 +47,35 @@ socket.on('state', function(layout) {
 
 function draw_new_board(layout) {
   console.log("drawing new board")
-  let tiles = document.getElementsByClassName("hexagon")
+  let tiles = document.getElementsByClassName("hex")
+  console.log(tiles)
   let i = 0
   for (let i = 0; i < tiles.length; i++) {
+    circle = tiles[i].getElementsByTagName("circle")[0];
+    tile_image = tiles[i].getElementsByClassName("hexIn")[0].getElementsByClassName("hexLink")[0].getElementsByTagName("img")[0];
+    console.log(tile_image.src);
     if(layout[i].type === "desert") {
-      tiles[i].style.backgroundImage = "url('../images/desert.jpeg')";
-      tiles[i].getElementsByClassName("circle")[0].style.visibility = "hidden";
+      tile_image.src = "./images/desert.jpeg";
+      circle.style.visibility = "hidden";
     }
     else {
       if(layout[i].type === "wheat") {
-        tiles[i].style.backgroundImage = "url('../images/wheat.jpg')";
+        tile_image.src = "./images/wheat.jpg";
       }
       else if(layout[i].type === "sheep") {
-        tiles[i].style.backgroundImage = "url('../images/sheep.jpg')";
+        tile_image.src = "./images/sheep.jpg";
       }
       else if(layout[i].type === "ore") {
-        tiles[i].style.backgroundImage = "url('../images/ore.jpg')";
+        tile_image.src = "./images/ore.jpg";
       }
       else if(layout[i].type === "brick") {
-        tiles[i].style.backgroundImage = "url('../images/brick.jpeg')";
+        tile_image.src = "./images/brick.jpg";
       }
       else if(layout[i].type === "wood") {
-        tiles[i].style.backgroundImage = "url('../images/wood.jpeg')";
+        tile_image.src = "./images/wood.jpeg";
       }
-      tiles[i].getElementsByClassName("circle")[0].style.visibility = "visible";
-      tiles[i].getElementsByClassName("circle")[0].textContent = layout[i].number;
+      circle.style.visibility = "visible";
+      circle.textContent = layout[i].number;
     }
   }
 }

@@ -1,85 +1,88 @@
-/* define hexagon and sub objects*/
-.hexagon {
-    object-fit: contain;
-    position: fixed;
-    z-index: -1;
-    right: 0;
-    width: 300px; 
-    height: 173.21px;
-    margin: 86.60px 0;
-    background-size: auto 346.4102px;
-    background-position: center;
-    transform: scale(0.75)
+/* Inserting this collapsed row between two flex items will make 
+ * the flex item that comes after it break to a new row */
+ .break {
+    flex-basis: 100%;
+    height: 0;
+  }
+
+/* src: https://github.com/web-tiki/responsive-grid-of-hexagons/blob/master/index.html */
+
+* {
+    margin: 0%;
+    padding: 0;
+}
+body {
+    background: rgb(123, 158, 158);
+}
+#hexGrid {
+  display: flex;
+  flex-wrap: wrap;
+  width: 90%;
+  height: 90%;
+  margin: 0 auto;
+  overflow: hidden;
+  font-family: 'Raleway', sans-serif;
+  font-size: 15px;
+  list-style-type: none;
 }
 
-.hexTop,
-.hexBottom {
-    object-fit: inherit;
-    position: inherit;
-    z-index: 1;
-    width: 212.13px;
-    height: 212.13px;
+.hex {
+  position: relative;
+  visibility: hidden;
+  outline:1px solid transparent; /* fix for jagged edges in FF on hover transition */
+}
+.hex::after{
+  content:'';
+  display:block;
+  padding-bottom: 86.602%;  /* =  100 / tan(60) * 1.5 */
+}
+.hexIn{
+  position: absolute;
+  width:96%;
+  padding-bottom: 110.851%; /* =  width / sin(60) */
+  margin:0 2%;
+  overflow: hidden;
+  visibility: hidden;
+  outline:1px solid transparent; /* fix for jagged edges in FF on hover transition */
+  -webkit-transform: rotate3d(0,0,1,-60deg) skewY(30deg);
+      -ms-transform: rotate3d(0,0,1,-60deg) skewY(30deg);
+          transform: rotate3d(0,0,1,-60deg) skewY(30deg);
+}
+.hexIn * {
+  position: absolute;
+  visibility: visible;
+  outline:1px solid transparent; /* fix for jagged edges in FF on hover transition */
+}
+.hexLink {
+    display:block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: #fff;
     overflow: hidden;
-    -webkit-transform: scaleY(0.5774) rotate(-45deg);
-    -ms-transform: scaleY(0.5774) rotate(-45deg);
-    transform: scaleY(0.5774) rotate(-45deg);
-    background: inherit;
-    left: 43.93px;
+    -webkit-transform: skewY(-30deg) rotate3d(0,0,1,60deg);
+        -ms-transform: skewY(-30deg) rotate3d(0,0,1,60deg);
+            transform: skewY(-30deg) rotate3d(0,0,1,60deg);
 }
 
-/*counter transform the bg image on the caps*/
-.hexTop:after,
-.hexBottom:after {
-    content: "";
-    object-fit: inherit;
-    position: inherit;
-    width: 300.0000px;
-    height: 173.20508075688775px;
-    -webkit-transform:  rotate(45deg) scaleY(1.7321) translateY(-86.6025px);
-    -ms-transform:      rotate(45deg) scaleY(1.7321) translateY(-86.6025px);
-    transform:          rotate(45deg) scaleY(1.7321) translateY(-86.6025px);
-    -webkit-transform-origin: 0 0;
-    -ms-transform-origin: 0 0;
-    transform-origin: 0 0;
-    background: inherit;
-}
-
-.hexTop {
-    top: -106.0660px;
-}
-
-.hexTop:after {
-    background-position: center top;
-}
-
-.hexBottom {
-    bottom: -106.0660px;
-}
-
-.hexBottom:after {
-    background-position: center bottom;
-}
-
-.hexagon:after {
-    content: "";
-    object-fit: inherit;
-    position: inherit;
-    top: 0.0000px;
-    left: 0;
-    width: 300.0000px;
-    height: 173.2051px;
-    z-index: 2;
-    background: inherit;
+/*** HEX CONTENT **********************************************************************/
+.hex img {
+  left: -100%;
+  right: -100%;
+  width: auto;
+  height: 100%;
+  margin: 0 auto;
+  -webkit-transform: rotate3d(0,0,0,0deg);
+      -ms-transform: rotate3d(0,0,0,0deg);
+          transform: rotate3d(0,0,0,0deg);
 }
 
 /*circle for numbers*/
-.circle {
-    object-fit: contain;
-    position: relative;
-    z-index: 3;
-    margin: auto;
-    width: 25%;
-    height: 42%;
+.hex circle {
+    top: 30%;
+    left: 35%; 
+    width: 30%;
+    height: 27.5%;
     font-size: 300%;
     border-radius: 50%;
     color: #fff;
@@ -87,112 +90,75 @@
     background: #000
 }
 
-
-/* define specific tiles */
-/* line 1 */
-#tile1.hexagon {
-    top: 100px;
-    left: 400px;
-    background-image: url("../images/wheat.jpg");
+/*** HOVER CONTENT  **********************************************************************/
+.hex h1, .hex p {
+  width: 100%;
+  padding: 5%;
+  box-sizing:border-box;
+  background-color: rgba(0, 128, 128, 0.8);
+  font-weight: 300;
+  -webkit-transition:  -webkit-transform .2s ease-out, opacity .3s ease-out;
+          transition:          transform .2s ease-out, opacity .3s ease-out;
 }
-#tile2.hexagon {
-    top: 100px;
-    left: 640px;
-    background-image: url("../images/wheat.jpg");
+.hex h1 {
+  bottom: 50%;
+  padding-top:50%;
+  font-size: 1.5em;
+  z-index: 1;
+  -webkit-transform:translate3d(0,-100%,0);
+      -ms-transform:translate3d(0,-100%,0);
+          transform:translate3d(0,-100%,0);
 }
-#tile3.hexagon {
-    top: 100px;
-    left: 880px;
-    background-image: url("../images/wheat.jpg");
+.hex h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 45%;
+  width: 10%;
+  text-align: center;
+  border-bottom: 1px solid #fff;
 }
-
-/* line 2 */
-#tile4.hexagon {
-    top: 305px;
-    left: 280px;
-    background-image: url("../images/wheat.jpg");
-}
-#tile5.hexagon {
-    top: 305px;
-    left: 520px;
-    background-image: url("../images/sheep.jpg");
-}
-#tile6.hexagon {
-    top: 305px;
-    left: 760px;
-    background-image: url("../images/sheep.jpg");
-}
-#tile7.hexagon {
-    top: 305px;
-    left: 1000px;
-    background-image: url("../images/sheep.jpg");
+.hex p {
+  top: 50%;
+  padding-bottom:50%;
+  -webkit-transform:translate3d(0,100%,0);
+      -ms-transform:translate3d(0,100%,0);
+          transform:translate3d(0,100%,0);
 }
 
-/* line 3 */
-#tile8.hexagon {
-    top: 510px;
-    left: 160px;
-    background-image: url("../images/sheep.jpg");
-}
-#tile9.hexagon {
-    top: 510px;
-    left: 400px;
-    background-image: url("../images/ore.jpg");
-}
-#tile10.hexagon {
-    top: 510px;
-    left: 640px;
-    background-image: url("../images/ore.jpg");
-}
-#tile11.hexagon {
-    top: 510px;
-    left: 880px;
-    background-image: url("../images/ore.jpg");
-}
-#tile12.hexagon {
-    top: 510px;
-    left: 1120px;
-    background-image: url("../images/brick.jpeg");
+
+/*** HOVER EFFECT  **********************************************************************/
+.hexLink:hover h1, .hexLink:focus h1,
+.hexLink:hover p, .hexLink:focus p{
+  -webkit-transform:translate3d(0,0,0);
+      -ms-transform:translate3d(0,0,0);
+          transform:translate3d(0,0,0);
 }
 
-/* line 4 */
-#tile13.hexagon {
-    top: 715px;
-    left: 280px;
-    background-image: url("../images/brick.jpeg");
-}
-#tile14.hexagon {
-    top: 715px;
-    left: 520px;
-    background-image: url("../images/brick.jpeg");
-}
-#tile15.hexagon {
-    top: 715px;
-    left: 760px;
-    background-image: url("../images/wood.jpeg");
-}
-#tile16.hexagon {
-    top: 715px;
-    left: 1000px;
-    background-image: url("../images/wood.jpeg");
+/*** HEXAGON SIZING AND EVEN ROW INDENTATION *****************************************************************/
+@media (min-width:0px) { /* <- 5-4  hexagons per row */
+    #hexGrid{
+        height: 90%;
+        padding-bottom: 20%;
+    }
+    .hex {
+        width: 15%;
+    }
+    .hex:nth-child(1) { /* row 1 */
+        margin-left:25%;  /* indent = width * 1.667 */
+    }
+    .hex:nth-child(4) { /* row 2 */
+        margin-left:17.5%;  /* = indent: width * 1.1667 */
+    }
+    .hex:nth-child(8) { /* row 3 */
+        margin-left:10%;  /* = indent: width * 0.667 */
+    }
+    .hex:nth-child(13) { /* row 4 */
+        margin-left:17.5%; /* = indent: width * 1.1667 */
+    }
+    .hex:nth-child(17){ /* row 5*/
+        margin-left:25%;  /* indent = width * 1.667 */
+    }
 }
 
-/* line 5 */
-#tile17.hexagon {
-    
-    top: 920px;
-    left: 400px;
-    background-image: url("../images/wood.jpeg");
-}
-#tile18.hexagon {
-    
-    top: 920px;
-    left: 640px;
-    background-image: url("../images/wood.jpeg");
-}
-#tile19.hexagon {
-    
-    top: 920px;
-    left: 880px;
-    background-image: url("../images/desert.jpeg");
-}
+
