@@ -52,7 +52,7 @@ function draw_new_board(layout) {
   let i = 0
   for (let i = 0; i < tiles.length; i++) {
     circle = tiles[i].getElementsByTagName("circle")[0];
-    tile_image = tiles[i].getElementsByClassName("hexIn")[0].getElementsByClassName("hexLink")[0].getElementsByTagName("img")[0];
+    tile_image = tiles[i].getElementsByClassName("hexRhombus")[0].getElementsByClassName("hexRectangle")[0].getElementsByTagName("img")[0];
     console.log(tile_image.src);
     if(layout[i].type === "desert") {
       tile_image.src = "./images/desert.jpeg";

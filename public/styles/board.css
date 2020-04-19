@@ -11,9 +11,22 @@
     margin: 0%;
     padding: 0;
 }
-body {
-    background: rgb(123, 158, 158);
+
+html, body {
+    height: 100%;
 }
+
+body {
+    background: rgb(40, 98, 184);
+}
+
+.board {
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+    resize: both;
+}
+
 #hexGrid {
   display: flex;
   flex-wrap: wrap;
@@ -21,22 +34,22 @@ body {
   height: 90%;
   margin: 0 auto;
   overflow: hidden;
-  font-family: 'Raleway', sans-serif;
-  font-size: 15px;
   list-style-type: none;
+  resize: inherit;
 }
 
 .hex {
-  position: relative;
-  visibility: hidden;
-  outline:1px solid transparent; /* fix for jagged edges in FF on hover transition */
+    position: relative;
+    visibility: hidden;
+    outline:1px solid transparent; /* fix for jagged edges in FF on hover transition */
 }
+
 .hex::after{
   content:'';
   display:block;
   padding-bottom: 86.602%;  /* =  100 / tan(60) * 1.5 */
 }
-.hexIn{
+.hexRhombus{
   position: absolute;
   width:96%;
   padding-bottom: 110.851%; /* =  width / sin(60) */
@@ -48,12 +61,12 @@ body {
       -ms-transform: rotate3d(0,0,1,-60deg) skewY(30deg);
           transform: rotate3d(0,0,1,-60deg) skewY(30deg);
 }
-.hexIn * {
+.hexRhombus * {
   position: absolute;
   visibility: visible;
   outline:1px solid transparent; /* fix for jagged edges in FF on hover transition */
 }
-.hexLink {
+.hexRectangle {
     display:block;
     width: 100%;
     height: 100%;
@@ -83,62 +96,17 @@ body {
     left: 35%; 
     width: 30%;
     height: 27.5%;
-    font-size: 300%;
+    font-size: 3vw;
     border-radius: 50%;
     color: #fff;
     text-align: center;
-    background: #000
-}
-
-/*** HOVER CONTENT  **********************************************************************/
-.hex h1, .hex p {
-  width: 100%;
-  padding: 5%;
-  box-sizing:border-box;
-  background-color: rgba(0, 128, 128, 0.8);
-  font-weight: 300;
-  -webkit-transition:  -webkit-transform .2s ease-out, opacity .3s ease-out;
-          transition:          transform .2s ease-out, opacity .3s ease-out;
-}
-.hex h1 {
-  bottom: 50%;
-  padding-top:50%;
-  font-size: 1.5em;
-  z-index: 1;
-  -webkit-transform:translate3d(0,-100%,0);
-      -ms-transform:translate3d(0,-100%,0);
-          transform:translate3d(0,-100%,0);
-}
-.hex h1::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 45%;
-  width: 10%;
-  text-align: center;
-  border-bottom: 1px solid #fff;
-}
-.hex p {
-  top: 50%;
-  padding-bottom:50%;
-  -webkit-transform:translate3d(0,100%,0);
-      -ms-transform:translate3d(0,100%,0);
-          transform:translate3d(0,100%,0);
-}
-
-
-/*** HOVER EFFECT  **********************************************************************/
-.hexLink:hover h1, .hexLink:focus h1,
-.hexLink:hover p, .hexLink:focus p{
-  -webkit-transform:translate3d(0,0,0);
-      -ms-transform:translate3d(0,0,0);
-          transform:translate3d(0,0,0);
+    background: #000;
 }
 
 /*** HEXAGON SIZING AND EVEN ROW INDENTATION *****************************************************************/
 @media (min-width:0px) { /* <- 5-4  hexagons per row */
     #hexGrid{
-        height: 90%;
+        height: 85%;
         padding-bottom: 20%;
     }
     .hex {

@@ -6,203 +6,455 @@
     <title></title>
     <script src="/socket.io/socket.io.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="./styles/style.css">
-    <link href='https://fonts.googleapis.com/css?family=Raleway:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="./styles/board.css">
+    <link rel="stylesheet" type="text/css" href="./styles/pieces.css">
+    <link  rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Raleway:300'>
   </head>
   <body>
     <script src="/static/client.js"></script>
     <button onclick="shuffle_board()">Shuffle Board</button>
-    <ul id="hexGrid">
-      <li class="hex">
-        <div class="hexIn">
-          <a class="hexLink" href="#">
-            <img src="./images/dirt.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-            <circle></circle>
-          </a>
-        </div>
-      </li>
-      <li class="hex">
-        <div class="hexIn">
-          <a class="hexLink" href="#">
-            <img src="./images/dirt.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-            <circle></circle>
-          </a>
-        </div>
-      </li>
-      <li class="hex">
-        <div class="hexIn">
-          <a class="hexLink" href="#">
-            <img src="./images/dirt.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-            <circle></circle>
-          </a>
-        </div>
-      </li>
-      <li class="hex">
-        <div class="hexIn">
-          <a class="hexLink" href="#">
-            <img src="./images/dirt.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-            <circle></circle>
-          </a>
-        </div>
-      </li>
-      <li class="hex">
-        <div class="hexIn">
-          <a class="hexLink" href="#">
-            <img src="./images/dirt.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-            <circle></circle>
-          </a>
-        </div>
-      </li>
-      <li class="hex">
-        <div class="hexIn">
-          <a class="hexLink" href="#">
-            <img src="./images/dirt.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-            <circle></circle>
-          </a>
-        </div>
-      </li>
-      <li class="hex">
-        <div class="hexIn">
-          <a class="hexLink" href="#">
-            <img src="./images/dirt.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-            <circle></circle>
-          </a>
-        </div>
-      </li>
-      <li class="hex">
-        <div class="hexIn">
-          <a class="hexLink" href="#">
-            <img src="./images/dirt.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-            <circle></circle>
-          </a>
-        </div>
-      </li>
-      <li class="hex">
-        <div class="hexIn">
-          <a class="hexLink" href="#">
-            <img src="./images/dirt.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-            <circle></circle>
-          </a>
-        </div>
-      </li>
-      <li class="hex">
-        <div class="hexIn">
-          <a class="hexLink" href="#">
-            <img src="./images/dirt.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-            <circle></circle>
-          </a>
-        </div>
-      </li>
-      <li class="hex">
-        <div class="hexIn">
-          <a class="hexLink" href="#">
-            <img src="./images/dirt.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-            <circle></circle>
-          </a>
-        </div>
-      </li>
-      <li class="hex">
-        <div class="hexIn">
-          <a class="hexLink" href="#">
-            <img src="./images/dirt.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-            <circle></circle>
-          </a>
-        </div>
-      </li>
-      <li class="hex">
-        <div class="hexIn">
-          <a class="hexLink" href="#">
-            <img src="./images/dirt.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-            <circle></circle>
-          </a>
-        </div>
-      </li>
-      <li class="hex">
-        <div class="hexIn">
-          <a class="hexLink" href="#">
-            <img src="./images/dirt.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-            <circle></circle>
-          </a>
-        </div>
-      </li>
-      <li class="hex">
-        <div class="hexIn">
-          <a class="hexLink" href="#">
-            <img src="./images/dirt.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-            <circle></circle>
-          </a>
-        </div>
-      </li>
-      <li class="hex">
-        <div class="hexIn">
-          <a class="hexLink" href="#">
-            <img src="./images/dirt.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-            <circle></circle>
-          </a>
-        </div>
-      </li>
-      <li class="hex">
-        <div class="hexIn">
-          <a class="hexLink" href="#">
-            <img src="./images/dirt.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-            <circle></circle>
-          </a>
-        </div>
-      </li>
-      <li class="hex">
-        <div class="hexIn">
-          <a class="hexLink" href="#">
-            <img src="./images/dirt.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-            <circle></circle>
-          </a>
-        </div>
-      </li>
-      <li class="hex">
-        <div class="hexIn">
-          <a class="hexLink" href="#">
-            <img src="./images/dirt.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-            <circle></circle>
-          </a>
-        </div>
-      </li>
-    </ul>
+    <div class="pieces">
+      <ul id="pieceGrid"> 
+        <li class="piece">
+          <div class="pieceRhombus">
+            <a class="pieceRectangle" href="#">
+              <road class="road1"></road>
+              <road class="road2"></road>
+              <road class="road3"></road>
+              <road class="road4"></road>
+              <road class="road5"></road>
+              <road class="road6"></road>
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="piece">
+          <div class="pieceRhombus">
+            <a class="pieceRectangle" href="#">
+              <road class="road1"></road>
+              <road class="road2"></road>
+              <road class="road3"></road>
+              <road class="road4"></road>
+              <road class="road5"></road>
+              <road class="road6"></road>
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="piece">
+          <div class="pieceRhombus">
+            <a class="pieceRectangle" href="#">
+              <road class="road1"></road>
+              <road class="road2"></road>
+              <road class="road3"></road>
+              <road class="road4"></road>
+              <road class="road5"></road>
+              <road class="road6"></road>
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="piece">
+          <div class="pieceRhombus">
+            <a class="pieceRectangle" href="#">
+              <road class="road1"></road>
+              <road class="road2"></road>
+              <road class="road3"></road>
+              <road class="road4"></road>
+              <road class="road5"></road>
+              <road class="road6"></road>
+
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="piece">
+          <div class="pieceRhombus">
+            <a class="pieceRectangle" href="#">
+              <road class="road1"></road>
+              <road class="road2"></road>
+              <road class="road3"></road>
+              <road class="road4"></road>
+              <road class="road5"></road>
+              <road class="road6"></road>
+
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="piece">
+          <div class="pieceRhombus">
+            <a class="pieceRectangle" href="#">
+              <road class="road1"></road>
+              <road class="road2"></road>
+              <road class="road3"></road>
+              <road class="road4"></road>
+              <road class="road5"></road>
+              <road class="road6"></road>
+
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="piece">
+          <div class="pieceRhombus">
+            <a class="pieceRectangle" href="#">
+              <road class="road1"></road>
+              <road class="road2"></road>
+              <road class="road3"></road>
+              <road class="road4"></road>
+              <road class="road5"></road>
+              <road class="road6"></road>
+
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="piece">
+          <div class="pieceRhombus">
+            <a class="pieceRectangle" href="#">
+              <road class="road1"></road>
+              <road class="road2"></road>
+              <road class="road3"></road>
+              <road class="road4"></road>
+              <road class="road5"></road>
+              <road class="road6"></road>
+
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="piece">
+          <div class="pieceRhombus">
+            <a class="pieceRectangle" href="#">
+              <road class="road1"></road>
+              <road class="road2"></road>
+              <road class="road3"></road>
+              <road class="road4"></road>
+              <road class="road5"></road>
+              <road class="road6"></road>
+
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="piece">
+          <div class="pieceRhombus">
+            <a class="pieceRectangle" href="#">
+              <road class="road1"></road>
+              <road class="road2"></road>
+              <road class="road3"></road>
+              <road class="road4"></road>
+              <road class="road5"></road>
+              <road class="road6"></road>
+
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="piece">
+          <div class="pieceRhombus">
+            <a class="pieceRectangle" href="#">
+              <road class="road1"></road>
+              <road class="road2"></road>
+              <road class="road3"></road>
+              <road class="road4"></road>
+              <road class="road5"></road>
+              <road class="road6"></road>
+
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="piece">
+          <div class="pieceRhombus">
+            <a class="pieceRectangle" href="#">
+              <road class="road1"></road>
+              <road class="road2"></road>
+              <road class="road3"></road>
+              <road class="road4"></road>
+              <road class="road5"></road>
+              <road class="road6"></road>
+
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="piece">
+          <div class="pieceRhombus">
+            <a class="pieceRectangle" href="#">
+              <road class="road1"></road>
+              <road class="road2"></road>
+              <road class="road3"></road>
+              <road class="road4"></road>
+              <road class="road5"></road>
+              <road class="road6"></road>
+
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="piece">
+          <div class="pieceRhombus">
+            <a class="pieceRectangle" href="#">
+              <road class="road1"></road>
+              <road class="road2"></road>
+              <road class="road3"></road>
+              <road class="road4"></road>
+              <road class="road5"></road>
+              <road class="road6"></road>
+
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="piece">
+          <div class="pieceRhombus">
+            <a class="pieceRectangle" href="#">
+              <road class="road1"></road>
+              <road class="road2"></road>
+              <road class="road3"></road>
+              <road class="road4"></road>
+              <road class="road5"></road>
+              <road class="road6"></road>
+
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="piece">
+          <div class="pieceRhombus">
+            <a class="pieceRectangle" href="#">
+              <road class="road1"></road>
+              <road class="road2"></road>
+              <road class="road3"></road>
+              <road class="road4"></road>
+              <road class="road5"></road>
+              <road class="road6"></road>
+
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="piece">
+          <div class="pieceRhombus">
+            <a class="pieceRectangle" href="#">
+              <road class="road1"></road>
+              <road class="road2"></road>
+              <road class="road3"></road>
+              <road class="road4"></road>
+              <road class="road5"></road>
+              <road class="road6"></road>
+
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="piece">
+          <div class="pieceRhombus">
+            <a class="pieceRectangle" href="#">
+              <road class="road1"></road>
+              <road class="road2"></road>
+              <road class="road3"></road>
+              <road class="road4"></road>
+              <road class="road5"></road>
+              <road class="road6"></road>
+
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="piece">
+          <div class="pieceRhombus">
+            <a class="pieceRectangle" href="#">
+              <road class="road1"></road>
+              <road class="road2"></road>
+              <road class="road3"></road>
+              <road class="road4"></road>
+              <road class="road5"></road>
+              <road class="road6"></road>
+
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>  
+    <div class="board">
+      <ul id="hexGrid">
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+    
   </body>
 </html>
