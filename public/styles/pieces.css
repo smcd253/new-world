@@ -28,82 +28,22 @@
     visibility: hidden;
     outline:1px solid transparent; /* fix for jagged edges in FF on hover transition */
 }
-.piece::after{
-    content:'';
-    display:block;
-    padding-bottom: 86.602%;  /* =  100 / tan(60) * 1.5 */
+.road_diag1{
+    position: absolute;
+    width: 5%;
+    height: 200%;
+    visibility: visible;
+    top: -35%;
+    left: 50%;
+    transform: rotate(60deg); 
+    background: rgb(0, 0, 0);
 }
-.pieceRhombus{
-position: absolute;
-width:96%;
-padding-bottom: 110.851%; /* =  width / sin(60) */
-margin:0 2%;
-overflow: hidden;
-visibility: hidden;
-outline:1px solid transparent; /* fix for jagged edges in FF on hover transition */
--webkit-transform: rotate3d(0,0,1,-60deg) skewY(30deg);
-    -ms-transform: rotate3d(0,0,1,-60deg) skewY(30deg);
-        transform: rotate3d(0,0,1,-60deg) skewY(30deg);
-}
-.pieceRhombus * {
-position: absolute;
-visibility: visible;
-outline:1px solid transparent; /* fix for jagged edges in FF on hover transition */
-}
-.pieceRectangle {
-    display:block;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    color: #fff;
-    overflow: hidden;
-    -webkit-transform: skewY(-30deg) rotate3d(0,0,1,60deg);
-        -ms-transform: skewY(-30deg) rotate3d(0,0,1,60deg);
-            transform: skewY(-30deg) rotate3d(0,0,1,60deg);
-}
-
 
 /* roads */
-.piece road {
+/* .piece road {
     width: 2%;
     height: 35%;
 }
-.road_a {
-    top: -2%;
-    left: 72.5%;
-    transform: rotate(-60deg) scale(0.9); 
-    background: rgb(0, 0, 0);
-}
-.road_b {
-    top: 31.5%;
-    left: 93.5%;
-    background: rgb(0, 0, 0);
-}
-.road_c {
-    top: 63.5%;
-    left: 72.5%;
-    transform: rotate(60deg) scale(0.9);
-    background: rgb(0, 0, 0);
-}
-.road_d {
-    top: 63.5%;
-    left: 25.5%;
-    transform: rotate(-60deg) scale(0.9);
-    background: rgb(0, 0, 0);
-}
-.road_e {
-    top: 31.5%;
-    left: 4.5%;
-    background: rgb(0, 0, 0);
-}
-.road_f {
-    top: -2%;
-    left: 25.5%;
-    transform: rotate(60deg) scale(0.9);
-    background: rgb(0, 0, 0);
-}
-
-/* settlements */
 .piece settlement { 
     width: 7.5%;
     height: 5%;
@@ -130,14 +70,7 @@ outline:1px solid transparent; /* fix for jagged edges in FF on hover transition
     
 }
 
-.settlement_a {
-    top: 5%;
-    left: 45%;
-}
-.settlement_b {
-    top: 25%;
-    left: 90%;
-}
+} */
 
 /*** HEXAGON SIZING AND EVEN ROW INDENTATION *****************************************************************/
 @media (min-width:0px) { /* <- 5-4  pieceagons per row */
@@ -146,22 +79,24 @@ outline:1px solid transparent; /* fix for jagged edges in FF on hover transition
         padding-bottom: 20%;
     }
     .piece {
-        width: 15%;
-        transform: scale(1.50);
+        width: 7.5%;
     }
-    .piece:nth-child(1) { /* row 1 */
-        margin-left:25%;  /* indent = width * 1.667 */
+    .piece:nth-child(n + 1):nth-child(-n + 6) {
+        margin-bottom: 2%;
     }
-    .piece:nth-child(4) { /* row 2 */
-        margin-left:17.5%;  /* = indent: width * 1.1667 */
+    .piece:nth-child(1) {
+        margin-left:25%;
     }
-    .piece:nth-child(8) { /* row 3 */
-        margin-left:10%;  /* = indent: width * 0.667 */
+    .piece:nth-child(n + 7):nth-child(-n + 15) {
+        margin-top: 5%;
     }
-    .piece:nth-child(13) { /* row 4 */
-        margin-left:17.5%; /* = indent: width * 1.1667 */
+    .piece:nth-child(7) {
+        margin-left:12.5%;  
     }
-    .piece:nth-child(17){ /* row 5*/
-        margin-left:25%;  /* indent = width * 1.667 */
+    .piece:nth-child(13) { 
+        margin-left:17.5%;
+    }
+    .piece:nth-child(17){
+        margin-left:25%;
     }
 }
