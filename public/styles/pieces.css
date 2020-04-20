@@ -68,35 +68,35 @@ outline:1px solid transparent; /* fix for jagged edges in FF on hover transition
     width: 2%;
     height: 35%;
 }
-.road1 {
+.road_a {
     top: -2%;
     left: 72.5%;
     transform: rotate(-60deg) scale(0.9); 
     background: rgb(0, 0, 0);
 }
-.road2 {
+.road_b {
     top: 31.5%;
     left: 93.5%;
     background: rgb(0, 0, 0);
 }
-.road3 {
+.road_c {
     top: 63.5%;
     left: 72.5%;
     transform: rotate(60deg) scale(0.9);
     background: rgb(0, 0, 0);
 }
-.road4 {
+.road_d {
     top: 63.5%;
     left: 25.5%;
     transform: rotate(-60deg) scale(0.9);
     background: rgb(0, 0, 0);
 }
-.road5 {
+.road_e {
     top: 31.5%;
     left: 4.5%;
     background: rgb(0, 0, 0);
 }
-.road6 {
+.road_f {
     top: -2%;
     left: 25.5%;
     transform: rotate(60deg) scale(0.9);
@@ -105,43 +105,38 @@ outline:1px solid transparent; /* fix for jagged edges in FF on hover transition
 
 /* settlements */
 .piece settlement { 
-    width: 10%;
-    height: 10%;
-    background: rgb(0, 0, 0);
+    width: 7.5%;
+    height: 5%;
+    --custom-color: rgb(255, 255, 255);
+    background: var(--custom-color);
+    color: var(--custom-color);
 }
-.roof {
-    width: 10%;
-    height: 0;    
-    padding-left:10%;
-    padding-bottom: 10%;
-    overflow: hidden;
-    transform: scale(5);
+.roofR {
+    top: -50%;
+    left: 50%;
+    background-image: linear-gradient(to right top, currentColor 0%, currentColor 50%, transparent 50%);
+    position: absolute;
+    width: 75%;
+    height: 75%;
+    
 }
-.roof:after {
-    content: "";
-    display: block;
-    width: 0;
-    height: 0;
-    margin-left:-500px;
-    border-left: 500px solid transparent;
-    border-right: 500px solid transparent;
-    border-bottom: 500px black;
+.roofL {
+    top: -50%;
+    left: -23%;
+    background-image: linear-gradient(to left top, currentColor 0%, currentColor 50%, transparent 50%);
+    position: absolute;
+    width: 75%;
+    height: 75%;
+    
 }
 
-.settlement1 {
-    top: 50%;
-    left: 75%;
+.settlement_a {
+    top: 5%;
+    left: 45%;
 }
-/*** HEX CONTENT **********************************************************************/
-.piece img {
-left: -100%;
-right: -100%;
-width: auto;
-height: 100%;
-margin: 0 auto;
--webkit-transform: rotate3d(0,0,0,0deg);
-    -ms-transform: rotate3d(0,0,0,0deg);
-        transform: rotate3d(0,0,0,0deg);
+.settlement_b {
+    top: 25%;
+    left: 90%;
 }
 
 /*** HEXAGON SIZING AND EVEN ROW INDENTATION *****************************************************************/
@@ -152,7 +147,7 @@ margin: 0 auto;
     }
     .piece {
         width: 15%;
-        transform: scale(1.17);
+        transform: scale(1.50);
     }
     .piece:nth-child(1) { /* row 1 */
         margin-left:25%;  /* indent = width * 1.667 */

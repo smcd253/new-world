@@ -92,7 +92,7 @@ body {
 
 /*circle for numbers*/
 .hex circle {
-    top: 30%;
+    top: 35%;
     left: 35%; 
     width: 30%;
     height: 27.5%;
@@ -111,6 +111,7 @@ body {
     }
     .hex {
         width: 15%;
+        transform: scale(0.95);
     }
     .hex:nth-child(1) { /* row 1 */
         margin-left:25%;  /* indent = width * 1.667 */
