@@ -7,23 +7,23 @@
     <script src="/socket.io/socket.io.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="./styles/board.css">
-    <link rel="stylesheet" type="text/css" href="./styles/pieces.css">
+    <link rel="stylesheet" type="text/css" href="./styles/roads.css">
     <link  rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Raleway:300'>
   </head>
   <body>
     <script src="/static/client.js"></script>
     <button onclick="shuffle_board()">Shuffle Board</button>
-    <div class="pieces">
-      <ul id="pieceGrid"> 
-        <li class="piece">
-          <div class="pieceRhombus">
-            <a class="pieceRectangle" href="#">
-              <road class="road_top_right" id="road1"></road>
-              <road class="road_right"  id="road2"></road>
-              <road class="road_bottom_right" id="road3"></road>
-              <road class="road_bottom_left" id="road4"></road>
-              <road class="road_left" id="road5"></road>
-              <road class="road_top_left" id="road6"></road>
+    <div class="roads">
+      <ul id="roadGrid"> 
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_top_right" id="road1"></rd>
+              <rd class="road_right"  id="road2"></rd>
+              <rd class="road_bottom_right" id="road3"></rd>
+              <rd class="road_bottom_left" id="road4"></rd>
+              <rd class="road_left" id="road5"></rd>
+              <rd class="road_top_left" id="road6"></rd>
               <!-- <settlement class="settlement_a">
                 <div class="roofR"></div>
                 <div class="roofL"></div>
@@ -38,194 +38,194 @@
             </a>
           </div>
         </li>
-        <li class="piece">
-          <div class="pieceRhombus">
-            <a class="pieceRectangle" href="#">
-              <road class="road_top_right" id="road7"></road>
-              <road class="road_right" id="road8"></road>
-              <road class="road_bottom_right" id="road9"></road>
-              <road class="road_bottom_left" id="road10"></road>
-              <road class="road_top_left"  id="road11"></road>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_top_right" id="road7"></rd>
+              <rd class="road_right" id="road8"></rd>
+              <rd class="road_bottom_right" id="road9"></rd>
+              <rd class="road_bottom_left" id="road10"></rd>
+              <rd class="road_top_left"  id="road11"></rd>
               <circle></circle>
             </a>
           </div>
         </li>
-        <li class="piece">
-          <div class="pieceRhombus">
-            <a class="pieceRectangle" href="#">
-              <road class="road_top_right" id="road12"></road>
-              <road class="road_right" id="road13"></road>
-              <road class="road_bottom_right" id="road14"></road>
-              <road class="road_bottom_left" id="road15"></road>
-              <road class="road_top_left"  id="road16"></road>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_top_right" id="road12"></rd>
+              <rd class="road_right" id="road13"></rd>
+              <rd class="road_bottom_right" id="road14"></rd>
+              <rd class="road_bottom_left" id="road15"></rd>
+              <rd class="road_top_left"  id="road16"></rd>
               <circle></circle>
             </a>
           </div>
         </li>
-        <li class="piece">
-          <div class="pieceRhombus">
-            <a class="pieceRectangle" href="#">
-              <road class="road_right" id="road17"></road>
-              <road class="road_bottom_right" id="road19"></road>
-              <road class="road_bottom_left" id="road20"></road>
-              <road class="road_left" id="road21"></road>
-              <road class="road_top_left" id="road22"></road>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_right" id="road17"></rd>
+              <rd class="road_bottom_right" id="road19"></rd>
+              <rd class="road_bottom_left" id="road20"></rd>
+              <rd class="road_left" id="road21"></rd>
+              <rd class="road_top_left" id="road22"></rd>
               <circle></circle>
             </a>
           </div>
         </li>
-        <li class="piece">
-          <div class="pieceRhombus">
-            <a class="pieceRectangle" href="#">
-              <road class="road_right" id="road23"></road>
-              <road class="road_bottom_right" id="road24"></road>
-              <road class="road_bottom_left" id="road25"></road>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_right" id="road23"></rd>
+              <rd class="road_bottom_right" id="road24"></rd>
+              <rd class="road_bottom_left" id="road25"></rd>
               <circle></circle>
             </a>
           </div>
         </li>
-        <li class="piece">
-          <div class="pieceRhombus">
-            <a class="pieceRectangle" href="#">
-              <road class="road_right" id="road26"></road>
-              <road class="road_bottom_right" id="road27"></road>
-              <road class="road_bottom_left" id="road28"></road>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_right" id="road26"></rd>
+              <rd class="road_bottom_right" id="road27"></rd>
+              <rd class="road_bottom_left" id="road28"></rd>
               <circle></circle>
             </a>
           </div>
         </li>
-        <li class="piece">
-          <div class="pieceRhombus">
-            <a class="pieceRectangle" href="#">
-              <road class="road_top_right" id="road29"></road>
-              <road class="road_right" id="road30"></road>
-              <road class="road_bottom_right" id="road31"></road>
-              <road class="road_bottom_left" id="road32"></road>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_top_right" id="road29"></rd>
+              <rd class="road_right" id="road30"></rd>
+              <rd class="road_bottom_right" id="road31"></rd>
+              <rd class="road_bottom_left" id="road32"></rd>
               <circle></circle>
             </a>
           </div>
         </li>
-        <li class="piece">
-          <div class="pieceRhombus">
-            <a class="pieceRectangle" href="#">
-              <road class="road_right" id="road33"></road>
-              <road class="road_bottom_right" id="road34"></road>
-              <road class="road_bottom_left" id="road35"></road>
-              <road class="road_left" id="road36"></road>
-              <road class="road_top_left" id="road37"></road>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_right" id="road33"></rd>
+              <rd class="road_bottom_right" id="road34"></rd>
+              <rd class="road_bottom_left" id="road35"></rd>
+              <rd class="road_left" id="road36"></rd>
+              <rd class="road_top_left" id="road37"></rd>
               <circle></circle>
             </a>
           </div>
         </li>
-        <li class="piece">
-          <div class="pieceRhombus">
-            <a class="pieceRectangle" href="#">
-              <road class="road_right" id="road38"></road>
-              <road class="road_bottom_right" id="road39"></road>
-              <road class="road_bottom_left" id="road40"></road>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_right" id="road38"></rd>
+              <rd class="road_bottom_right" id="road39"></rd>
+              <rd class="road_bottom_left" id="road40"></rd>
               <circle></circle>
             </a>
           </div>
         </li>
-        <li class="piece">
-          <div class="pieceRhombus">
-            <a class="pieceRectangle" href="#">
-              <road class="road_right" id="road41"></road>
-              <road class="road_bottom_right" id="road42"></road>
-              <road class="road_bottom_left" id="road43"></road>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_right" id="road41"></rd>
+              <rd class="road_bottom_right" id="road42"></rd>
+              <rd class="road_bottom_left" id="road43"></rd>
               <circle></circle>
             </a>
           </div>
         </li>
-        <li class="piece">
-          <div class="pieceRhombus">
-            <a class="pieceRectangle" href="#">
-              <road class="road_right" id="road44"></road>
-              <road class="road_bottom_right" id="road45"></road>
-              <road class="road_bottom_left" id="road46"></road>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_right" id="road44"></rd>
+              <rd class="road_bottom_right" id="road45"></rd>
+              <rd class="road_bottom_left" id="road46"></rd>
               <circle></circle>
             </a>
           </div>
         </li>
-        <li class="piece">
-          <div class="pieceRhombus">
-            <a class="pieceRectangle" href="#">
-              <road class="road_top_right" id="road47"></road>
-              <road class="road_right" id="road48"></road>
-              <road class="road_bottom_right" id="road49"></road>
-              <road class="road_bottom_left" id="road50"></road>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_top_right" id="road47"></rd>
+              <rd class="road_right" id="road48"></rd>
+              <rd class="road_bottom_right" id="road49"></rd>
+              <rd class="road_bottom_left" id="road50"></rd>
               <circle></circle>
             </a>
           </div>
         </li>
-        <li class="piece">
-          <div class="pieceRhombus">
-            <a class="pieceRectangle" href="#">
-              <road class="road_right" id="road51"></road>
-              <road class="road_bottom_right" id="road52"></road>
-              <road class="road_bottom_left" id="road53"></road>
-              <road class="road_left" id="road54"></road>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_right" id="road51"></rd>
+              <rd class="road_bottom_right" id="road52"></rd>
+              <rd class="road_bottom_left" id="road53"></rd>
+              <rd class="road_left" id="road54"></rd>
               <circle></circle>
             </a>
           </div>
         </li>
-        <li class="piece">
-          <div class="pieceRhombus">
-            <a class="pieceRectangle" href="#">
-              <road class="road_right" id="road55"></road>
-              <road class="road_bottom_right" id="road56"></road>
-              <road class="road_bottom_left" id="road57"></road>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_right" id="road55"></rd>
+              <rd class="road_bottom_right" id="road56"></rd>
+              <rd class="road_bottom_left" id="road57"></rd>
               <circle></circle>
             </a>
           </div>
         </li>
-        <li class="piece">
-          <div class="pieceRhombus">
-            <a class="pieceRectangle" href="#">
-              <road class="road_right" id="road58"></road>
-              <road class="road_bottom_right" id="road59"></road>
-              <road class="road_bottom_left" id="road60"></road>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_right" id="road58"></rd>
+              <rd class="road_bottom_right" id="road59"></rd>
+              <rd class="road_bottom_left" id="road60"></rd>
               <circle></circle>
             </a>
           </div>
         </li>
-        <li class="piece">
-          <div class="pieceRhombus">
-            <a class="pieceRectangle" href="#">
-              <road class="road_right" id="road61"></road>
-              <road class="road_bottom_right" id="road62"></road>
-              <road class="road_bottom_left" id="road63"></road>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_right" id="road61"></rd>
+              <rd class="road_bottom_right" id="road62"></rd>
+              <rd class="road_bottom_left" id="road63"></rd>
               <circle></circle>
             </a>
           </div>
         </li>
-        <li class="piece">
-          <div class="pieceRhombus">
-            <a class="pieceRectangle" href="#">
-              <road class="road_right" id="road64"></road>
-              <road class="road_bottom_right" id="road65"></road>
-              <road class="road_bottom_left" id="road66"></road>
-              <road class="road_left" id="road67"></road>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_right" id="road64"></rd>
+              <rd class="road_bottom_right" id="road65"></rd>
+              <rd class="road_bottom_left" id="road66"></rd>
+              <rd class="road_left" id="road67"></rd>
               <circle></circle>
             </a>
           </div>
         </li>
-        <li class="piece">
-          <div class="pieceRhombus">
-            <a class="pieceRectangle" href="#">
-              <road class="road_right" id="road68"></road>
-              <road class="road_bottom_right" id="road69"></road>
-              <road class="road_bottom_left" id="road70"></road>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_right" id="road68"></rd>
+              <rd class="road_bottom_right" id="road69"></rd>
+              <rd class="road_bottom_left" id="road70"></rd>
               <circle></circle>
             </a>
           </div>
         </li>
-        <li class="piece">
-          <div class="pieceRhombus">
-            <a class="pieceRectangle" href="#">
-              <road class="road_right" id="road71"></road>
-              <road class="road_bottom_right" id="road72"></road>
-              <road class="road_bottom_left" id="road73"></road>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_right" id="road71"></rd>
+              <rd class="road_bottom_right" id="road72"></rd>
+              <rd class="road_bottom_left" id="road73"></rd>
               <circle></circle>
             </a>
           </div>
