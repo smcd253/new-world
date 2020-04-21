@@ -27,7 +27,7 @@
   
 .piece {
     position: relative;
-    visibility: hidden;
+    visibility: visible;
     outline:1px solid transparent; /* fix for jagged edges in FF on hover transition */
 }
 .piece::after{
@@ -49,7 +49,7 @@ outline:1px solid transparent; /* fix for jagged edges in FF on hover transition
 }
 .pieceRhombus * {
 position: absolute;
-visibility: visible;
+visibility: hidden;
 outline:1px solid transparent; /* fix for jagged edges in FF on hover transition */
 }
 .pieceRectangle {
@@ -372,6 +372,22 @@ outline:1px solid transparent; /* fix for jagged edges in FF on hover transition
     visibility: hidden;
 }
 #road69 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road70 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road71 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road72 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road73 {
     background: rgb(0, 0, 0);
     visibility: hidden;
 }
