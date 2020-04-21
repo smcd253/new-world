@@ -28,12 +28,19 @@
     visibility: hidden;
     outline:1px solid transparent; /* fix for jagged edges in FF on hover transition */
 }
+.piece::after{
+    content:'';
+    display:block;
+    padding-bottom: 100%;  /* =  100 / tan(60) * 1.5 */
+  }
 .road_diag_up{
     position: absolute;
     width: 5%;
-    height: 200%;
+    height: 100%;
     visibility: visible;
-    top: -35%;
+    display: block;
+    overflow: hidden;
+    top: -25%;
     left: 47.5%;
     transform: rotate(60deg); 
     background: rgb(0, 0, 0);
@@ -41,9 +48,11 @@
 .road_diag_down{
     position: absolute;
     width: 5%;
-    height: 200%;
+    height: 100%;
     visibility: visible;
-    top: -35%;
+    display: block;
+    overflow: hidden;
+    top: -25%;
     left: 47.5%;
     transform: rotate(-60deg); 
     background: rgb(0, 0, 0);
@@ -51,7 +60,7 @@
 .road_vert{
     position: absolute;
     width: 5%;
-    height: 200%;
+    height: 100%;
     visibility: visible;
     top: -35%;
     left: 47.5%;
@@ -99,19 +108,14 @@
     .piece:nth-child(1) {
         margin-left:25%;
     }
-    .piece:nth-child(n + 1):nth-child(-n + 6) {
-        margin-bottom: 2%;
+    .piece:nth-child(8) {
+        margin-top: 5.5%;
+        margin-left:25%;  
     }
-    .piece:nth-child(7) {
-        margin-left:12.5%;  
-    }
-    .piece:nth-child(n + 7):nth-child(-n + 15) {
-        margin-top: 5%;
-    }
-    .piece:nth-child(13) { 
+    /* .piece:nth-child(13) { 
         margin-left:17.5%;
     }
     .piece:nth-child(17){
         margin-left:25%;
-    }
+    } */
 }
