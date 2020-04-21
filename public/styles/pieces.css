@@ -6,6 +6,7 @@
 }
 
 .pieces {
+    margin-top: 5%;
     position: absolute;
     width: 100%;
     z-index: 1;
@@ -17,8 +18,9 @@
     flex-wrap: wrap;
     width: 90%;
     height: 90%;
+    margin-top: 5%;
     margin: 0 auto;
-    overflow: hidden;
+    /* overflow: hidden; */
     list-style-type: none;
     resize: inherit;
 }
@@ -66,41 +68,312 @@ outline:1px solid transparent; /* fix for jagged edges in FF on hover transition
 /* roads */
 .piece road {
     width: 2%;
-    height: 35%;
+    height: 22.5%;
 }
-.road_a {
-    top: -2%;
-    left: 72.5%;
+.road_top_right {
+    top: 8.5%;
+    left: 66%;
     transform: rotate(-60deg) scale(0.9); 
-    background: rgb(0, 0, 0);
 }
-.road_b {
-    top: 31.5%;
-    left: 93.5%;
-    background: rgb(0, 0, 0);
+.road_right {
+    top: 35%;
+    left: 84%;
 }
-.road_c {
-    top: 63.5%;
-    left: 72.5%;
+.road_bottom_right {
+    top: 61%;
+    left: 67%;
     transform: rotate(60deg) scale(0.9);
-    background: rgb(0, 0, 0);
 }
-.road_d {
-    top: 63.5%;
-    left: 25.5%;
+.road_bottom_left {
+    top: 61%;
+    left: 32%;
     transform: rotate(-60deg) scale(0.9);
-    background: rgb(0, 0, 0);
 }
-.road_e {
-    top: 31.5%;
-    left: 4.5%;
-    background: rgb(0, 0, 0);
+.road_left {
+    top: 35%;
+    left: 14.65%;
 }
-.road_f {
-    top: -2%;
-    left: 25.5%;
+.road_top_left {
+    top: 9%;
+    left: 32.5%;
     transform: rotate(60deg) scale(0.9);
+}
+
+#road1 {
     background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road2 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road3 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road4 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road5 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road6 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road7 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road8 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road9 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road10 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road11 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road12 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road13 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road14 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road15 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road16 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road17 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road18 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road19 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road20 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road21 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road22 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road23 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road24 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road25 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road26 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road27 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road28 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road29 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road30 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road31 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road32 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road33 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road34 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road35 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road36 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road37 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road38 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road39 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road40 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road41 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road42 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road43 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road44 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road45 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road46 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road47 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road48 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road49 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road50 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road51 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road52 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road53 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road54 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road55 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road56 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road57 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road58 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road59 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road60 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road61 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road62 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road63 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road64 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road65 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road66 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road67 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road68 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
+}
+#road69 {
+    background: rgb(0, 0, 0);
+    visibility: hidden;
 }
 
 /* settlements */
@@ -131,12 +404,12 @@ outline:1px solid transparent; /* fix for jagged edges in FF on hover transition
 }
 
 .settlement_a {
-    top: 5%;
-    left: 45%;
+    top: 10%;
+    left: 46.5%;
 }
 .settlement_b {
     top: 25%;
-    left: 90%;
+    left: 81%;
 }
 
 /*** HEXAGON SIZING AND EVEN ROW INDENTATION *****************************************************************/
