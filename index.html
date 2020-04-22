@@ -7,12 +7,363 @@
     <script src="/socket.io/socket.io.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="./styles/board.css">
+    <link rel="stylesheet" type="text/css" href="./styles/colonies.css">
     <link rel="stylesheet" type="text/css" href="./styles/roads.css">
     <link  rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Raleway:300'>
   </head>
   <body>
     <script src="/static/client.js"></script>
     <button onclick="shuffle_board()">Shuffle Board</button>
+    <div class="colonies">
+      <ul id="colonyGrid">
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_a" id="colony1">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_b" id="colony2">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_c" id="colony3">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony4">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_e" id="colony5">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_f" id="colony6">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_a" id="colony7">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_b" id="colony8">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_c" id="colony9">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony10">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_a" id="colony11">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_b" id="colony12">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_c" id="colony13">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony14">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_c" id="colony15">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony16">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_e" id="colony17">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_f" id="colony18">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_c" id="colony19">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony20">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_e" id="colony21">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_c" id="colony22">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony23">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_b" id="colony24">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_c" id="colony25">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony26">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_c" id="colony27">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony28">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_e" id="colony29">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_f" id="colony30">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_c" id="colony31">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony32">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_c" id="colony34">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d"  id="colony35">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_c" id="colony36">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony37">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_b" id="colony38">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_c" id="colony39">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony40">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_c" id="colony41">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony42">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_e" id="colony43">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_c" id="colony44">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony45">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_e" id="colony46">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_c" id="colony47">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony48">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_e" id="colony49">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_c" id="colony50">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony51">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_e" id="colony52">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_c" id="colony53">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony54">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_e" id="colony55">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_c" id="colony56">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony57">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_c" id="colony58">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony59">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
     <div class="roads">
       <ul id="roadGrid"> 
         <li class="road">
@@ -24,16 +375,7 @@
               <rd class="road_bottom_left" id="road4"></rd>
               <rd class="road_left" id="road5"></rd>
               <rd class="road_top_left" id="road6"></rd>
-              <!-- <settlement class="settlement_a">
-                <div class="roofR"></div>
-                <div class="roofL"></div>
-                <div class="base"></div>
-              </settlement>
-              <settlement class="settlement_b">
-                <div class="roofR"></div>
-                <div class="roofL"></div>
-                <div class="base"></div> -->
-              </settlement>
+              
               <circle></circle>
             </a>
           </div>
