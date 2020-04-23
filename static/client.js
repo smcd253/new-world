@@ -35,8 +35,8 @@ function shuffle_board() {
   socket.emit('shuffle');
 }
 // send server message 'place road' when a client presses "Place Road"
-function place_road() {
-  socket.emit('place road', 1);
+function place_road(pos) {
+  socket.emit('place road', pos);
 }
 
 // debug print

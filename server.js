@@ -68,9 +68,8 @@ io.on('connection', function(socket) {
     // place new road based on position and socket.id
     console.log(players[socket.id]);
     roads[position].owner = players[socket.id].name;
-    new_road = {position: -1, color: ""};
-    new_road.position = position;
-    new_road.color = players[socket.id].color;
+    new_road = {position: position, color: players[socket.id].color};
     io.sockets.emit('new road', new_road);
+    
   });
 });
