@@ -85,6 +85,22 @@ class Tile {
     }
 }
 
+
+let roads = [
+    {position: 1, owner: "null"},
+    {position: 2, owner: "null"},
+    {position: 3, owner: "null"},
+    {position: 4, owner: "null"},
+    {position: 5, owner: "null"},
+    {position: 6, owner: "null"},
+    {position: 7, owner: "null"},
+    {position: 8, owner: "null"}
+];
+
+exports.get_roads = function() {
+    return roads;
+}
+
 class Board {
     constructor() {
         // create an array of tiles
@@ -93,8 +109,38 @@ class Board {
             this.tiles[i] = new Tile(_tiles[i]);
         }
     }
+    shuffle_numbers() {
+        let currentIndex = this.tiles.length, temp, randomIndex;
+      
+        while (0 !== currentIndex) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+            while (this.tiles[randomIndex].type === "desert")
+            {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+            }
+            if (this.tiles[currentIndex].type !== "desert")
+            {
+                temp = this.tiles[currentIndex].number;
+                this.tiles[currentIndex].number = this.tiles[randomIndex].number;
+                this.tiles[randomIndex].number = temp;
+            }
+        }
+    }
+    shuffle_tiles() {
+        let currentIndex = this.tiles.length, temp, randomIndex;
+      
+        while (0 !== currentIndex) {
+      
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+        
+            temp = this.tiles[currentIndex];
+            this.tiles[currentIndex] = this.tiles[randomIndex];
+            this.tiles[randomIndex] = temp;
+        }
+    }
 }
-
 
 exports.get_board = function() {
     return new Board();

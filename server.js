@@ -39,34 +39,16 @@ setInterval(function() {
   }, 1000);
 
 
-// src: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-function shuffle(array) {
-  let currentIndex = array.length, temporaryValue, randomIndex;
-
-  // While there remain elements to shuffle...
-  while (0 !== currentIndex) {
-
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-
-    // And swap it with the current element.
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-}
-
 // game objects
 let board = game.get_board();
-
+let roads = game.get_roads();
 let players = {};
 
 // every time a request is made
 io.on('connection', function(socket) {
-  // if it is a new player (new instance of game.js)
+  // if it is a new player (new instance of client.js)
   socket.on('new player', function(name, color) {
-    if(players.length < 4) {
+    if(Object.keys(players).length < 4) {
       io.sockets.emit('debug', socket.id);
       players[socket.id] = game.new_player(name, color);
       io.sockets.emit(players[socket.id])
@@ -75,7 +57,20 @@ io.on('connection', function(socket) {
 
   // if message is "shuffle"
   socket.on('shuffle', function() {
-    shuffle(board.tiles);
+    console.log("received shuffle");
+    board.shuffle_tiles();
+    board.shuffle_numbers();
     io.sockets.emit('state', board.tiles);
+  });
+
+  // if message is "place road"
+  socket.on('place road', function(position) {
+    // place new road based on position and socket.id
+    console.log(players[socket.id]);
+    roads[position].owner = players[socket.id].name;
+    new_road = {position: -1, color: ""};
+    new_road.position = position;
+    new_road.color = players[socket.id].color;
+    io.sockets.emit('new road', new_road);
   });
 });
