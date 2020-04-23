@@ -15,7 +15,6 @@
   <body>
     <script src="/static/client.js"></script>
     <button onclick="shuffle_board()">Shuffle Board</button>
-    <button onclick="place_road()">Place Road</button>
     <div class="colonies">
       <ul id="colonyGrid">
         <li class="colony">
@@ -370,334 +369,282 @@
       <ul id="road_buttonGrid">
         <li class="road_button">
           <div class="road_buttonRhombus">
-            <a class="road_buttonRectangle">
-              <rd_b class="road_button_top_right">
-                <button class="road_button_click" onclick="place_road(1)">Place Here</button>
-              </rd_b>
-              <rd_b class="road_button_right">
-                <button class="road_button_click" onclick="place_road(2)">Place Here</button>
+            <rd_b class="road_button_top_right">
+              <button class="road_button_click" onclick="place_road(1)">Place Here</button>
+            </rd_b>
+            <rd_b class="road_button_right">
+              <button class="road_button_click" onclick="place_road(2)">Place Here</button>
+            </rd_b>
+            <rd_b class="road_button_bottom_right">
+              <button class="road_button_click" onclick="place_road(3)">Place Here</button>
+            </rd_b>
+            <rd_b class="road_button_bottom_left">
+              <button class="road_button_click" onclick="place_road(4)">Place Here</button>
+            </rd_b>
+            <rd_b class="road_button_left">
+              <button class="road_button_click" onclick="place_road(5)">Place Here</button>
+            </rd_b>
+            <rd_b class="road_button_top_left">
+              <button class="road_button_click" onclick="place_road(6)">Place Here</button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="road_button">
+          <div class="road_buttonRhombus">
+            <rd_b class="road_button_top_right">
+              <button class="road_button_click" onclick="place_road(7)">Place Here</button>
+            </rd_b>
+            <rd_b class="road_button_right">
+              <button class="road_button_click" onclick="place_road(8)">Place Here</button>
+            </rd_b>
+            <rd_b class="road_button_bottom_right">
+              <button class="road_button_click" onclick="place_road(9)">Place Here</button>
+            </rd_b>
+            <rd_b class="road_button_bottom_left">
+              <button class="road_button_click" onclick="place_road(10)">Place Here</button>
+            </rd_b>
+            <rd_b class="road_button_top_left">
+              <button class="road_button_click" onclick="place_road(11)">Place Here</button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="road_button">
+          <div class="road_buttonRhombus">
+            <rd_b class="road_button_top_right">
+              <button class="road_button_click" onclick="place_road(12)">Place Here</button>
+            </rd_b>
+            <rd_b class="road_button_right">
+              <button class="road_button_click" onclick="place_road(13)">Place Here</button>
+            </rd_b>
+            <rd_b class="road_button_bottom_right">
+              <button class="road_button_click" onclick="place_road(14)">Place Here</button>
+            </rd_b>
+            <rd_b class="road_button_bottom_left">
+              <button class="road_button_click" onclick="place_road(15)">Place Here</button>
+            </rd_b>
+            <rd_b class="road_button_top_left">
+              <button class="road_button_click" onclick="place_road(16)">Place Here</button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="road_button">
+          <div class="road_buttonRhombus">
+            <rd_b class="road_button_right">
+              <button class="road_button_click" onclick="place_road(17)">Place Here</button>
+            </rd_b>
+            <rd_b class="road_button_bottom_right">
+              <button class="road_button_click" onclick="place_road(18)">Place Here</button>
+            </rd_b>
+            <rd_b class="road_button_bottom_left">
+              <button class="road_button_click" onclick="place_road(19)">Place Here</button>
+            </rd_b>
+            <rd_b class="road_button_left">
+              <button class="road_button_click" onclick="place_road(20)">Place Here</button>
+            </rd_b>
+            <rd_b class="road_button_top_left">
+              <button class="road_button_click" onclick="place_road(21)">Place Here</button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="road_button">
+          <div class="road_buttonRhombus">
+            <rd_b class="road_button_right">
+              <button class="road_button_click" onclick="place_road(22)">Place Here</button>
+            </rd_b>
+            <rd_b class="road_button_bottom_right">
+              <button class="road_button_click" onclick="place_road(23)">Place Here</button>
+            </rd_b>
+            <rd_b class="road_button_bottom_left">
+              <button class="road_button_click" onclick="place_road(24)">Place Here</button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="road_button">
+          <div class="road_buttonRhombus"><rd_b class="road_button_right">
+                <button class="road_button_click" onclick="place_road(25)">Place Here</button>
               </rd_b>
               <rd_b class="road_button_bottom_right">
-                <button class="road_button_click" onclick="place_road(3)">Place Here</button>
+                <button class="road_button_click" onclick="place_road(26)">Place Here</button>
               </rd_b>
               <rd_b class="road_button_bottom_left">
-                <button class="road_button_click" onclick="place_road(4)">Place Here</button>
+                <button class="road_button_click" onclick="place_road(27)">Place Here</button>
+              </rd_b>
+          </div>
+        </li>
+        <li class="road_button">
+          <div class="road_buttonRhombus"><rd_b class="road_button_top_right">
+                <button class="road_button_click" onclick="place_road(28)">Place Here</button>
+              </rd_b>
+              <rd_b class="road_button_right">
+                <button class="road_button_click" onclick="place_road(29)">Place Here</button>
+              </rd_b>
+              <rd_b class="road_button_bottom_right">
+                <button class="road_button_click" onclick="place_road(30)">Place Here</button>
+              </rd_b>
+              <rd_b class="road_button_bottom_left">
+                <button class="road_button_click" onclick="place_road(31)">Place Here</button>
+              </rd_b>
+          </div>
+        </li>
+        <li class="road_button">
+          <div class="road_buttonRhombus"><rd_b class="road_button_right">
+                <button class="road_button_click" onclick="place_road(32)">Place Here</button>
+              </rd_b>
+              <rd_b class="road_button_bottom_right">
+                <button class="road_button_click" onclick="place_road(33)">Place Here</button>
+              </rd_b>
+              <rd_b class="road_button_bottom_left">
+                <button class="road_button_click" onclick="place_road(34)">Place Here</button>
               </rd_b>
               <rd_b class="road_button_left">
-                <button class="road_button_click" onclick="place_road(5)">Place Here</button>
+                <button class="road_button_click" onclick="place_road(35)">Place Here</button>
               </rd_b>
               <rd_b class="road_button_top_left">
-                <button class="road_button_click" onclick="place_road(6)">Place Here</button>
+                <button class="road_button_click" onclick="place_road(36)">Place Here</button>
               </rd_b>
-            </a>
           </div>
         </li>
         <li class="road_button">
-          <div class="road_buttonRhombus">
-            <a class="road_buttonRectangle">
-              <rd_b class="road_button_top_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-              <rd_b class="road_button_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
+          <div class="road_buttonRhombus"><rd_b class="road_button_right">
+                <button class="road_button_click" onclick="place_road(37)">Place Here</button>
               </rd_b>
               <rd_b class="road_button_bottom_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
+                <button class="road_button_click" onclick="place_road(38)">Place Here</button>
               </rd_b>
               <rd_b class="road_button_bottom_left">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
+                <button class="road_button_click" onclick="place_road(39)">Place Here</button>
               </rd_b>
-              <rd_b class="road_button_top_left">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-            </a>
           </div>
         </li>
         <li class="road_button">
-          <div class="road_buttonRhombus">
-            <a class="road_buttonRectangle">
-              <rd_b class="road_button_top_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-              <rd_b class="road_button_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
+          <div class="road_buttonRhombus"><rd_b class="road_button_right">
+                <button class="road_button_click" onclick="place_road(40)">Place Here</button>
               </rd_b>
               <rd_b class="road_button_bottom_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
+                <button class="road_button_click" onclick="place_road(41)">Place Here</button>
               </rd_b>
               <rd_b class="road_button_bottom_left">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
+                <button class="road_button_click" onclick="place_road(42)">Place Here</button>
               </rd_b>
-              <rd_b class="road_button_top_left">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-            </a>
           </div>
         </li>
         <li class="road_button">
-          <div class="road_buttonRhombus">
-            <a class="road_buttonRectangle">
-              <rd_b class="road_button_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
+          <div class="road_buttonRhombus"><rd_b class="road_button_right">
+                <button class="road_button_click" onclick="place_road(43)">Place Here</button>
               </rd_b>
               <rd_b class="road_button_bottom_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
+                <button class="road_button_click" onclick="place_road(44)">Place Here</button>
               </rd_b>
               <rd_b class="road_button_bottom_left">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
+                <button class="road_button_click" onclick="place_road(45)">Place Here</button>
+              </rd_b>
+          </div>
+        </li>
+        <li class="road_button">
+          <div class="road_buttonRhombus"><rd_b class="road_button_top_right">
+                <button class="road_button_click" onclick="place_road(46)">Place Here</button>
+              </rd_b>
+              <rd_b class="road_button_right">
+                <button class="road_button_click" onclick="place_road(47)">Place Here</button>
+              </rd_b>
+              <rd_b class="road_button_bottom_right">
+                <button class="road_button_click" onclick="place_road(48)">Place Here</button>
+              </rd_b>
+              <rd_b class="road_button_bottom_left">
+                <button class="road_button_click" onclick="place_road(49)">Place Here</button>
+              </rd_b>
+          </div>
+        </li>
+        <li class="road_button">
+          <div class="road_buttonRhombus"><rd_b class="road_button_right">
+                <button class="road_button_click" onclick="place_road(50)">Place Here</button>
+              </rd_b>
+              <rd_b class="road_button_bottom_right">
+                <button class="road_button_click" onclick="place_road(51)">Place Here</button>
+              </rd_b>
+              <rd_b class="road_button_bottom_left">
+                <button class="road_button_click" onclick="place_road(52)">Place Here</button>
               </rd_b>
               <rd_b class="road_button_left">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
+                <button class="road_button_click" onclick="place_road(53)">Place Here</button>
               </rd_b>
-              <rd_b class="road_button_top_left">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-            </a>
           </div>
         </li>
         <li class="road_button">
-          <div class="road_buttonRhombus">
-            <a class="road_buttonRectangle">
-              <rd_b class="road_button_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
+          <div class="road_buttonRhombus"><rd_b class="road_button_right">
+                <button class="road_button_click" onclick="place_road(54)">Place Here</button>
               </rd_b>
               <rd_b class="road_button_bottom_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
+                <button class="road_button_click" onclick="place_road(55)">Place Here</button>
               </rd_b>
               <rd_b class="road_button_bottom_left">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
+                <button class="road_button_click" onclick="place_road(56)">Place Here</button>
               </rd_b>
-            </a>
           </div>
         </li>
         <li class="road_button">
-          <div class="road_buttonRhombus">
-            <a class="road_buttonRectangle">
-              <rd_b class="road_button_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
+          <div class="road_buttonRhombus"><rd_b class="road_button_right">
+                <button class="road_button_click" onclick="place_road(57)">Place Here</button>
               </rd_b>
               <rd_b class="road_button_bottom_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
+                <button class="road_button_click" onclick="place_road(58)">Place Here</button>
               </rd_b>
               <rd_b class="road_button_bottom_left">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
+                <button class="road_button_click" onclick="place_road(59)">Place Here</button>
               </rd_b>
-            </a>
           </div>
         </li>
         <li class="road_button">
-          <div class="road_buttonRhombus">
-            <a class="road_buttonRectangle">
-              <rd_b class="road_button_top_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-              <rd_b class="road_button_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
+          <div class="road_buttonRhombus"><rd_b class="road_button_right">
+                <button class="road_button_click" onclick="place_road(60)">Place Here</button>
               </rd_b>
               <rd_b class="road_button_bottom_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
+                <button class="road_button_click" onclick="place_road(61)">Place Here</button>
               </rd_b>
               <rd_b class="road_button_bottom_left">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
+                <button class="road_button_click" onclick="place_road(62)">Place Here</button>
               </rd_b>
-            </a>
           </div>
         </li>
         <li class="road_button">
-          <div class="road_buttonRhombus">
-            <a class="road_buttonRectangle">
-              <rd_b class="road_button_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
+          <div class="road_buttonRhombus"><rd_b class="road_button_right">
+                <button class="road_button_click" onclick="place_road(63)">Place Here</button>
               </rd_b>
               <rd_b class="road_button_bottom_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
+                <button class="road_button_click" onclick="place_road(64)">Place Here</button>
               </rd_b>
               <rd_b class="road_button_bottom_left">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
+                <button class="road_button_click" onclick="place_road(65)">Place Here</button>
               </rd_b>
               <rd_b class="road_button_left">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
+                <button class="road_button_click" onclick="place_road(66)">Place Here</button>
               </rd_b>
-              <rd_b class="road_button_top_left">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-            </a>
           </div>
         </li>
         <li class="road_button">
-          <div class="road_buttonRhombus">
-            <a class="road_buttonRectangle">
-              <rd_b class="road_button_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
+          <div class="road_buttonRhombus"><rd_b class="road_button_right">
+                <button class="road_button_click" onclick="place_road(67)">Place Here</button>
               </rd_b>
               <rd_b class="road_button_bottom_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
+                <button class="road_button_click" onclick="place_road(68)">Place Here</button>
               </rd_b>
               <rd_b class="road_button_bottom_left">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
+                <button class="road_button_click" onclick="place_road(69)">Place Here</button>
               </rd_b>
-            </a>
           </div>
         </li>
         <li class="road_button">
-          <div class="road_buttonRhombus">
-            <a class="road_buttonRectangle">
-              <rd_b class="road_button_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
+          <div class="road_buttonRhombus"><rd_b class="road_button_right">
+                <button class="road_button_click" onclick="place_road(70)">Place Here</button>
               </rd_b>
               <rd_b class="road_button_bottom_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
+                <button class="road_button_click" onclick="place_road(71)">Place Here</button>
               </rd_b>
               <rd_b class="road_button_bottom_left">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
+                <button class="road_button_click" onclick="place_road(72)">Place Here</button>
               </rd_b>
-            </a>
           </div>
-        </li>
-        <li class="road_button">
-          <div class="road_buttonRhombus">
-            <a class="road_buttonRectangle">
-              <rd_b class="road_button_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-              <rd_b class="road_button_bottom_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-              <rd_b class="road_button_bottom_left">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-            </a>
-          </div>
-        </li>
-        <li class="road_button">
-          <div class="road_buttonRhombus">
-            <a class="road_buttonRectangle">
-              <rd_b class="road_button_top_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-              <rd_b class="road_button_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-              <rd_b class="road_button_bottom_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-              <rd_b class="road_button_bottom_left">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-            </a>
-          </div>
-        </li>
-        <li class="road_button">
-          <div class="road_buttonRhombus">
-            <a class="road_buttonRectangle">
-              <rd_b class="road_button_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-              <rd_b class="road_button_bottom_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-              <rd_b class="road_button_bottom_left">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-              <rd_b class="road_button_left">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-            </a>
-          </div>
-        </li>
-        <li class="road_button">
-          <div class="road_buttonRhombus">
-            <a class="road_buttonRectangle">
-              <rd_b class="road_button_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-              <rd_b class="road_button_bottom_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-              <rd_b class="road_button_bottom_left">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-            </a>
-          </div>
-        </li>
-        <li class="road_button">
-          <div class="road_buttonRhombus">
-            <a class="road_buttonRectangle">
-              <rd_b class="road_button_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-              <rd_b class="road_button_bottom_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-              <rd_b class="road_button_bottom_left">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-            </a>
-          </div>
-        </li>
-        <li class="road_button">
-          <div class="road_buttonRhombus">
-            <a class="road_buttonRectangle">
-              <rd_b class="road_button_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-              <rd_b class="road_button_bottom_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-              <rd_b class="road_button_bottom_left">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-            </a>
-          </div>
-        </li>
-        <li class="road_button">
-          <div class="road_buttonRhombus">
-            <a class="road_buttonRectangle">
-              <rd_b class="road_button_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-              <rd_b class="road_button_bottom_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-              <rd_b class="road_button_bottom_left">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-              <rd_b class="road_button_left">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-            </a>
-          </div>
-        </li>
-        <li class="road_button">
-          <div class="road_buttonRhombus">
-            <a class="road_buttonRectangle">
-              <rd_b class="road_button_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-              <rd_b class="road_button_bottom_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-              <rd_b class="road_button_bottom_left">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-            </a>
-          </div>
-        </li>
-        <li class="road_button">
-          <div class="road_buttonRhombus">
-            <a class="road_buttonRectangle">
-              <rd_b class="road_button_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-              <rd_b class="road_button_bottom_right">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-              <rd_b class="road_button_bottom_left">
-                <button class="road_button_click" onclick="place_road()">Place Here</button>
-              </rd_b>
-            </a>
-          </div>
-        </li>
+        </li> -->
       </ul>
     </div>
     <div class="roads">

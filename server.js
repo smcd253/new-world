@@ -43,15 +43,15 @@ setInterval(function() {
 let board = game.get_board();
 let roads = game.get_roads();
 let players = {};
-
+let player_num = 1;
 // every time a request is made
 io.on('connection', function(socket) {
   // if it is a new player (new instance of client.js)
   socket.on('new player', function(name, color) {
     if(Object.keys(players).length < 4) {
-      io.sockets.emit('debug', socket.id);
-      players[socket.id] = game.new_player(name, color);
-      io.sockets.emit(players[socket.id])
+      io.sockets.emit('debug', player_num);
+      players[socket.id] = game.new_player(name, color, player_num);
+      player_num++;
     }
   });
 
