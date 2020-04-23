@@ -34,6 +34,7 @@ class Hand {
 class Player {
     constructor(name, color, player_num) {
         this.player_number = player_num;
+        console.log
         this.name = name;
         this.color = color;
         this.points_visible = 0;
@@ -50,8 +51,8 @@ class Player {
     }
 }
 
-exports.new_player = function(name, color) {
-    return new Player(name, color);
+exports.new_player = function(name, color, player_num) {
+    return new Player(name, color, player_num);
 }
 
 // object to initialize board tiles

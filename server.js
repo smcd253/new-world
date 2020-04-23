@@ -44,15 +44,25 @@ let board = game.get_board();
 let roads = game.get_roads();
 let players = {};
 let player_num = 1;
+
 // every time a request is made
 io.on('connection', function(socket) {
+  // get client ip
+  let ip = socket.handshake.address;
   // if it is a new player (new instance of client.js)
   socket.on('new player', function(name, color) {
     if(Object.keys(players).length < 4) {
-      io.sockets.emit('debug', player_num);
-      players[socket.id] = game.new_player(name, color, player_num);
-      player_num++;
+      if(!(ip in players)) {
+        players[ip] = game.new_player(name, color, player_num);
+        io.sockets.emit('debug', `welcome player ${players[ip].player_number}`)
+        player_num++;
+      }
+      else {
+        io.sockets.emit('debug', `welcome BACK player ${players[ip].player_number}`)
+      }
+      io.sockets.emit('debug', `your ip = ${ip}`)
     }
+    console.log(players[ip])
   });
 
   // if message is "shuffle"

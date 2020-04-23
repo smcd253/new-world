@@ -14,7 +14,6 @@ let color = "black"; // TODO: source this from html
 
 // send server message: 'new player' and new player info when a new connection (this script) is formed
 socket.emit('new player', name, color);
-console.log('new player!')
 
 // create client instance of player
 // my_player = new Player(name, color);
