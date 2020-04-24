@@ -41,7 +41,7 @@ setInterval(function() {
 
 // game objects
 let board = game.get_board();
-let roads = game.get_roads();
+// let roads = game.get_roads();
 let players = {};
 let player_num = 1;
 
@@ -83,7 +83,8 @@ io.on('connection', function(socket) {
     if(typeof players[ip] != "undefined") {
       // place new road based on position and user ip
       if(players[ip].roads > 0){
-        roads[position].owner = players[ip].name;
+        // roads[position].owner = players[ip].name;
+        board.roads.owner = players[ip].name;
         new_road = {position: position, color: players[ip].color};
         players[ip].roads--;
         io.sockets.emit('new road', new_road);

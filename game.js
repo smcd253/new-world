@@ -174,6 +174,13 @@ class Board {
         for(let i = 0; i < _tiles.length; i++) {
             this.tiles[i] = new Tile(_tiles[i]);
         }
+        
+        // create an array of roads
+        this.roads = []
+        for(let i = 1; i <= 72; i++) {
+            this.roads.position = i;
+            this.roads.owner = "null";
+        }
     }
     shuffle_numbers() {
         let currentIndex = this.tiles.length, temp, randomIndex;
