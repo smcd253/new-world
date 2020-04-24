@@ -387,10 +387,6 @@ outline:1px solid transparent; /* fix for jagged edges in FF on hover transition
     background: rgb(0, 0, 0);
     visibility: hidden;
 }
-#road73 {
-    background: rgb(0, 0, 0);
-    visibility: hidden;
-}
 
 /*** HEXAGON SIZING AND EVEN ROW INDENTATION *****************************************************************/
 @media (min-width:0px) { /* <- 5-4  roadagons per row */
