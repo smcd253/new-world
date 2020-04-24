@@ -1,0 +1,415 @@
+/* src: https://github.com/web-tiki/responsive-grid-of-road_buttonagons/blob/master/hexagons.css */
+
+* {
+    margin: 0%;
+    padding: 0;
+}
+
+.road_buttons {
+    margin-top: 7.5%;
+    position: absolute;
+    width: 100%;
+    z-index: 3;
+    resize: both;
+}
+
+#road_buttonGrid {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    height: 90%;
+    margin-top: 5%;
+    margin: 0 auto;
+    /* overflow: hidden; */
+    list-style-type: none;
+    resize: inherit;
+}
+  
+.road_button {
+    position: relative;
+    visibility: visible;
+    outline:1px solid transparent; /* fix for jagged edges in FF on hover transition */
+    /* margin:1.5% 1.5% 1.5%; */
+
+}
+.road_button::after{
+    content:'';
+    display:flex;
+    padding-bottom: 86.602%;
+}
+.road_buttonRhombus{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+}
+.road_buttonRhombus * {
+    position: absolute;
+    visibility: hidden;
+    outline:1px solid transparent; /* fix for jagged edges in FF on hover transition */
+}
+
+
+/* road_buttons */
+.road_button_click {
+    z-index: 4;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    visibility: visible;
+}
+
+button {
+    font-size: 0.4vw;
+}
+.road_button rd_b {
+    width: 10%;
+    height: 12%;
+}
+
+.road_button_top_right {
+    top: -14%;
+    left: 71%;
+}
+.road_button_right {
+    top: 35%;
+    left: 95%;
+}
+.road_button_bottom_right {
+    top: 86%;
+    left: 70%;
+}
+.road_button_bottom_left {
+    top: 86%;
+    left: 21.5%;
+}
+.road_button_left {
+    top: 35%;
+    left: -5%;
+}
+.road_button_top_left {
+    top: -14%;
+    left: 21%;
+}
+
+/* #road_button1 {
+    
+    visibility: hidden;
+}
+#road_button2 {
+    
+    visibility: hidden;
+}
+#road_button3 {
+    
+    visibility: hidden;
+}
+#road_button4 {
+    
+    visibility: hidden;
+}
+#road_button5 {
+    
+    visibility: hidden;
+}
+#road_button6 {
+    
+    visibility: hidden;
+}
+#road_button7 {
+    
+    visibility: hidden;
+}
+#road_button8 {
+    
+    visibility: hidden;
+}
+#road_button9 {
+    
+    visibility: hidden;
+}
+#road_button10 {
+    
+    visibility: hidden;
+}
+#road_button11 {
+    
+    visibility: hidden;
+}
+#road_button12 {
+    
+    visibility: hidden;
+}
+#road_button13 {
+    
+    visibility: hidden;
+}
+#road_button14 {
+    
+    visibility: hidden;
+}
+#road_button15 {
+    
+    visibility: hidden;
+}
+#road_button16 {
+    
+    visibility: hidden;
+}
+#road_button17 {
+    
+    visibility: hidden;
+}
+#road_button18 {
+    
+    visibility: hidden;
+}
+#road_button19 {
+    
+    visibility: hidden;
+}
+#road_button20 {
+    
+    visibility: hidden;
+}
+#road_button21 {
+    
+    visibility: hidden;
+}
+#road_button22 {
+    
+    visibility: hidden;
+}
+#road_button23 {
+    
+    visibility: hidden;
+}
+#road_button24 {
+    
+    visibility: hidden;
+}
+#road_button25 {
+    
+    visibility: hidden;
+}
+#road_button26 {
+    
+    visibility: hidden;
+}
+#road_button27 {
+    
+    visibility: hidden;
+}
+#road_button28 {
+    
+    visibility: hidden;
+}
+#road_button29 {
+    
+    visibility: hidden;
+}
+#road_button30 {
+    
+    visibility: hidden;
+}
+#road_button31 {
+    
+    visibility: hidden;
+}
+#road_button32 {
+    
+    visibility: hidden;
+}
+#road_button33 {
+    
+    visibility: hidden;
+}
+#road_button34 {
+    
+    visibility: hidden;
+}
+#road_button35 {
+    
+    visibility: hidden;
+}
+#road_button36 {
+    
+    visibility: hidden;
+}
+#road_button37 {
+    
+    visibility: hidden;
+}
+#road_button38 {
+    
+    visibility: hidden;
+}
+#road_button39 {
+    
+    visibility: hidden;
+}
+#road_button40 {
+    
+    visibility: hidden;
+}
+#road_button41 {
+    
+    visibility: hidden;
+}
+#road_button42 {
+    
+    visibility: hidden;
+}
+#road_button43 {
+    
+    visibility: hidden;
+}
+#road_button44 {
+    
+    visibility: hidden;
+}
+#road_button45 {
+    
+    visibility: hidden;
+}
+#road_button46 {
+    
+    visibility: hidden;
+}
+#road_button47 {
+    
+    visibility: hidden;
+}
+#road_button48 {
+    
+    visibility: hidden;
+}
+#road_button49 {
+    
+    visibility: hidden;
+}
+#road_button50 {
+    
+    visibility: hidden;
+}
+#road_button51 {
+    
+    visibility: hidden;
+}
+#road_button52 {
+    
+    visibility: hidden;
+}
+#road_button53 {
+    
+    visibility: hidden;
+}
+#road_button54 {
+    
+    visibility: hidden;
+}
+#road_button55 {
+    
+    visibility: hidden;
+}
+#road_button56 {
+    
+    visibility: hidden;
+}
+#road_button57 {
+    
+    visibility: hidden;
+}
+#road_button58 {
+    
+    visibility: hidden;
+}
+#road_button59 {
+    
+    visibility: hidden;
+}
+#road_button60 {
+    
+    visibility: hidden;
+}
+#road_button61 {
+    
+    visibility: hidden;
+}
+#road_button62 {
+    
+    visibility: hidden;
+}
+#road_button63 {
+    
+    visibility: hidden;
+}
+#road_button64 {
+    
+    visibility: hidden;
+}
+#road_button65 {
+    
+    visibility: hidden;
+}
+#road_button66 {
+    
+    visibility: hidden;
+}
+#road_button67 {
+    
+    visibility: hidden;
+}
+#road_button68 {
+    
+    visibility: hidden;
+}
+#road_button69 {
+    
+    visibility: hidden;
+}
+#road_button70 {
+    
+    visibility: hidden;
+}
+#road_button71 {
+    
+    visibility: hidden;
+}
+#road_button72 {
+    
+    visibility: hidden;
+}
+#road_button73 {
+    
+    visibility: hidden;
+} */
+
+/*** HEXAGON SIZING AND EVEN ROW INDENTATION *****************************************************************/
+@media (min-width:0px) { /* <- 5-4  road_buttonagons per row */
+    #road_buttonGrid{
+        height: 85%;
+        padding-bottom: 20%;
+    }
+    .road_button {
+        width: 15%;
+        /* transform: scale(1.50); */
+    }
+    .road_button:nth-child(1) { /* row 1 */
+        margin-left:25%;  /* indent = width * 1.667 */
+    }
+    .road_button:nth-child(4) { /* row 2 */
+        margin-left:17.5%;  /* = indent: width * 1.1667 */
+    }
+    .road_button:nth-child(8) { /* row 3 */
+        margin-left:10%;  /* = indent: width * 0.667 */
+    }
+    .road_button:nth-child(13) { /* row 4 */
+        margin-left:17.5%; /* = indent: width * 1.1667 */
+    }
+    .road_button:nth-child(17){ /* row 5*/
+        margin-left:25%;  /* indent = width * 1.667 */
+    }
+}
