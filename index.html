@@ -6,15 +6,21 @@
     <title></title>
     <script src="/socket.io/socket.io.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="./styles/player.css">
     <link rel="stylesheet" type="text/css" href="./styles/board.css">
     <link rel="stylesheet" type="text/css" href="./styles/colonies.css">
     <link rel="stylesheet" type="text/css" href="./styles/roads.css">
     <link rel="stylesheet" type="text/css" href="./styles/road_buttons.css">
-    <link  rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Raleway:300'>
+    <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Raleway:300'>
   </head>
   <body>
     <script src="/static/client.js"></script>
     <button onclick="shuffle_board()">Shuffle Board</button>
+    <div class="player_menu" id="player_window">
+      Player Name: <input type="text" class="player_text_field" id="player_name" value=""/>
+      Player Color: <input type="text" class="player_text_field" id="player_color" value=""/>
+      <button class="player_button" onclick="get_player_info()">Submit</button>
+    </div>
     <div class="colonies">
       <ul id="colonyGrid">
         <li class="colony">

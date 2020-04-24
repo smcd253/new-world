@@ -12,22 +12,6 @@ socket.on('message', function(data) {
 let name = "Spencer"; // TODO: source this from html
 let color = "black"; // TODO: source this from html
 
-// send server message: 'new player' and new player info when a new connection (this script) is formed
-socket.emit('new player', name, color);
-
-// create client instance of player
-// my_player = new Player(name, color);
-
-// callback to update player socket id
-// socket.on("player number", function(socket_id) {
-//   my_player.player_number = socket_id;
-// });
-
-// // debug
-// console.log("client player instance")
-// console.log(my_player)
-
-
 
 // send server message 'shuffle' when a client presses "Shuffle Board"
 function shuffle_board() {
@@ -38,6 +22,14 @@ function place_road(pos) {
   socket.emit('place road', pos);
 }
 
+// player input fields
+function get_player_info() {
+  let name = document.getElementById("player_name").value;
+  let color = document.getElementById("player_color").value;
+
+  // send server message: 'new player' and new player info when a new connection (this script) is formed
+  socket.emit('new player', name, color);
+}
 // debug print
 socket.on('debug', function(data) {
   console.log("------------------------- Server Debug Msg -------------------------")

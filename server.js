@@ -67,25 +67,35 @@ io.on('connection', function(socket) {
 
   // if message is "shuffle"
   socket.on('shuffle', function() {
-    console.log("received shuffle");
-    board.shuffle_tiles();
-    board.shuffle_numbers();
-    io.sockets.emit('state', board.tiles);
+    if(typeof players[ip] != "undefined") {
+      console.log("received shuffle");
+      board.shuffle_tiles();
+      board.shuffle_numbers();
+      io.sockets.emit('state', board.tiles);
+    }
+    else {
+      io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
+    }
   });
 
   // if message is "place road"
   socket.on('place road', function(position) {
-    // place new road based on position and user ip
-    if(players[ip].roads > 0){
-      roads[position].owner = players[ip].name;
-      new_road = {position: position, color: players[ip].color};
-      players[ip].roads--;
-      io.sockets.emit('new road', new_road);
+    if(typeof players[ip] != "undefined") {
+      // place new road based on position and user ip
+      if(players[ip].roads > 0){
+        roads[position].owner = players[ip].name;
+        new_road = {position: position, color: players[ip].color};
+        players[ip].roads--;
+        io.sockets.emit('new road', new_road);
+      }
+      else {
+        io.to(socket.id).emit('out of roads', "You have no more roads to place.");
+      }
+      console.log(players[ip].roads);
     }
     else {
-      io.to(socket.id).emit('out of roads', "You have no more roads to place.")
+      io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
     }
-    console.log(players[ip].roads);
-    
   });
+  
 });
