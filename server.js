@@ -75,10 +75,10 @@ io.on('connection', function(socket) {
 
   // if message is "place road"
   socket.on('place road', function(position) {
-    // place new road based on position and socket.id
-    console.log(players[socket.id]);
-    roads[position].owner = players[socket.id].name;
-    new_road = {position: position, color: players[socket.id].color};
+    // place new road based on position and user ip
+    console.log(players[ip]);
+    roads[position].owner = players[ip].name;
+    new_road = {position: position, color: players[ip].color};
     io.sockets.emit('new road', new_road);
     
   });
