@@ -54,13 +54,13 @@ io.on('connection', function(socket) {
     if(Object.keys(players).length < 4) {
       if(!(ip in players)) {
         players[ip] = game.new_player(name, color, player_num);
-        io.sockets.emit('debug', `welcome player ${players[ip].player_number}`)
+        io.to(socket.id).emit('debug', `welcome player ${players[ip].player_number}`)
         player_num++;
       }
       else {
-        io.sockets.emit('debug', `welcome BACK player ${players[ip].player_number}`)
+        io.to(socket.id).emit('debug', `welcome BACK player ${players[ip].player_number}`)
       }
-      io.sockets.emit('debug', `your ip = ${ip}`)
+      io.to(socket.id).emit('debug', `your ip = ${ip}`)
     }
     console.log(players[ip])
   });
@@ -76,10 +76,16 @@ io.on('connection', function(socket) {
   // if message is "place road"
   socket.on('place road', function(position) {
     // place new road based on position and user ip
-    console.log(players[ip]);
-    roads[position].owner = players[ip].name;
-    new_road = {position: position, color: players[ip].color};
-    io.sockets.emit('new road', new_road);
+    if(players[ip].roads > 0){
+      roads[position].owner = players[ip].name;
+      new_road = {position: position, color: players[ip].color};
+      players[ip].roads--;
+      io.sockets.emit('new road', new_road);
+    }
+    else {
+      io.to(socket.id).emit('out of roads', "You have no more roads to place.")
+    }
+    console.log(players[ip].roads);
     
   });
 });

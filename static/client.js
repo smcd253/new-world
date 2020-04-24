@@ -98,3 +98,7 @@ function draw_new_road(new_road) {
   road_to_draw.style.background = new_road.color;
   road_to_draw.style.visibility = "visible";
 }
+
+socket.on('out of roads', function(msg) {
+  console.log(msg);
+});
