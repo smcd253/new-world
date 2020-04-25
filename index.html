@@ -17,9 +17,22 @@
     <script src="/static/client.js"></script>
     <button onclick="shuffle_board()">Shuffle Board</button>
     <div class="player_menu" id="player_window">
-      Player Name: <input type="text" class="player_text_field" id="player_name" value=""/>
-      Player Color: <input type="text" class="player_text_field" id="player_color" value=""/>
-      <button class="player_button" onclick="get_player_info()">Submit</button>
+      <div class="box player_info">
+        <div class="box pi_r1_c1">Player Name</div>
+        <div class="box pi_r1_c2">
+          <input type="text" class="player_text_field" id="player_name" value=""/>
+        </div>
+        <div class="box pi_r2_c1">Player Color</div>
+        <div class="box pi_r2_c2">
+          <input type="text" class="player_text_field" id="player_color" value=""/>
+        </div>
+        <div class="box pi_r3">
+          <button class="player_button" onclick="get_player_info()">Submit</button>
+        </div>
+      </div>
+      <div class="box b">B</div>
+      <div class="box c">C</div>
+      <div class="box d">D</div>
     </div>
     <div class="colonies">
       <ul id="colonyGrid">
