@@ -17,7 +17,12 @@ let color = "black"; // TODO: source this from html
 function shuffle_board() {
   socket.emit('shuffle');
 }
-// send server message 'place road' when a client presses "Place Road"
+
+// send server message 'build road' when client presses "Build Road"
+function build_road() {
+  socket.emit('build road');
+}
+// send server message 'place road' when a client presses a button corrsponding to road at position pos
 function place_road(pos) {
   socket.emit('place road', pos);
 }
@@ -76,12 +81,26 @@ function draw_new_board(new_board) {
   }
 }
 
+function toggle_road_buttons(_visibility) {
+  let road_buttons = document.getElementsByClassName("road_button_click");
+  for(let r of road_buttons) {
+    r.style.visibility = _visibility;
+  }
+}
+
+// receive enable road building, set all road buttons to visible
+socket.on('enable road building', function() {
+  toggle_road_buttons("visible");
+});
+
 // receive new state from server, draw new components
 socket.on('new road', function(new_road) {
   draw_new_road(new_road);
+  toggle_road_buttons("hidden");
 });
 
 function draw_new_road(new_road) {
+  // draw new road
   let roads_container = document.getElementsByClassName("roads")[0];
   let roads = roads_container.querySelectorAll('*[id]:not([id=""]');
   console.log(new_road.position)

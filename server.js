@@ -78,6 +78,13 @@ io.on('connection', function(socket) {
     }
   });
 
+  // if message is "build road"
+  socket.on('build road', function() {
+    // send message to allow roads to appear on THIS player's screen
+    // can only build road if they have the correct resources
+    io.to(socket.id).emit('enable road building');
+  });
+
   // if message is "place road"
   socket.on('place road', function(position) {
     if(typeof players[ip] != "undefined") {

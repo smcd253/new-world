@@ -29,8 +29,7 @@
     position: relative;
     visibility: visible;
     outline:1px solid transparent; /* fix for jagged edges in FF on hover transition */
-    /* margin:1.5% 1.5% 1.5%; */
-
+    opacity: 0.5;
 }
 .road_button::after{
     content:'';
