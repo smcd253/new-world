@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="./styles/colonies.css">
     <link rel="stylesheet" type="text/css" href="./styles/roads.css">
     <link rel="stylesheet" type="text/css" href="./styles/road_buttons.css">
+    <link rel="stylesheet" type="text/css" href="./styles/colony_buttons.css">
     <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Raleway:300'>
   </head>
   <body>
@@ -31,9 +32,251 @@
       <div class="box game_controls">
         <button class="box gc_r1_c1" onclick="build_road()">Build Road</button>
         <button class="box gc_r1_c2" onclick="">Build Settlement</button>
-        <button class="box gc_r2_c1" onclick="">Build Ciy</button>
+        <button class="box gc_r2_c1" onclick="">Build City</button>
         <button class="box gc_r2_c2" onclick="">Roll Dice</button>
       </div>
+    </div>
+    <div class="colony_buttons">
+      <ul id="colony_buttonGrid">
+        <li class="colony_button">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_a">
+              <button class="colony_button_click" onclick="place_colony(1)"></button>
+            </rd_b>
+            <rd_b class="colony_button_b">
+              <button class="colony_button_click" onclick="place_colony(2)"></button>
+            </rd_b>
+            <rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(3)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(4)"></button>
+            </rd_b>
+            <rd_b class="colony_button_e">
+              <button class="colony_button_click" onclick="place_colony(5)"></button>
+            </rd_b>
+            <rd_b class="colony_button_f">
+              <button class="colony_button_click" onclick="place_colony(6)"></button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="colony_button">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_a">
+              <button class="colony_button_click" onclick="place_colony(7)"></button>
+            </rd_b>
+            <rd_b class="colony_button_b">
+              <button class="colony_button_click" onclick="place_colony(8)"></button>
+            </rd_b>
+            <rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(9)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(10)"></button>
+            </rd_b>
+            
+          </div>
+        </li>
+        <li class="colony_button">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_a">
+              <button class="colony_button_click" onclick="place_colony(11)"></button>
+            </rd_b>
+            <rd_b class="colony_button_b">
+              <button class="colony_button_click" onclick="place_colony(12)"></button>
+            </rd_b>
+            <rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(13)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(14)"></button>
+            </rd_b>
+            
+          </div>
+        </li>
+        <li class="colony_button">
+          <div class="colony_buttonRhombus">
+            
+            <rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(15)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(16)"></button>
+            </rd_b>
+            <rd_b class="colony_button_e">
+              <button class="colony_button_click" onclick="place_colony(17)"></button>
+            </rd_b>
+            <rd_b class="colony_button_f">
+              <button class="colony_button_click" onclick="place_colony(18)"></button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="colony_button">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(19)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(20)"></button>
+            </rd_b>
+          </div>
+        </li>
+      <li class="colony_button">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(21)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(22)"></button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="colony_button">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_b">
+            <button class="colony_button_click" onclick="place_colony(23)"></button>
+          </rd_b><rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(24)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(25)"></button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="colony_button">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(26)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(27)"></button>
+            </rd_b>
+            <rd_b class="colony_button_e">
+              <button class="colony_button_click" onclick="place_colony(28)"></button>
+            </rd_b>
+            <rd_b class="colony_button_f">
+              <button class="colony_button_click" onclick="place_colony(29)"></button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="colony_button">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(30)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(31)"></button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="colony_button">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(32)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(33)"></button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="colony_button">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(34)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(35)"></button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="colony_button">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_b">
+              <button class="colony_button_click" onclick="place_colony(36)"></button>
+            </rd_b>
+            <rd_b class="colony_button_c">
+                <button class="colony_button_click" onclick="place_colony(37)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(38)"></button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="colony_button">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(39)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(40)"></button>
+            </rd_b>
+            <rd_b class="colony_button_e">
+              <button class="colony_button_click" onclick="place_colony(41)"></button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="colony_button">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(42)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(43)"></button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="colony_button">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(44)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(45)"></button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="colony_button">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(46)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(47)"></button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="colony_button">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(48)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(49)"></button>
+            </rd_b>
+            <rd_b class="colony_button_e">
+                <button class="colony_button_click" onclick="place_colony(50)"></button>
+            </rd_b></div>
+        </li>
+        <li class="colony_button">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(51)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(52)"></button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="colony_button">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(53)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(54)"></button>
+            </rd_b>
+          </div>
+        </li></ul>
     </div>
     <div class="colonies">
       <ul id="colonyGrid">
@@ -144,7 +387,18 @@
                 <div class="roofR"></div>
                 <div class="roofL"></div>
               </c>
-              <c class="colony_e" id="colony21">
+              
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_c" id="colony21">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony22">
                 <div class="roofR"></div>
                 <div class="roofL"></div>
               </c>
@@ -154,29 +408,15 @@
         <li class="colony">
           <div class="colonyRhombus">
             <a class="colonyRectangle" href="#">
-              <c class="colony_c" id="colony22">
+              <c class="colony_b" id="colony23">
                 <div class="roofR"></div>
                 <div class="roofL"></div>
               </c>
-              <c class="colony_d" id="colony23">
+              <c class="colony_c" id="colony24">
                 <div class="roofR"></div>
                 <div class="roofL"></div>
               </c>
-            </a>
-          </div>
-        </li>
-        <li class="colony">
-          <div class="colonyRhombus">
-            <a class="colonyRectangle" href="#">
-              <c class="colony_b" id="colony24">
-                <div class="roofR"></div>
-                <div class="roofL"></div>
-              </c>
-              <c class="colony_c" id="colony25">
-                <div class="roofR"></div>
-                <div class="roofL"></div>
-              </c>
-              <c class="colony_d" id="colony26">
+              <c class="colony_d" id="colony25">
                 <div class="roofR"></div>
                 <div class="roofL"></div>
               </c>
@@ -186,19 +426,19 @@
         <li class="colony">
           <div class="colonyRhombus">
             <a class="colonyRectangle" href="#">
-              <c class="colony_c" id="colony27">
+              <c class="colony_c" id="colony26">
                 <div class="roofR"></div>
                 <div class="roofL"></div>
               </c>
-              <c class="colony_d" id="colony28">
+              <c class="colony_d" id="colony27">
                 <div class="roofR"></div>
                 <div class="roofL"></div>
               </c>
-              <c class="colony_e" id="colony29">
+              <c class="colony_e" id="colony28">
                 <div class="roofR"></div>
                 <div class="roofL"></div>
               </c>
-              <c class="colony_f" id="colony30">
+              <c class="colony_f" id="colony29">
                 <div class="roofR"></div>
                 <div class="roofL"></div>
               </c>
@@ -208,11 +448,25 @@
         <li class="colony">
           <div class="colonyRhombus">
             <a class="colonyRectangle" href="#">
-              <c class="colony_c" id="colony31">
+              <c class="colony_c" id="colony30">
                 <div class="roofR"></div>
                 <div class="roofL"></div>
               </c>
-              <c class="colony_d" id="colony32">
+              <c class="colony_d" id="colony31">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_c" id="colony32">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony33">
                 <div class="roofR"></div>
                 <div class="roofL"></div>
               </c>
@@ -226,7 +480,7 @@
                 <div class="roofR"></div>
                 <div class="roofL"></div>
               </c>
-              <c class="colony_d"  id="colony35">
+              <c class="colony_d" id="colony35">
                 <div class="roofR"></div>
                 <div class="roofL"></div>
               </c>
@@ -236,11 +490,15 @@
         <li class="colony">
           <div class="colonyRhombus">
             <a class="colonyRectangle" href="#">
-              <c class="colony_c" id="colony36">
+              <c class="colony_b" id="colony36">
                 <div class="roofR"></div>
                 <div class="roofL"></div>
               </c>
-              <c class="colony_d" id="colony37">
+              <c class="colony_c" id="colony37">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony38">
                 <div class="roofR"></div>
                 <div class="roofL"></div>
               </c>
@@ -250,10 +508,6 @@
         <li class="colony">
           <div class="colonyRhombus">
             <a class="colonyRectangle" href="#">
-              <c class="colony_b" id="colony38">
-                <div class="roofR"></div>
-                <div class="roofL"></div>
-              </c>
               <c class="colony_c" id="colony39">
                 <div class="roofR"></div>
                 <div class="roofL"></div>
@@ -262,24 +516,25 @@
                 <div class="roofR"></div>
                 <div class="roofL"></div>
               </c>
+              <c class="colony_e" id="colony41">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
             </a>
           </div>
         </li>
         <li class="colony">
           <div class="colonyRhombus">
             <a class="colonyRectangle" href="#">
-              <c class="colony_c" id="colony41">
+              <c class="colony_c" id="colony42">
                 <div class="roofR"></div>
                 <div class="roofL"></div>
               </c>
-              <c class="colony_d" id="colony42">
+              <c class="colony_d" id="colony43">
                 <div class="roofR"></div>
                 <div class="roofL"></div>
               </c>
-              <c class="colony_e" id="colony43">
-                <div class="roofR"></div>
-                <div class="roofL"></div>
-              </c>
+              
             </a>
           </div>
         </li>
@@ -294,7 +549,37 @@
                 <div class="roofR"></div>
                 <div class="roofL"></div>
               </c>
-              <c class="colony_e" id="colony46">
+              
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_c" id="colony46">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony47">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_c" id="colony48">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony49">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_e" id="colony50">
                 <div class="roofR"></div>
                 <div class="roofL"></div>
               </c>
@@ -304,33 +589,11 @@
         <li class="colony">
           <div class="colonyRhombus">
             <a class="colonyRectangle" href="#">
-              <c class="colony_c" id="colony47">
+              <c class="colony_c" id="colony51">
                 <div class="roofR"></div>
                 <div class="roofL"></div>
               </c>
-              <c class="colony_d" id="colony48">
-                <div class="roofR"></div>
-                <div class="roofL"></div>
-              </c>
-              <c class="colony_e" id="colony49">
-                <div class="roofR"></div>
-                <div class="roofL"></div>
-              </c>
-            </a>
-          </div>
-        </li>
-        <li class="colony">
-          <div class="colonyRhombus">
-            <a class="colonyRectangle" href="#">
-              <c class="colony_c" id="colony50">
-                <div class="roofR"></div>
-                <div class="roofL"></div>
-              </c>
-              <c class="colony_d" id="colony51">
-                <div class="roofR"></div>
-                <div class="roofL"></div>
-              </c>
-              <c class="colony_e" id="colony52">
+              <c class="colony_d" id="colony52">
                 <div class="roofR"></div>
                 <div class="roofL"></div>
               </c>
@@ -345,38 +608,6 @@
                 <div class="roofL"></div>
               </c>
               <c class="colony_d" id="colony54">
-                <div class="roofR"></div>
-                <div class="roofL"></div>
-              </c>
-              <c class="colony_e" id="colony55">
-                <div class="roofR"></div>
-                <div class="roofL"></div>
-              </c>
-            </a>
-          </div>
-        </li>
-        <li class="colony">
-          <div class="colonyRhombus">
-            <a class="colonyRectangle" href="#">
-              <c class="colony_c" id="colony56">
-                <div class="roofR"></div>
-                <div class="roofL"></div>
-              </c>
-              <c class="colony_d" id="colony57">
-                <div class="roofR"></div>
-                <div class="roofL"></div>
-              </c>
-            </a>
-          </div>
-        </li>
-        <li class="colony">
-          <div class="colonyRhombus">
-            <a class="colonyRectangle" href="#">
-              <c class="colony_c" id="colony58">
-                <div class="roofR"></div>
-                <div class="roofL"></div>
-              </c>
-              <c class="colony_d" id="colony59">
                 <div class="roofR"></div>
                 <div class="roofL"></div>
               </c>

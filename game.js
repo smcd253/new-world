@@ -86,87 +86,6 @@ class Tile {
     }
 }
 
-
-let roads = [
-    {position: 1, owner: "null"},
-    {position: 2, owner: "null"},
-    {position: 3, owner: "null"},
-    {position: 4, owner: "null"},
-    {position: 5, owner: "null"},
-    {position: 6, owner: "null"},
-    {position: 7, owner: "null"},
-    {position: 8, owner: "null"},
-    {position: 9, owner: "null"},
-    {position: 10, owner: "null"},
-    {position: 11, owner: "null"},
-    {position: 12, owner: "null"},
-    {position: 13, owner: "null"},
-    {position: 14, owner: "null"},
-    {position: 15, owner: "null"},
-    {position: 16, owner: "null"},
-    {position: 17, owner: "null"},
-    {position: 18, owner: "null"},
-    {position: 19, owner: "null"},
-    {position: 20, owner: "null"},
-    {position: 21, owner: "null"},
-    {position: 22, owner: "null"},
-    {position: 23, owner: "null"},
-    {position: 24, owner: "null"},
-    {position: 25, owner: "null"},
-    {position: 26, owner: "null"},
-    {position: 27, owner: "null"},
-    {position: 28, owner: "null"},
-    {position: 29, owner: "null"},
-    {position: 30, owner: "null"},
-    {position: 31, owner: "null"},
-    {position: 32, owner: "null"},
-    {position: 33, owner: "null"},
-    {position: 34, owner: "null"},
-    {position: 35, owner: "null"},
-    {position: 36, owner: "null"},
-    {position: 37, owner: "null"},
-    {position: 38, owner: "null"},
-    {position: 39, owner: "null"},
-    {position: 40, owner: "null"},
-    {position: 41, owner: "null"},
-    {position: 42, owner: "null"},
-    {position: 43, owner: "null"},
-    {position: 44, owner: "null"},
-    {position: 45, owner: "null"},
-    {position: 46, owner: "null"},
-    {position: 47, owner: "null"},
-    {position: 48, owner: "null"},
-    {position: 49, owner: "null"},
-    {position: 50, owner: "null"},
-    {position: 51, owner: "null"},
-    {position: 52, owner: "null"},
-    {position: 53, owner: "null"},
-    {position: 54, owner: "null"},
-    {position: 55, owner: "null"},
-    {position: 56, owner: "null"},
-    {position: 57, owner: "null"},
-    {position: 58, owner: "null"},
-    {position: 59, owner: "null"},
-    {position: 60, owner: "null"},
-    {position: 61, owner: "null"},
-    {position: 62, owner: "null"},
-    {position: 63, owner: "null"},
-    {position: 64, owner: "null"},
-    {position: 65, owner: "null"},
-    {position: 66, owner: "null"},
-    {position: 67, owner: "null"},
-    {position: 68, owner: "null"},
-    {position: 69, owner: "null"},
-    {position: 70, owner: "null"},
-    {position: 71, owner: "null"},
-    {position: 72, owner: "null"},
-    {position: 73, owner: "null"},
-];
-
-exports.get_roads = function() {
-    return roads;
-}
-
 class Board {
     constructor() {
         // create an array of tiles
@@ -180,6 +99,13 @@ class Board {
         for(let i = 1; i <= 72; i++) {
             this.roads.position = i;
             this.roads.owner = "null";
+        }
+
+        // create an array of colonies
+        this.colonies = []
+        for(let i = 1; i <= 59; i++) {
+            this.colonies.position = i;
+            this.colonies.owner = "null";
         }
     }
     shuffle_numbers() {

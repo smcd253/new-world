@@ -41,7 +41,6 @@ setInterval(function() {
 
 // game objects
 let board = game.get_board();
-// let roads = game.get_roads();
 let players = {};
 let player_num = 1;
 
@@ -67,19 +66,22 @@ io.on('connection', function(socket) {
 
   // if message is "shuffle"
   socket.on('shuffle', function() {
-    if(typeof players[ip] != "undefined") {
-      console.log("received shuffle");
-      board.shuffle_tiles();
-      board.shuffle_numbers();
-      io.sockets.emit('state', board.tiles);
-    }
-    else {
+    if(typeof players[ip] == "undefined") {
       io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
+      return;
     }
+    console.log("received shuffle");
+    board.shuffle_tiles();
+    board.shuffle_numbers();
+    io.sockets.emit('state', board.tiles);
   });
 
   // if message is "build road"
   socket.on('build road', function() {
+    if(typeof players[ip] == "undefined") {
+      io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
+      return;
+    }
     // send message to allow roads to appear on THIS player's screen
     // can only build road if they have the correct resources
     io.to(socket.id).emit('enable road building');
@@ -87,23 +89,19 @@ io.on('connection', function(socket) {
 
   // if message is "place road"
   socket.on('place road', function(position) {
-    if(typeof players[ip] != "undefined") {
-      // place new road based on position and user ip
-      if(players[ip].roads > 0){
-        // roads[position].owner = players[ip].name;
-        board.roads.owner = players[ip].name;
-        new_road = {position: position, color: players[ip].color};
-        players[ip].roads--;
-        io.sockets.emit('new road', new_road);
-      }
-      else {
-        io.to(socket.id).emit('out of roads', "You have no more roads to place.");
-      }
-      console.log(players[ip].roads);
-    }
-    else {
+    if(typeof players[ip] == "undefined") {
       io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
+      return;
     }
+    // place new road based on position and user ip
+    if(players[ip].roads > 0){
+      // roads[position].owner = players[ip].name;
+      board.roads.owner = players[ip].name;
+      new_road = {position: position, color: players[ip].color};
+      players[ip].roads--;
+      io.sockets.emit('new road', new_road);
+    }
+    console.log(players[ip].roads);
   });
   
 });

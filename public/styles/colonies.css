@@ -20,7 +20,6 @@
     height: 90%;
     margin-top: 5%;
     margin: 0 auto;
-    /* overflow: hidden; */
     list-style-type: none;
     resize: inherit;
 }
@@ -36,21 +35,21 @@
     padding-bottom: 86.602%;  /* =  100 / tan(60) * 1.5 */
 }
 .colonyRhombus{
-position: absolute;
-width:96%;
-padding-bottom: 110.851%; /* =  width / sin(60) */
-margin:0 2%;
-overflow: hidden;
-visibility: hidden;
-outline:1px solid transparent; /* fix for jagged edges in FF on hover transition */
--webkit-transform: rotate3d(0,0,1,-60deg) skewY(30deg);
-    -ms-transform: rotate3d(0,0,1,-60deg) skewY(30deg);
-        transform: rotate3d(0,0,1,-60deg) skewY(30deg);
+    position: absolute;
+    width:96%;
+    padding-bottom: 110.851%; /* =  width / sin(60) */
+    margin:0 2%;
+    overflow: hidden;
+    visibility: hidden;
+    outline:1px solid transparent; /* fix for jagged edges in FF on hover transition */
+    -webkit-transform: rotate3d(0,0,1,-60deg) skewY(30deg);
+        -ms-transform: rotate3d(0,0,1,-60deg) skewY(30deg);
+            transform: rotate3d(0,0,1,-60deg) skewY(30deg);
 }
 .colonyRhombus * {
-position: absolute;
-visibility: hidden;
-outline:1px solid transparent; /* fix for jagged edges in FF on hover transition */
+    position: absolute;
+    visibility: hidden;
+    outline:1px solid transparent; /* fix for jagged edges in FF on hover transition */
 }
 .colonyRectangle {
     display:block;
@@ -123,358 +122,358 @@ outline:1px solid transparent; /* fix for jagged edges in FF on hover transition
 
 /*colony ids*/
 #colony1 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony2 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony3 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony4 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony5 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony6 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony7 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony8 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony9 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony10 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony11 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony12 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony13 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony14 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony15 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony16 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony17 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony18 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony19 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony20 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony21 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony22 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony23 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony24 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony25 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony26 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony27 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony28 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony29 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony30 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony31 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony32 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony33 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony34 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony35 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony36 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony37 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony38 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony39 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony40 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony41 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony42 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony43 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony44 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony45 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony46 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony47 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony48 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony49 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony50 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony51 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony52 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony53 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony54 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony55 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony56 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony57 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony58 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 #colony59 {
-    --custom-color: rgb(255, 255, 255); /*player color*/
+    --custom-color: white; /*player color*/
     background: var(--custom-color);
     color: var(--custom-color);
-    visibility: hidden; /*toggle: if user place*/
+    visibility: visible; /*toggle: if user place*/
 }
 
 
