@@ -56,32 +56,33 @@ exports.new_player = function(name, color, player_num) {
 }
 
 // object to initialize board tiles
-let _tiles = [
-    {type: "wheat",  number: 2},
-    {type: "wheat",  number: 3},
-    {type: "wheat",  number: 3},
-    {type: "wheat",  number: 4},
-    {type: "sheep",  number: 4},
-    {type: "sheep",  number: 5},
-    {type: "sheep",  number: 5},
-    {type: "sheep",  number: 6},
-    {type: "ore",    number: 6},
-    {type: "ore",    number: 8},
-    {type: "ore",    number: 8},
-    {type: "brick",  number: 9},
-    {type: "brick",  number: 9},
-    {type: "brick",  number: 10},
-    {type: "wood",   number: 10},
-    {type: "wood",   number: 11},
-    {type: "wood",   number: 11},
-    {type: "wood",   number: 12},
-    {type: "desert",  number: 0},
+let _tiles = [                                      /* colony positions surrounding tile (clockwise from top) */
+    {type: "wheat",   number: 2,    colony_positions: [1,  2,  3,  4,  5,  6]},
+    {type: "wheat",   number: 3,    colony_positions: [2,  3,  7,  8,  9,  10]},
+    {type: "wheat",   number: 3,    colony_positions: [8,  9,  11, 12, 13, 14]},
+    {type: "wheat",   number: 4,    colony_positions: [5,  4,  15, 16, 17, 18]},
+    {type: "sheep",   number: 4,    colony_positions: [3,  10, 19, 20, 15, 4]},
+    {type: "sheep",   number: 5,    colony_positions: [9,  14, 21, 22, 19, 10]},
+    {type: "sheep",   number: 5,    colony_positions: [13, 23, 24, 25, 21, 14]},
+    {type: "sheep",   number: 6,    colony_positions: [17, 16, 26, 27, 28, 29]},
+    {type: "ore",     number: 6,    colony_positions: [15, 20, 30, 31, 26, 16]},
+    {type: "ore",     number: 8,    colony_positions: [19, 22, 32, 33, 30, 20]},
+    {type: "ore",     number: 8,    colony_positions: [21, 25, 34, 35, 32, 22]},
+    {type: "brick",   number: 9,    colony_positions: [24, 36, 37, 38, 34, 25]},
+    {type: "brick",   number: 9,    colony_positions: [26, 31, 39, 40, 41, 27]},
+    {type: "brick",   number: 10,   colony_positions: [30, 33, 42, 43, 39, 31]},
+    {type: "wood",    number: 10,   colony_positions: [32, 35, 44, 45, 42, 33]},
+    {type: "wood",    number: 11,   colony_positions: [34, 38, 46, 47, 44, 35]},
+    {type: "wood",    number: 11,   colony_positions: [39, 43, 48, 49, 50, 40]},
+    {type: "wood",    number: 12,   colony_positions: [42, 45, 51, 52, 48, 43]},
+    {type: "desert",  number: 0,    colony_positions: [44, 47, 53, 54, 51, 45]}
 ];
 
 class Tile {
     constructor (_tile) {
         this.type = _tile.type;
         this.number = _tile.number;
+        this.colony_positions = _tile.colony_positions;
     }
 }
 
@@ -95,18 +96,26 @@ class Board  {
         
         // create an array of roads
         this.roads = []
-        for(let i = 1; i <= 72; i++) {
-            this.roads.position = i;
-            this.roads.owner = "null";
+        for(let i = 0; i < 72; i++) {
+            this.roads.push({owner: 0}); 
         }
 
-        // create an array of colonies
+        // create an array of colonies with boardering tiles
         this.colonies = []
-        for(let i = 1; i <= 59; i++) {
-            this.colonies.position = i;
-            this.colonies.owner = "null";   
+        for(let i = 0; i < 54; i++) {
+            this.colonies.push({owner: 0});
+            this.colonies[i].tiles = {};
+            for(let j = 0; j < this.tiles.length; j++) {
+                if(this.tiles[j].colony_positions.includes(i + 1)) {
+                    // add number and resource type to colony
+                    this.colonies[i].tiles[this.tiles[j].number] = this.tiles[j].type;
+                }
+            }              
         }
 
+        // keep list of active colonies
+        this.active_colonies = []
+        
         // dice roll result
         this.dice = 0;
     }

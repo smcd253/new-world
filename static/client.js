@@ -222,7 +222,7 @@ socket.on('new colony', function(new_colony) {
   // draw new colony
 function draw_new_colony(new_colony) {
   let colonies_container = document.getElementsByClassName("colonies")[0];
-  let colonies = colonies_container.querySelectorAll('*[id]:not([id=""]');
+  let colonies = colonies_container.querySelectorAll('*[id]:not([id="colonyGrid"])');
   console.log(new_colony.position)
   let colony_to_draw = colonies[new_colony.position];
   console.log(colony_to_draw);
@@ -235,3 +235,14 @@ socket.on('out of colonies', function(msg) {
   toggle_colony_buttons("hidden");
   console.log(msg);
 });
+
+function expose_col_num() {
+  let expose_colonies = document.getElementsByClassName("colonies")[0];
+  console.log(expose_colonies);
+  let col = expose_colonies.querySelectorAll('*[id]:not([id="colonyGrid"]');
+  for(let i = 0; i < col.length; i++) {
+    col[i].style.visibility = "visible";
+    col[i].textContent = col[i].id.slice(1).slice(-2);
+    col[i].style.background = "black";
+  }
+}

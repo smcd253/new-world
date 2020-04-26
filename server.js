@@ -37,6 +37,7 @@ io.on('connection', function(socket) {
 let board = game.get_board();
 let players = {};
 
+
 // every time a request is made
 io.on('connection', function(socket) {
   // get client ip
@@ -123,15 +124,14 @@ io.on('connection', function(socket) {
       return;
     }
     // place new road based on position and user ip
-    if(players[ip].roads > 0){
-      // roads[position].owner = players[ip].name;
-      board.roads.owner = players[ip].name;
-      new_road = {position: position, color: players[ip].color};
+    if(players[ip].roads > 0 && board.roads[posiiton - 1].owner == 0){
+      board.roads[position - 1].owner = players[ip].player_number;
+      new_road = {position: position - 1, color: players[ip].color};
       players[ip].roads--;
       io.sockets.emit('new road', new_road);
     }
     else {
-      io.to(socket.id).emit('out of roads', "You have no more roads to build with.")
+      io.to(socket.id).emit('out of roads', "You cannot build a road here.")
     }
     console.log(players[ip].roads);
   });
@@ -143,15 +143,15 @@ io.on('connection', function(socket) {
       return;
     }
     // place new road based on position and user ip
-    if(players[ip].colonies > 0){
-      // colonies[position].owner = players[ip].name;
-      board.colonies.owner = players[ip].name;
-      new_colony = {position: position, color: players[ip].color};
+    if(players[ip].colonies > 0 && board.colonies[position - 1].owner == 0){
+      board.colonies[position - 1].owner = players[ip].player_number;
+      new_colony = {position: position - 1, color: players[ip].color};
       players[ip].colonies--;
       io.sockets.emit('new colony', new_colony);
+
     }
     else {
-      io.to(socket.id).emit('out of colonies', "You have no more colonies to build with.")
+      io.to(socket.id).emit('out of colonies', "You cannot build a colony here.")
     }
     console.log(players[ip].colonies);
   });
