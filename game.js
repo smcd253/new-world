@@ -1,40 +1,8 @@
-// player's hand
-class Hand {
-    constructor() {
-        this.total = 0;
-        let wheat = 0;
-        let sheep = 0;
-        let ore = 0;
-        let brick = 0;
-        let wood = 0;
-    }
-
-    get_wheat() {
-        return this.wheat;
-    }
-
-    get_sheep() {
-        return this.sheep;
-    }
-
-    get_ore() {
-        return this.ore;
-    }
-
-    get_brick() {
-        return this.brick;
-    }
-
-    get_wood() {
-        return this.wood;
-    }
-}
 
 // player info
 class Player {
     constructor(name, color, player_num) {
         this.player_number = player_num;
-        console.log
         this.name = name;
         this.color = color;
         this.points_visible = 0;
@@ -43,16 +11,12 @@ class Player {
         this.cities = 4;
         this.roads = 15;
         this.dev_cards = 0;
-        this.hand = new Hand();
+        this.hand = {'wheat': 0, 'sheep': 0, 'brick': 0, 'wood': 0, 'ore': 0};
     }
 
     get_points_actual() {
         return this.points_actual;
     }
-}
-
-exports.new_player = function(name, color, player_num) {
-    return new Player(name, color, player_num);
 }
 
 // object to initialize board tiles
@@ -99,7 +63,19 @@ class Board  {
         for(let i = 0; i < 72; i++) {
             this.roads.push({owner: 0}); 
         }
+        
+        // initialize colonies
+        this.colonies = [];
+        this.init_colonies();
 
+        // keep list of active colonies
+        this.active_colonies = []
+        
+        // dice roll result
+        this.dice = 0;
+    }
+    // reinitialize colonies
+    init_colonies() {
         // create an array of colonies with boardering tiles
         this.colonies = []
         for(let i = 0; i < 54; i++) {
@@ -108,18 +84,14 @@ class Board  {
             for(let j = 0; j < this.tiles.length; j++) {
                 if(this.tiles[j].colony_positions.includes(i + 1)) {
                     // add number and resource type to colony
-                    this.colonies[i].tiles[this.tiles[j].number] = this.tiles[j].type;
+                    if(typeof this.colonies[i].tiles[this.tiles[j].number] === "undefined") {
+                        this.colonies[i].tiles[this.tiles[j].number] = [];
+                    }
+                    this.colonies[i].tiles[this.tiles[j].number].push(this.tiles[j].type);
                 }
             }              
         }
-
-        // keep list of active colonies
-        this.active_colonies = []
-        
-        // dice roll result
-        this.dice = 0;
     }
-
     // shuffle numbers on board
     shuffle_numbers() {
         let currentIndex = this.tiles.length, temp, randomIndex;
@@ -170,6 +142,7 @@ class Board  {
         this.shuffle_numbers();
         this.shuffle_types();
         this.zero_desert();
+        this.init_colonies();
     }
 
     // roll dice
@@ -178,10 +151,7 @@ class Board  {
         let max = 12;
         this.dice = Math.floor(Math.random() * (max - min + 1)) + min; ;
     }
-}
 
-exports.get_board = function() {
-    return new Board();
 }
 
 // on object to run the game state machine and keep track of all game objects
@@ -200,8 +170,10 @@ class GameManager {
     }
 
     // new player
-    new_player(name, color, ip) {
-        this.players[ip] = new_player(name, color, ip);
+    new_player(name, color, player_num, ip) {
+        this.players[ip] = new Player(name, color, player_num);
+        console.log("new player. hand = ");
+        console.log(this.players[ip].hand);
     }
 
     // update player
@@ -210,6 +182,46 @@ class GameManager {
         this.players[ip].color = color;
     }
 
-    // start game
-    // 
+    // allocate resources
+    // TODO: make this better!
+    allocate_resources() {
+        console.log("call allocate resources");
+        // loop through all colonies
+        for(let i = 0; i < this.board.colonies.length; i++) {
+            // if this colony has been placed
+            if(this.board.colonies[i].owner !== 0) {
+                console.log("colony has an owner.");
+                console.log(this.board.colonies[i]);
+                console.log("colony tile numbers:");
+                console.log(Object.keys(this.board.colonies[i].tiles));
+                // if this colony is bordering a tile with this dice roll
+                let roll = this.board.dice.toString();
+                console.log("roll = " + roll);
+                if(Object.keys(this.board.colonies[i].tiles).includes(roll)) {
+                    console.log("this colony boarders a tile with number " + roll);
+                    for(let p in this.players) {
+                        if(this.players.hasOwnProperty(p)) {
+                            // if the player number matches the colony owner
+                            if(this.players[p].player_number === this.board.colonies[i].owner) {
+                                // loop through tiles with number "roll" and give owner the resources
+                                for(let r in this.board.colonies[i].tiles[roll]) {
+                                    if(this.board.colonies[i].tiles[roll].hasOwnProperty(r)) {
+                                        this.players[p].hand[this.board.colonies[i].tiles[roll][r]]++;
+                                    }
+                                }
+                            }
+                        }
+                        console.log("player after allocate resources: ");
+                        console.log(this.players[p]);
+                        console.log("player hand after allocate resources: ");
+                        console.log(this.players[p].hand);
+                    }
+                }
+            }
+        }
+    }
+}
+
+exports.get_game_manager = function() {
+    return new GameManager();
 }

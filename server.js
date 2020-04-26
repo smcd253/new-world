@@ -34,9 +34,9 @@ io.on('connection', function(socket) {
 });
 
 // game objects
-let board = game.get_board();
-let players = {};
-
+// let game_manager.board = game.get_board();
+// let game_manager.players = {};
+let game_manager = game.get_game_manager();
 
 // every time a request is made
 io.on('connection', function(socket) {
@@ -45,59 +45,66 @@ io.on('connection', function(socket) {
   socket.on('new player', function(name, color) {
     if (/\S/.test(name) && /\S/.test(color)) {
       // if it is a new player 
-      if(!(ip in players)) {
-        // limit number of players to 4
-        if(Object.keys(players).length < 4) {
-          players[ip] = game.new_player(name, color, Object.keys(players).length + 1);
-          io.to(socket.id).emit('debug', `welcome ${players[ip].name}`)
+      if(!(ip in game_manager.players)) {
+        // limit number of game_manager.players to 4
+        if(Object.keys(game_manager.players).length < 4) {
+          game_manager.new_player(name, color, Object.keys(game_manager.players).length + 1, ip);
+          io.to(socket.id).emit('debug', `welcome ${game_manager.players[ip].name}`)
           // instruct clients to update scoreboard
-          io.sockets.emit('update scoreboard', players);
+          io.sockets.emit('update scoreboard', game_manager.players);
         }
       }
       // else update player info
       else {
-        players[ip].name = name;
-        players[ip].color = color;
+        game_manager.players[ip].name = name;
+        game_manager.players[ip].color = color;
         // instruct clients to update scoreboard
-        io.sockets.emit('update scoreboard', players);
-        // TODO: redraw all player assets on board
-        io.to(socket.id).emit('debug', `welcome back ${players[ip].name}`)
+        io.sockets.emit('update scoreboard', game_manager.players);
+        // TODO: redraw all player assets on game_manager.board
+        io.to(socket.id).emit('debug', `welcome back ${game_manager.players[ip].name}`)
       }
     }
     else {
       io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
     }
-    console.log(players[ip])
+    console.log(game_manager.players[ip])
   });
 
   // if message is "shuffle"
   socket.on('shuffle', function() {
-    if(typeof players[ip] == "undefined") {
+    if(typeof game_manager.players[ip] === "undefined") {
       io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
       return;
     }
     console.log("received shuffle");
-    board.shuffle_board();
-    io.sockets.emit('state', board.tiles);
+    game_manager.board.shuffle_board();
+    io.sockets.emit('state', game_manager.board.tiles);
   });
 
   // if message is "start"
   socket.on('start', function() {
+    if(typeof game_manager.players[ip] === "undefined") {
+      io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
+      return;
+    }
     // start turn state machine
-    io.sockets.emit('state', board.tiles);
+    io.sockets.emit('state', game_manager.board.tiles);
   });
 
   socket.on('roll dice', function() {
-    console.log("received dice roll");
-    board.roll_dice();
-    console.log("new dice val = " + board.dice);
-    io.sockets.emit('new dice roll', board.dice);
-    io.sockets.emit('debug', "Dice Roll = " + board.dice);
+    if(typeof game_manager.players[ip] === "undefined") {
+      io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
+      return;
+    }
+    game_manager.board.roll_dice();
+    game_manager.allocate_resources();
+    console.log(game_manager.players[ip]);
+    io.sockets.emit('new dice roll', game_manager.board.dice);
   });
 
   // if message is "build road"
   socket.on('build road', function() {
-    if(typeof players[ip] == "undefined") {
+    if(typeof game_manager.players[ip] === "undefined") {
       io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
       return;
     }
@@ -108,7 +115,7 @@ io.on('connection', function(socket) {
 
   // if message is "build colony"
   socket.on('build colony', function() {
-    if(typeof players[ip] == "undefined") {
+    if(typeof game_manager.players[ip] === "undefined") {
       io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
       return;
     }
@@ -119,41 +126,40 @@ io.on('connection', function(socket) {
 
   // if message is "place road"
   socket.on('place road', function(position) {
-    if(typeof players[ip] == "undefined") {
+    if(typeof game_manager.players[ip] === "undefined") {
       io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
       return;
     }
     // place new road based on position and user ip
-    if(players[ip].roads > 0 && board.roads[posiiton - 1].owner == 0){
-      board.roads[position - 1].owner = players[ip].player_number;
-      new_road = {position: position - 1, color: players[ip].color};
-      players[ip].roads--;
+    if(game_manager.players[ip].roads > 0 && game_manager.board.roads[position - 1].owner === 0){
+      game_manager.board.roads[position - 1].owner = game_manager.players[ip].player_number;
+      new_road = {position: position, color: game_manager.players[ip].color};
+      game_manager.players[ip].roads--;
       io.sockets.emit('new road', new_road);
     }
     else {
       io.to(socket.id).emit('out of roads', "You cannot build a road here.")
     }
-    console.log(players[ip].roads);
+    console.log(game_manager.players[ip].roads);
   });
 
   // if message is "place colony"
   socket.on('place colony', function(position) {
-    if(typeof players[ip] == "undefined") {
+    if(typeof game_manager.players[ip] === "undefined") {
       io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
       return;
     }
     // place new road based on position and user ip
-    if(players[ip].colonies > 0 && board.colonies[position - 1].owner == 0){
-      board.colonies[position - 1].owner = players[ip].player_number;
-      new_colony = {position: position - 1, color: players[ip].color};
-      players[ip].colonies--;
+    if(game_manager.players[ip].colonies > 0 && game_manager.board.colonies[position - 1].owner === 0){
+      game_manager.board.colonies[position - 1].owner = game_manager.players[ip].player_number;
+      new_colony = {position: position - 1, color: game_manager.players[ip].color};
+      game_manager.players[ip].colonies--;
       io.sockets.emit('new colony', new_colony);
-
     }
     else {
       io.to(socket.id).emit('out of colonies', "You cannot build a colony here.")
     }
-    console.log(players[ip].colonies);
+    console.log(game_manager.players[ip].colonies);
   });
   
 });
