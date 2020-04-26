@@ -2,10 +2,7 @@
 // note: socketIO uses JSON.stringify() natively to send and receive any objects
 let socket = io();
 
-// log any messages from server
-socket.on('message', function(data) {
-  console.log(data);
-});
+socket.emit()
 
 /********************** send server messages **************************/
 
@@ -21,6 +18,11 @@ function get_player_info() {
 // send server message 'shuffle' when a client presses "Shuffle Board"
 function shuffle_board() {
   socket.emit('shuffle');
+}
+
+// send server message 'start' when a client presses "Start Game"
+function start_game() {
+  socket.emit('start');
 }
 
 // send server message 'roll dice' when a client presses "Roll Dice"
@@ -52,9 +54,12 @@ function place_colony(pos) {
 socket.on('debug', function(data) {
   console.log("------------------------- Server Debug Msg -------------------------")
   console.log(data);
+  document.getElementsByClassName("msg_board")[0].textContent = data;
 });
 
 /********************** update scoreboard **************************/
+// update scoreboard
+// TODO: include function to update player score and num cards with every move
 socket.on('update scoreboard', function(players) {
   // get scoreboard data
   let scoreboard_names = document.getElementsByClassName("player_info_name");

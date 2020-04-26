@@ -33,12 +33,6 @@ server.listen(port, function() {
 io.on('connection', function(socket) {
 });
 
-// send message to client every 1s
-setInterval(function() {
-    io.sockets.emit('message', 'hi!');
-  }, 1000);
-
-
 // game objects
 let board = game.get_board();
 let players = {};
@@ -78,8 +72,13 @@ io.on('connection', function(socket) {
       return;
     }
     console.log("received shuffle");
-    board.shuffle_tiles();
-    board.shuffle_numbers();
+    board.shuffle_board();
+    io.sockets.emit('state', board.tiles);
+  });
+
+  // if message is "start"
+  socket.on('start', function() {
+    // start turn state machine
     io.sockets.emit('state', board.tiles);
   });
 

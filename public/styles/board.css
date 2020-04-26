@@ -8,6 +8,17 @@ body {
     background: rgb(40, 98, 184);
 }
 
+.msg_board {
+    z-index: -1;
+    position: absolute;
+    width: 60%;
+    height: 5%;
+    resize: both;
+    text-align: center;
+    font-size: 2vw;
+    left: 20%;
+}
+
 .board {
     z-index: -1;
     margin-top: 5%;

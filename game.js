@@ -86,7 +86,7 @@ class Tile {
     }
 }
 
-class Board {
+class Board  {
     constructor() {
         // create an array of tiles
         this.tiles = [];
@@ -147,6 +147,12 @@ class Board {
         }
     }
 
+    // shuffle everything
+    shuffle_board() {
+        this.shuffle_numbers();
+        this.shuffle_board();
+    }
+
     // roll dice
     roll_dice() {
         let min = 2;
@@ -157,4 +163,34 @@ class Board {
 
 exports.get_board = function() {
     return new Board();
+}
+
+// on object to run the game state machine and keep track of all game objects
+class GameManager {
+    constructor() {
+        this.board = new Board();
+        this.players = {}
+        this.game_states = {
+            "registration": {next_state: "game_setup"},
+            "game_setup": {next_state: "play_game"},
+            "play_game": {next_state: "end_game"},
+            "end_game": {next_state: "registration"}
+        }
+        this.turn = {} /* populated in new_player() */
+        this.state="registration";
+    }
+
+    // new player
+    new_player(name, color, ip) {
+        this.players[ip] = new_player(name, color, ip);
+    }
+
+    // update player
+    update_player(name, color, ip) {
+        this.players[ip].name = name;
+        this.players[ip].color = color;
+    }
+    
+    // start game
+    // 
 }
