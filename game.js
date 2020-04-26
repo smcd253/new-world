@@ -57,30 +57,29 @@ exports.new_player = function(name, color, player_num) {
 
 // object to initialize board tiles
 let _tiles = [
-    {name: "wheat1",  type: "wheat",  number: 2},
-    {name: "wheat2",  type: "wheat",  number: 3},
-    {name: "wheat3",  type: "wheat",  number: 3},
-    {name: "wheat4",  type: "wheat",  number: 4},
-    {name: "sheep1",  type: "sheep",  number: 4},
-    {name: "sheep2",  type: "sheep",  number: 5},
-    {name: "sheep3",  type: "sheep",  number: 5},
-    {name: "sheep4",  type: "sheep",  number: 6},
-    {name: "ore1",    type: "ore",    number: 6},
-    {name: "ore2",    type: "ore",    number: 8},
-    {name: "ore3",    type: "ore",    number: 8},
-    {name: "brick1",  type: "brick",  number: 9},
-    {name: "brick2",  type: "brick",  number: 9},
-    {name: "brick3",  type: "brick",  number: 10},
-    {name: "wood1",   type: "wood",   number: 10},
-    {name: "wood2",   type: "wood",   number: 11},
-    {name: "wood3",   type: "wood",   number: 11},
-    {name: "wood4",   type: "wood",   number: 12},
-    {name: "desert",  type: "desert",  number: 0},
+    {type: "wheat",  number: 2},
+    {type: "wheat",  number: 3},
+    {type: "wheat",  number: 3},
+    {type: "wheat",  number: 4},
+    {type: "sheep",  number: 4},
+    {type: "sheep",  number: 5},
+    {type: "sheep",  number: 5},
+    {type: "sheep",  number: 6},
+    {type: "ore",    number: 6},
+    {type: "ore",    number: 8},
+    {type: "ore",    number: 8},
+    {type: "brick",  number: 9},
+    {type: "brick",  number: 9},
+    {type: "brick",  number: 10},
+    {type: "wood",   number: 10},
+    {type: "wood",   number: 11},
+    {type: "wood",   number: 11},
+    {type: "wood",   number: 12},
+    {type: "desert",  number: 0},
 ];
 
 class Tile {
     constructor (_tile) {
-        this.name = _tile.name;
         this.type = _tile.type;
         this.number = _tile.number;
     }
@@ -105,7 +104,7 @@ class Board  {
         this.colonies = []
         for(let i = 1; i <= 59; i++) {
             this.colonies.position = i;
-            this.colonies.owner = "null";
+            this.colonies.owner = "null";   
         }
 
         // dice roll result
@@ -119,21 +118,16 @@ class Board  {
         while (0 !== currentIndex) {
             randomIndex = Math.floor(Math.random() * currentIndex);
             currentIndex -= 1;
-            while (this.tiles[randomIndex].type === "desert")
-            {
-                randomIndex = Math.floor(Math.random() * currentIndex);
-            }
-            if (this.tiles[currentIndex].type !== "desert")
-            {
-                temp = this.tiles[currentIndex].number;
-                this.tiles[currentIndex].number = this.tiles[randomIndex].number;
-                this.tiles[randomIndex].number = temp;
-            }
+
+            temp = this.tiles[currentIndex].number;
+            this.tiles[currentIndex].number = this.tiles[randomIndex].number;
+            this.tiles[randomIndex].number = temp;
+        
         }
     }
 
     // shuffle tiles on board
-    shuffle_tiles() {
+    shuffle_types() {
         let currentIndex = this.tiles.length, temp, randomIndex;
       
         while (0 !== currentIndex) {
@@ -141,16 +135,32 @@ class Board  {
             randomIndex = Math.floor(Math.random() * currentIndex);
             currentIndex -= 1;
         
-            temp = this.tiles[currentIndex];
-            this.tiles[currentIndex] = this.tiles[randomIndex];
-            this.tiles[randomIndex] = temp;
+            let temp_type = this.tiles[currentIndex].type;
+            this.tiles[currentIndex].type = this.tiles[randomIndex].type;
+            this.tiles[randomIndex].type = temp_type;
         }
     }
 
+    // put zero back on desert
+    zero_desert() {
+        for(let i = 0; i < this.tiles.length; i++) {
+            if(this.tiles[i].number === 0) {
+                let zero = this.tiles[i].number;
+                for(let j = 0; j < this.tiles.length; j++) {
+                    if(this.tiles[j].type === "desert") {
+                        this.tiles[i].number = this.tiles[j].number;
+                        this.tiles[j].number = zero;
+                        return;
+                    }
+                }
+            }
+        }
+    }
     // shuffle everything
     shuffle_board() {
         this.shuffle_numbers();
-        this.shuffle_board();
+        this.shuffle_types();
+        this.zero_desert();
     }
 
     // roll dice
@@ -190,7 +200,7 @@ class GameManager {
         this.players[ip].name = name;
         this.players[ip].color = color;
     }
-    
+
     // start game
     // 
 }
