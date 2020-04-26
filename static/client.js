@@ -7,15 +7,25 @@ socket.on('message', function(data) {
   console.log(data);
 });
 
+/********************** send server messages **************************/
 
-// create new player
-let name = "Spencer"; // TODO: source this from html
-let color = "black"; // TODO: source this from html
+// create or update player from player input fields
+function get_player_info() {
+  let name = document.getElementById("player_name").value;
+  let color = document.getElementById("player_color").value;
 
+  // send server message: 'new player' and new player info when a new connection (this script) is formed
+  socket.emit('new player', name, color);
+}
 
 // send server message 'shuffle' when a client presses "Shuffle Board"
 function shuffle_board() {
   socket.emit('shuffle');
+}
+
+// send server message 'roll dice' when a client presses "Roll Dice"
+function roll_dice() {
+  socket.emit('roll dice');
 }
 
 // send server message 'build road' when client presses "Build Road"
@@ -38,25 +48,38 @@ function place_colony(pos) {
   socket.emit('place colony', pos);
 }
 
-// player input fields
-function get_player_info() {
-  let name = document.getElementById("player_name").value;
-  let color = document.getElementById("player_color").value;
-
-  // send server message: 'new player' and new player info when a new connection (this script) is formed
-  socket.emit('new player', name, color);
-}
 // debug print
 socket.on('debug', function(data) {
   console.log("------------------------- Server Debug Msg -------------------------")
   console.log(data);
 });
 
+/********************** update scoreboard **************************/
+socket.on('update scoreboard', function(players) {
+  // get scoreboard data
+  let scoreboard_names = document.getElementsByClassName("player_info_name");
+  let scoreboard_colors = document.getElementsByClassName("player_info_color");
+  let scoreboard_num_cards = document.getElementsByClassName("player_info_num_cards");
+  let scoreboard_score = document.getElementsByClassName("player_info_score");
+
+  // iterate through player object
+  let i = 0;
+  for(let player in players) {
+    if(players.hasOwnProperty(player)) {
+      scoreboard_names[i].textContent = "Name: " + players[player].name;
+      scoreboard_colors[i].textContent = "Color: " + players[player].color;
+      scoreboard_num_cards[i].textContent = "Num Cards: " + players[player].hand.total;
+      scoreboard_score[i].textContent = "Score: " + players[player].points_visible;
+      i++;
+    }
+  }
+});
+/********************** update board **************************/
+
 // receive new state from server, draw new components
 socket.on('state', function(new_board) {
   draw_new_board(new_board);
 });
-
 
 function draw_new_board(new_board) {
   let tiles = document.getElementsByClassName("hex")
@@ -176,8 +199,8 @@ socket.on('new colony', function(new_colony) {
   toggle_colony_buttons("hidden");
 });
 
+  // draw new colony
 function draw_new_colony(new_colony) {
-  // draw new road
   let colonies_container = document.getElementsByClassName("colonies")[0];
   let colonies = colonies_container.querySelectorAll('*[id]:not([id=""]');
   console.log(new_colony.position)

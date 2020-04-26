@@ -42,25 +42,32 @@ setInterval(function() {
 // game objects
 let board = game.get_board();
 let players = {};
-let player_num = 1;
 
 // every time a request is made
 io.on('connection', function(socket) {
   // get client ip
   let ip = socket.handshake.address;
-  // if it is a new player (new instance of client.js)
   socket.on('new player', function(name, color) {
+  // if it is a new player 
+  if(!(ip in players)) {
+    // limit number of players to 4
     if(Object.keys(players).length < 4) {
-      if(!(ip in players)) {
-        players[ip] = game.new_player(name, color, player_num);
-        io.to(socket.id).emit('debug', `welcome player ${players[ip].player_number}`)
-        player_num++;
-      }
-      else {
-        io.to(socket.id).emit('debug', `welcome BACK player ${players[ip].player_number}`)
-      }
-      io.to(socket.id).emit('debug', `your ip = ${ip}`)
+      players[ip] = game.new_player(name, color, Object.keys(players).length + 1);
+      io.to(socket.id).emit('debug', `welcome player ${players[ip].player_number}`)
+      // instruct clients to update scoreboard
+      io.sockets.emit('update scoreboard', players);
     }
+  }
+  // else update player info
+  else {
+    players[ip].name = name;
+    players[ip].color = color;
+    // instruct clients to update scoreboard
+    io.sockets.emit('update scoreboard', players);
+    // TODO: redraw all player assets on board
+    io.to(socket.id).emit('debug', `welcome BACK player ${players[ip].player_number}`)
+  }
+    
     console.log(players[ip])
   });
 
@@ -76,6 +83,10 @@ io.on('connection', function(socket) {
     io.sockets.emit('state', board.tiles);
   });
 
+  socket.on('roll dice', function() {
+
+  });
+  
   // if message is "build road"
   socket.on('build road', function() {
     if(typeof players[ip] == "undefined") {
