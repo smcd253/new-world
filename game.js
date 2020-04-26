@@ -70,10 +70,8 @@ class Board  {
 
         // keep list of active colonies
         this.active_colonies = []
-        
-        // dice roll result
-        this.dice = 0;
     }
+
     // reinitialize colonies
     init_colonies() {
         // create an array of colonies with boardering tiles
@@ -92,6 +90,7 @@ class Board  {
             }              
         }
     }
+
     // shuffle numbers on board
     shuffle_numbers() {
         let currentIndex = this.tiles.length, temp, randomIndex;
@@ -144,14 +143,6 @@ class Board  {
         this.zero_desert();
         this.init_colonies();
     }
-
-    // roll dice
-    roll_dice() {
-        let min = 2;
-        let max = 12;
-        this.dice = Math.floor(Math.random() * (max - min + 1)) + min; ;
-    }
-
 }
 
 // on object to run the game state machine and keep track of all game objects
@@ -167,13 +158,14 @@ class GameManager {
         }
         this.turn = {} /* populated in new_player() */
         this.state="registration";
+
+        // dice roll result
+        this.dice = 0;
     }
 
     // new player
     new_player(name, color, player_num, ip) {
         this.players[ip] = new Player(name, color, player_num);
-        console.log("new player. hand = ");
-        console.log(this.players[ip].hand);
     }
 
     // update player
@@ -182,23 +174,23 @@ class GameManager {
         this.players[ip].color = color;
     }
 
+    // roll dice
+    roll_dice() {
+        let min = 2;
+        let max = 12;
+        this.dice = Math.floor(Math.random() * (max - min + 1)) + min; ;
+    }
+
     // allocate resources
     // TODO: make this better!
     allocate_resources() {
-        console.log("call allocate resources");
         // loop through all colonies
         for(let i = 0; i < this.board.colonies.length; i++) {
             // if this colony has been placed
             if(this.board.colonies[i].owner !== 0) {
-                console.log("colony has an owner.");
-                console.log(this.board.colonies[i]);
-                console.log("colony tile numbers:");
-                console.log(Object.keys(this.board.colonies[i].tiles));
                 // if this colony is bordering a tile with this dice roll
-                let roll = this.board.dice.toString();
-                console.log("roll = " + roll);
+                let roll = this.dice.toString();
                 if(Object.keys(this.board.colonies[i].tiles).includes(roll)) {
-                    console.log("this colony boarders a tile with number " + roll);
                     for(let p in this.players) {
                         if(this.players.hasOwnProperty(p)) {
                             // if the player number matches the colony owner
@@ -211,10 +203,6 @@ class GameManager {
                                 }
                             }
                         }
-                        console.log("player after allocate resources: ");
-                        console.log(this.players[p]);
-                        console.log("player hand after allocate resources: ");
-                        console.log(this.players[p].hand);
                     }
                 }
             }

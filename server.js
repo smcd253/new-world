@@ -96,10 +96,10 @@ io.on('connection', function(socket) {
       io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
       return;
     }
-    game_manager.board.roll_dice();
+    game_manager.roll_dice();
     game_manager.allocate_resources();
     console.log(game_manager.players[ip]);
-    io.sockets.emit('new dice roll', game_manager.board.dice);
+    io.sockets.emit('new dice roll', game_manager.dice);
   });
 
   // if message is "build road"
