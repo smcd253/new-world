@@ -74,6 +74,10 @@ socket.on('update scoreboard', function(players) {
     }
   }
 });
+
+socket.on('new dice roll', function(dice) {
+  document.getElementsByClassName("turn_info_dice")[0].textContent = "Dice Roll = " + dice;
+});
 /********************** update board **************************/
 
 // receive new state from server, draw new components

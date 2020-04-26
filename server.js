@@ -84,9 +84,13 @@ io.on('connection', function(socket) {
   });
 
   socket.on('roll dice', function() {
-
+    console.log("received dice roll");
+    board.roll_dice();
+    console.log("new dice val = " + board.dice);
+    io.sockets.emit('new dice roll', board.dice);
+    io.sockets.emit('debug', "Dice Roll = " + board.dice);
   });
-  
+
   // if message is "build road"
   socket.on('build road', function() {
     if(typeof players[ip] == "undefined") {

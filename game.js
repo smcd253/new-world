@@ -107,7 +107,12 @@ class Board {
             this.colonies.position = i;
             this.colonies.owner = "null";
         }
+
+        // dice roll result
+        this.dice = 0;
     }
+
+    // shuffle numbers on board
     shuffle_numbers() {
         let currentIndex = this.tiles.length, temp, randomIndex;
       
@@ -126,6 +131,8 @@ class Board {
             }
         }
     }
+
+    // shuffle tiles on board
     shuffle_tiles() {
         let currentIndex = this.tiles.length, temp, randomIndex;
       
@@ -138,6 +145,13 @@ class Board {
             this.tiles[currentIndex] = this.tiles[randomIndex];
             this.tiles[randomIndex] = temp;
         }
+    }
+
+    // roll dice
+    roll_dice() {
+        let min = 2;
+        let max = 12;
+        this.dice = Math.floor(Math.random() * (max - min + 1)) + min; ;
     }
 }
 
