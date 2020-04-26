@@ -31,14 +31,14 @@
       </div>
       <div class="box game_controls">
         <button class="box gc_r1_c1" onclick="build_road()">Build Road</button>
-        <button class="box gc_r1_c2" onclick="">Build Settlement</button>
+        <button class="box gc_r1_c2" onclick="build_colony()">Build Colony</button>
         <button class="box gc_r2_c1" onclick="">Build City</button>
         <button class="box gc_r2_c2" onclick="">Roll Dice</button>
       </div>
     </div>
     <div class="colony_buttons">
       <ul id="colony_buttonGrid">
-        <li class="colony_button">
+        <li class="colony_button" style="z-index: 19;">
           <div class="colony_buttonRhombus">
             <rd_b class="colony_button_a">
               <button class="colony_button_click" onclick="place_colony(1)"></button>
@@ -60,7 +60,7 @@
             </rd_b>
           </div>
         </li>
-        <li class="colony_button">
+        <li class="colony_button" style="z-index: 18;">
           <div class="colony_buttonRhombus">
             <rd_b class="colony_button_a">
               <button class="colony_button_click" onclick="place_colony(7)"></button>
@@ -77,7 +77,7 @@
             
           </div>
         </li>
-        <li class="colony_button">
+        <li class="colony_button" style="z-index: 17;">
           <div class="colony_buttonRhombus">
             <rd_b class="colony_button_a">
               <button class="colony_button_click" onclick="place_colony(11)"></button>
@@ -94,7 +94,7 @@
             
           </div>
         </li>
-        <li class="colony_button">
+        <li class="colony_button" style="z-index: 16;">
           <div class="colony_buttonRhombus">
             
             <rd_b class="colony_button_c">
@@ -111,7 +111,7 @@
             </rd_b>
           </div>
         </li>
-        <li class="colony_button">
+        <li class="colony_button" style="z-index: 15;">
           <div class="colony_buttonRhombus">
             <rd_b class="colony_button_c">
               <button class="colony_button_click" onclick="place_colony(19)"></button>
@@ -121,7 +121,7 @@
             </rd_b>
           </div>
         </li>
-      <li class="colony_button">
+        <li class="colony_button" style="z-index: 14;">
           <div class="colony_buttonRhombus">
             <rd_b class="colony_button_c">
               <button class="colony_button_click" onclick="place_colony(21)"></button>
@@ -131,7 +131,7 @@
             </rd_b>
           </div>
         </li>
-        <li class="colony_button">
+        <li class="colony_button" style="z-index: 13;">
           <div class="colony_buttonRhombus">
             <rd_b class="colony_button_b">
             <button class="colony_button_click" onclick="place_colony(23)"></button>
@@ -143,7 +143,7 @@
             </rd_b>
           </div>
         </li>
-        <li class="colony_button">
+        <li class="colony_button" style="z-index: 12;">
           <div class="colony_buttonRhombus">
             <rd_b class="colony_button_c">
               <button class="colony_button_click" onclick="place_colony(26)"></button>
@@ -159,7 +159,7 @@
             </rd_b>
           </div>
         </li>
-        <li class="colony_button">
+        <li class="colony_button" style="z-index: 11;">
           <div class="colony_buttonRhombus">
             <rd_b class="colony_button_c">
               <button class="colony_button_click" onclick="place_colony(30)"></button>
@@ -169,7 +169,7 @@
             </rd_b>
           </div>
         </li>
-        <li class="colony_button">
+        <li class="colony_button" style="z-index: 10;">
           <div class="colony_buttonRhombus">
             <rd_b class="colony_button_c">
               <button class="colony_button_click" onclick="place_colony(32)"></button>
@@ -179,7 +179,7 @@
             </rd_b>
           </div>
         </li>
-        <li class="colony_button">
+        <li class="colony_button" style="z-index: 9;">
           <div class="colony_buttonRhombus">
             <rd_b class="colony_button_c">
               <button class="colony_button_click" onclick="place_colony(34)"></button>
@@ -189,7 +189,7 @@
             </rd_b>
           </div>
         </li>
-        <li class="colony_button">
+        <li class="colony_button" style="z-index: 8;">
           <div class="colony_buttonRhombus">
             <rd_b class="colony_button_b">
               <button class="colony_button_click" onclick="place_colony(36)"></button>
@@ -202,7 +202,7 @@
             </rd_b>
           </div>
         </li>
-        <li class="colony_button">
+        <li class="colony_button" style="z-index: 7;">
           <div class="colony_buttonRhombus">
             <rd_b class="colony_button_c">
               <button class="colony_button_click" onclick="place_colony(39)"></button>
@@ -215,7 +215,7 @@
             </rd_b>
           </div>
         </li>
-        <li class="colony_button">
+        <li class="colony_button" style="z-index: 6;">
           <div class="colony_buttonRhombus">
             <rd_b class="colony_button_c">
               <button class="colony_button_click" onclick="place_colony(42)"></button>
@@ -225,7 +225,7 @@
             </rd_b>
           </div>
         </li>
-        <li class="colony_button">
+        <li class="colony_button" style="z-index: 5;">
           <div class="colony_buttonRhombus">
             <rd_b class="colony_button_c">
               <button class="colony_button_click" onclick="place_colony(44)"></button>
@@ -235,7 +235,7 @@
             </rd_b>
           </div>
         </li>
-        <li class="colony_button">
+        <li class="colony_button" style="z-index: 4;">
           <div class="colony_buttonRhombus">
             <rd_b class="colony_button_c">
               <button class="colony_button_click" onclick="place_colony(46)"></button>
@@ -245,7 +245,7 @@
             </rd_b>
           </div>
         </li>
-        <li class="colony_button">
+        <li class="colony_button" style="z-index: 3;">
           <div class="colony_buttonRhombus">
             <rd_b class="colony_button_c">
               <button class="colony_button_click" onclick="place_colony(48)"></button>
@@ -257,7 +257,7 @@
                 <button class="colony_button_click" onclick="place_colony(50)"></button>
             </rd_b></div>
         </li>
-        <li class="colony_button">
+        <li class="colony_button" style="z-index: 2;">
           <div class="colony_buttonRhombus">
             <rd_b class="colony_button_c">
               <button class="colony_button_click" onclick="place_colony(51)"></button>
@@ -267,7 +267,7 @@
             </rd_b>
           </div>
         </li>
-        <li class="colony_button">
+        <li class="colony_button" style="z-index: 1;">
           <div class="colony_buttonRhombus">
             <rd_b class="colony_button_c">
               <button class="colony_button_click" onclick="place_colony(53)"></button>
@@ -387,7 +387,6 @@
                 <div class="roofR"></div>
                 <div class="roofL"></div>
               </c>
-              
             </a>
           </div>
         </li>
@@ -534,7 +533,6 @@
                 <div class="roofR"></div>
                 <div class="roofL"></div>
               </c>
-              
             </a>
           </div>
         </li>
@@ -549,7 +547,6 @@
                 <div class="roofR"></div>
                 <div class="roofL"></div>
               </c>
-              
             </a>
           </div>
         </li>
@@ -564,7 +561,6 @@
                 <div class="roofR"></div>
                 <div class="roofL"></div>
               </c>
-              
             </a>
           </div>
         </li>

@@ -6,10 +6,10 @@
 }
 
 .roads {
+    z-index: 1;
     margin-top: 5%;
     position: absolute;
     width: 100%;
-    z-index: 1;
     resize: both;
 }
 

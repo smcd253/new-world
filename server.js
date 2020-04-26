@@ -87,6 +87,17 @@ io.on('connection', function(socket) {
     io.to(socket.id).emit('enable road building');
   });
 
+  // if message is "build colony"
+  socket.on('build colony', function() {
+    if(typeof players[ip] == "undefined") {
+      io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
+      return;
+    }
+    // send message to allow roads to appear on THIS player's screen
+    // can only build road if they have the correct resources
+    io.to(socket.id).emit('enable colony building');
+  });
+
   // if message is "place road"
   socket.on('place road', function(position) {
     if(typeof players[ip] == "undefined") {
@@ -101,7 +112,30 @@ io.on('connection', function(socket) {
       players[ip].roads--;
       io.sockets.emit('new road', new_road);
     }
+    else {
+      io.to(socket.id).emit('out of roads', "You have no more roads to build with.")
+    }
     console.log(players[ip].roads);
+  });
+
+  // if message is "place colony"
+  socket.on('place colony', function(position) {
+    if(typeof players[ip] == "undefined") {
+      io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
+      return;
+    }
+    // place new road based on position and user ip
+    if(players[ip].colonies > 0){
+      // colonies[position].owner = players[ip].name;
+      board.colonies.owner = players[ip].name;
+      new_colony = {position: position, color: players[ip].color};
+      players[ip].colonies--;
+      io.sockets.emit('new colony', new_colony);
+    }
+    else {
+      io.to(socket.id).emit('out of colonies', "You have no more colonies to build with.")
+    }
+    console.log(players[ip].colonies);
   });
   
 });

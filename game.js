@@ -39,7 +39,7 @@ class Player {
         this.color = color;
         this.points_visible = 0;
         let points_actual = 0; // + vp dev_cards
-        this.settlements = 5;
+        this.colonies = 5;
         this.cities = 4;
         this.roads = 15;
         this.dev_cards = 0;

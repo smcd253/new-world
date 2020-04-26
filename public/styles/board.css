@@ -1,16 +1,4 @@
-/* Inserting this collapsed row between two flex items will make 
- * the flex item that comes after it break to a new row */
- .break {
-    flex-basis: 100%;
-    height: 0;
-  }
-
 /* src: https://github.com/web-tiki/responsive-grid-of-hexagons/blob/master/index.html */
-
-* {
-    margin: 0%;
-    padding: 0;
-}
 
 html, body {
     height: 100%;
@@ -21,10 +9,10 @@ body {
 }
 
 .board {
+    z-index: -1;
     margin-top: 5%;
     position: absolute;
     width: 100%;
-    z-index: -1;
     resize: both;
 }
 
