@@ -24,11 +24,15 @@
       <div class="box player_info">
         <div class="box pi_r1_c1">Name</div>
         <div class="box pi_r1_c2">
-          <input type="text" class="player_text_field" id="player_name" value=""/>
+          <form action="#" onkeypress="get_player_info(event)">
+            <input type="text" class="player_text_field" id="player_name" value=""/>
+          </form>
         </div>
         <div class="box pi_r2_c1">Color</div>
         <div class="box pi_r2_c2">
-          <input type="text" class="player_text_field" id="player_color" value=""/>
+          <form action="#" onkeypress="get_player_info(event)">
+            <input type="text" class="player_text_field" id="player_color" value=""/>
+          </form>
         </div>
         <button class="box pi_r3" onclick="get_player_info()">Submit</button>
       </div>

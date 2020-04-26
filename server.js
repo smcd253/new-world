@@ -42,26 +42,30 @@ io.on('connection', function(socket) {
   // get client ip
   let ip = socket.handshake.address;
   socket.on('new player', function(name, color) {
-  // if it is a new player 
-  if(!(ip in players)) {
-    // limit number of players to 4
-    if(Object.keys(players).length < 4) {
-      players[ip] = game.new_player(name, color, Object.keys(players).length + 1);
-      io.to(socket.id).emit('debug', `welcome player ${players[ip].player_number}`)
-      // instruct clients to update scoreboard
-      io.sockets.emit('update scoreboard', players);
+    if (/\S/.test(name) && /\S/.test(color)) {
+      // if it is a new player 
+      if(!(ip in players)) {
+        // limit number of players to 4
+        if(Object.keys(players).length < 4) {
+          players[ip] = game.new_player(name, color, Object.keys(players).length + 1);
+          io.to(socket.id).emit('debug', `welcome ${players[ip].name}`)
+          // instruct clients to update scoreboard
+          io.sockets.emit('update scoreboard', players);
+        }
+      }
+      // else update player info
+      else {
+        players[ip].name = name;
+        players[ip].color = color;
+        // instruct clients to update scoreboard
+        io.sockets.emit('update scoreboard', players);
+        // TODO: redraw all player assets on board
+        io.to(socket.id).emit('debug', `welcome back ${players[ip].name}`)
+      }
     }
-  }
-  // else update player info
-  else {
-    players[ip].name = name;
-    players[ip].color = color;
-    // instruct clients to update scoreboard
-    io.sockets.emit('update scoreboard', players);
-    // TODO: redraw all player assets on board
-    io.to(socket.id).emit('debug', `welcome BACK player ${players[ip].player_number}`)
-  }
-    
+    else {
+      io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
+    }
     console.log(players[ip])
   });
 

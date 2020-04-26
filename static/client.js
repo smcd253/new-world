@@ -7,12 +7,23 @@ socket.emit()
 /********************** send server messages **************************/
 
 // create or update player from player input fields
-function get_player_info() {
-  let name = document.getElementById("player_name").value;
-  let color = document.getElementById("player_color").value;
-
-  // send server message: 'new player' and new player info when a new connection (this script) is formed
-  socket.emit('new player', name, color);
+function get_player_info(event) {
+  let name, color;
+  console.log(event);
+  if(event != "undefined") {
+    if(event.keyCode === 13) {
+      name = document.getElementById("player_name").value;
+      color = document.getElementById("player_color").value;
+      // send server message: 'new player' and new player info when a new connection (this script) is formed
+      socket.emit('new player', name, color);
+    }
+  }
+  else {
+    name = document.getElementById("player_name").value;
+    color = document.getElementById("player_color").value;
+    // send server message: 'new player' and new player info when a new connection (this script) is formed
+    socket.emit('new player', name, color);
+  }
 }
 
 // send server message 'shuffle' when a client presses "Shuffle Board"
