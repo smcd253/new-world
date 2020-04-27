@@ -29,19 +29,25 @@ server.listen(port, function() {
     console.log('Starting server on port 5000');
   });
 
-// WebSocket handlers
-io.on('connection', function(socket) {
-});
 
 // game objects
 // let game_manager.board = game.get_board();
 // let game_manager.players = {};
 let game_manager = game.get_game_manager();
 
-// every time a request is made
+
+// WebSocket handlers (every time a connection is made)
 io.on('connection', function(socket) {
   // get client ip
   let ip = socket.handshake.address;
+
+  function update_client() {
+    // update board
+    // io.sockets.emit('state', game_manager.board.tiles);
+
+    // update roads
+    // update colonies
+  }
 
   // new client instance, check to see if they are already registered as a player
   socket.on('new client', function() {
@@ -56,6 +62,9 @@ io.on('connection', function(socket) {
     else {
       io.to(socket.id).emit('debug', `please enter your name and color to join the game.`)
     }
+
+    // update everything else
+    update_client();
   });
 
   socket.on('new player', function(name, color) {
@@ -105,7 +114,6 @@ io.on('connection', function(socket) {
       return;
     }
     // start turn state machine
-    io.sockets.emit('state', game_manager.board.tiles);
   });
 
   socket.on('roll dice', function() {
@@ -151,17 +159,8 @@ io.on('connection', function(socket) {
       io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
       return;
     }
-    // place new road based on position and user ip
-    if(game_manager.players[ip].roads > 0 && game_manager.board.roads[position - 1].owner === 0){
-      game_manager.board.roads[position - 1].owner = game_manager.players[ip].player_number;
-      new_road = {position: position, color: game_manager.players[ip].color};
-      game_manager.players[ip].roads--;
-      io.sockets.emit('new road', new_road);
-    }
-    else {
-      io.to(socket.id).emit('out of roads', "You cannot build a road here.")
-    }
-    console.log(game_manager.players[ip].roads);
+    // place new road 
+    io.sockets.emit('new road', game_manager.place_road(position, ip));
   });
 
   // if message is "place colony"
@@ -170,17 +169,8 @@ io.on('connection', function(socket) {
       io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
       return;
     }
-    // place new road based on position and user ip
-    if(game_manager.players[ip].colonies > 0 && game_manager.board.colonies[position - 1].owner === 0){
-      game_manager.board.colonies[position - 1].owner = game_manager.players[ip].player_number;
-      new_colony = {position: position - 1, color: game_manager.players[ip].color};
-      game_manager.players[ip].colonies--;
-      io.sockets.emit('new colony', new_colony);
-    }
-    else {
-      io.to(socket.id).emit('out of colonies', "You cannot build a colony here.")
-    }
-    console.log(game_manager.players[ip].colonies);
+    // place new colony 
+    io.sockets.emit('new colony', game_manager.place_colony(position, ip));
   });
   
 });

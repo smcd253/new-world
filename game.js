@@ -5,18 +5,13 @@ class Player {
         this.player_number = player_num;
         this.name = name;
         this.color = color;
-        this.points_visible = 0;
-        let points_actual = 0; // + vp dev_cards
+        this.score = 0;
         this.colonies = 5;
         this.cities = 4;
         this.roads = 15;
         this.dev_cards = 0;
         this.hand = {'wheat': 0, 'sheep': 0, 'brick': 0, 'wood': 0, 'ore': 0};
         this.num_cards = 0;
-    }
-
-    get_points_actual() {
-        return this.points_actual;
     }
 
     update_num_cards() {
@@ -26,6 +21,10 @@ class Player {
                 sum += this.hand[resource];
             }
         }
+    }
+
+    update_score() {
+        this.score = 5 - this.colonies + 2 * (4 - this.cities);
     }
 }
 
@@ -190,6 +189,43 @@ class GameManager {
         return (typeof this.players[ip] === "undefined")
     }
 
+    // place new road based on position and user ip
+    place_road(position, ip) {
+        let new_road = {data: undefined, msg: ""};
+        if(this.players[ip].roads === 0) {
+            new_road.msg = "You are out of roads.";
+        } 
+        else if (this.board.roads[position - 1].owner !== 0) {
+            new_road.msg = "A road has already been built here.";
+        }
+        else {
+            this.board.roads[position - 1].owner = this.players[ip].player_number;
+            new_road.data = {position: position, color: this.players[ip].color};
+            this.players[ip].roads--;
+            new_road.msg = `Road built! You have ${this.players[ip].roads} roads left.`;
+        }
+        return new_road;
+    }
+
+    // place new colony based on position and user ip
+    place_colony(position, ip) {
+        let new_colony = {data: undefined, msg: ""};
+        if(this.players[ip].colonies === 0) {
+            new_colony.msg = "You are out of colonies.";
+        } 
+        else if (this.board.colonies[position - 1].owner !== 0) {
+            new_colony.msg = "A colony has already been built here.";
+        }
+        else {
+            this.board.colonies[position - 1].owner = this.players[ip].player_number;
+            new_colony.data = {position: position - 1, color: this.players[ip].color};
+            this.players[ip].colonies--;
+            this.players[ip].update_score();
+            new_colony.msg = `Colony built! You have ${this.players[ip].colonies} colonies left. Your score is now ${this.players[ip].score}!`;
+        }
+        return new_colony;
+    }
+
     // roll dice
     roll_dice() {
         let min = 2;
@@ -224,7 +260,6 @@ class GameManager {
                 }
             }
         }
-
     }
 }
 
