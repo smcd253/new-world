@@ -2,7 +2,7 @@
 
 .colony_buttons {
     z-index: 3;
-    margin-top: 7.5%;
+    margin-top: 5%;
     position: absolute;
     width: 100%;
     resize: both;
@@ -15,9 +15,9 @@
     height: 90%;
     margin-top: 5%;
     margin: 0 auto;
-    /* overflow: hidden; */
     list-style-type: none;
     resize: inherit;
+    max-width: 100%;
 }
   
 .colony_button {
@@ -64,32 +64,32 @@ button {
 }
 
 .colony_button_a {
-    top: -31%;
-    left: 46%;
+    top: -8%;
+    left: 45%;
     z-index: inherit;
 }
 .colony_button_b {
-    top: 2%;
+    top: 24%;
     left: 96%;
     z-index: inherit;
 }
 .colony_button_c {
-    top: 69%;
+    top: 90%;
     left: 96%;
     z-index: inherit;
 }
 .colony_button_d {
-    top: 101%;
+    top: 122%;
     left: 45.5%;
     z-index: inherit;
 }
 .colony_button_e {
-    top: 70%;
+    top: 90%;
     left: -5%;
     z-index: inherit;
 }
 .colony_button_f {
-    top: 2%;
+    top: 23%;
     left: -4%;
     z-index: inherit;
 }
@@ -97,6 +97,7 @@ button {
 /*** HEXAGON SIZING AND EVEN ROW INDENTATION *****************************************************************/
 @media (min-width:0px) { /* <- 5-4  colony_buttonagons per row */
     #colony_buttonGrid{
+        width: 100vh;
         height: 85%;
         padding-bottom: 20%;
     }

@@ -23,6 +23,7 @@
     /* overflow: hidden; */
     list-style-type: none;
     resize: inherit;
+    max-width: 100%;
 }
   
 .road {
@@ -391,6 +392,7 @@ outline:1px solid transparent; /* fix for jagged edges in FF on hover transition
 /*** HEXAGON SIZING AND EVEN ROW INDENTATION *****************************************************************/
 @media (min-width:0px) { /* <- 5-4  roadagons per row */
     #roadGrid{
+        width: 100vh;
         height: 85%;
         padding-bottom: 20%;
     }

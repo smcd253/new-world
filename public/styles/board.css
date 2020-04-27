@@ -55,6 +55,7 @@ body {
   overflow: hidden;
   list-style-type: none;
   resize: inherit;
+  max-width: 100%;
 }
 
 .hex {
@@ -125,6 +126,7 @@ body {
 /*** HEXAGON SIZING AND EVEN ROW INDENTATION *****************************************************************/
 @media (min-width:0px) { /* <- 5-4  hexagons per row */
     #hexGrid{
+        width: 100vh;
         height: 85%;
         padding-bottom: 20%;
     }

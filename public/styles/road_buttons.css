@@ -7,7 +7,7 @@
 
 .road_buttons {
     z-index: 2;
-    margin-top: 7.5%;
+    margin-top: 5%;
     position: absolute;
     width: 100%;
     resize: both;
@@ -20,9 +20,9 @@
     height: 90%;
     margin-top: 5%;
     margin: 0 auto;
-    /* overflow: hidden; */
     list-style-type: none;
     resize: inherit;
+    max-width: 100%;
 }
   
 .road_button {
@@ -69,32 +69,32 @@ button {
 }
 
 .road_button_top_right {
-    top: -14%;
+    top: 7%;
     left: 71%;
     z-index: inherit;
 }
 .road_button_right {
-    top: 35%;
+    top: 57%;
     left: 95%;
     z-index: inherit;
 }
 .road_button_bottom_right {
-    top: 86%;
+    top: 107%;
     left: 70%;
     z-index: inherit;
 }
 .road_button_bottom_left {
-    top: 86%;
+    top: 108%;
     left: 21.5%;
     z-index: inherit;
 }
 .road_button_left {
-    top: 35%;
+    top: 59%;
     left: -5%;
     z-index: inherit;
 }
 .road_button_top_left {
-    top: -14%;
+    top: 7%;
     left: 21%;
     z-index: inherit;
 }
@@ -102,6 +102,7 @@ button {
 /*** HEXAGON SIZING AND EVEN ROW INDENTATION *****************************************************************/
 @media (min-width:0px) { /* <- 5-4  road_buttonagons per row */
     #road_buttonGrid{
+        width: 100vh;
         height: 85%;
         padding-bottom: 20%;
     }

@@ -17,6 +17,7 @@
     margin: 0 auto;
     list-style-type: none;
     resize: inherit;
+    max-width: 100%;
 }
   
 .colony {
@@ -475,6 +476,7 @@
 /*** HEX7AGON SIZING AND EVEN ROW INDENTATION *****************************************************************/
 @media (min-width:0px) { /* <- 5-4  colonyagons per row */
     #colonyGrid{
+        width: 100vh;
         height: 85%;
         padding-bottom: 20%;
     }
