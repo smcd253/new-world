@@ -117,6 +117,10 @@ io.on('connection', function(socket) {
     game_manager.allocate_resources();
     console.log(game_manager.players[ip]);
     io.sockets.emit('new dice roll', game_manager.dice);
+    // instruct this client to update their player menu
+    io.to(socket.id).emit('update player menu', game_manager.players[ip]);
+    // instruct clients to update scoreboard
+    io.sockets.emit('update scoreboard', game_manager.players);;
   });
 
   // if message is "build road"

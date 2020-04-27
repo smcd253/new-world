@@ -22,7 +22,7 @@ class Player {
     update_num_cards() {
         let num_cards = 0;
         for(let resource in Object.keys(this.hand)) {
-            if(this.hand.hasOwnPropery(resource)) {
+            if(this.hand.hasOwnProperty(resource)) {
                 sum += this.hand[resource];
             }
         }

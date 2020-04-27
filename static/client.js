@@ -75,6 +75,11 @@ socket.on('update player menu', function(player) {
   document.getElementsByClassName("player_info_name")[0].textContent = "Name: " + player.name;
   document.getElementsByClassName("player_info_color")[0].textContent = "Color: " + player.color;
   // update hand
+  document.getElementsByClassName("player_hand_wood")[0].textContent = "Wood: " + player.hand["wood"];
+  document.getElementsByClassName("player_hand_brick")[0].textContent = "Brick: " + player.hand["brick"];
+  document.getElementsByClassName("player_hand_wheat")[0].textContent = "Wheat: " + player.hand["wheat"];
+  document.getElementsByClassName("player_hand_sheep")[0].textContent = "Sheep: " + player.hand["sheep"];
+  document.getElementsByClassName("player_hand_ore")[0].textContent = "Ore: " + player.hand["ore"];
   // update number of structures left
 });
 
