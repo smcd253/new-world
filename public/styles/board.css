@@ -9,15 +9,14 @@ body {
 }
 
 .msg_board {
-    margin-top: 1%;
+    margin: auto;
     z-index: -1;
-    position: absolute;
-    width: 60%;
+    position: relative;
+    width: 50%;
     height: 5%;
     resize: both;
     text-align: center;
     font-size: 2vw;
-    left: 20%;
 }
 
 .main_button {
@@ -39,6 +38,7 @@ body {
 }
 
 .board {
+    left: 2%;
     z-index: -1;
     margin-top: 5%;
     position: absolute;
@@ -55,7 +55,7 @@ body {
   overflow: hidden;
   list-style-type: none;
   resize: inherit;
-  max-width: 100%;
+  max-width: 90%;
 }
 
 .hex {

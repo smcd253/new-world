@@ -8,11 +8,11 @@
     background-color: gray;
     border-radius: 5%;
     font-size: 1.25vw;
-    left: 87.5%;
+    left: 85%;
 }
 #scoreboard_window {
-    width: 12.5%;
-    height: 35%;
+    width: 15%;
+    height: 40%;
     resize: both;
 }
 .scoreboard_text_field {

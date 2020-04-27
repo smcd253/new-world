@@ -1,6 +1,7 @@
 /* src: https://github.com/web-tiki/responsive-grid-of-colonyagons/blob/master/index.html */
 
 .colonies {
+    left: 2%;
     z-index: 1;
     margin-top: 5%;
     position: absolute;
@@ -17,7 +18,7 @@
     margin: 0 auto;
     list-style-type: none;
     resize: inherit;
-    max-width: 100%;
+    max-width: 90%;
 }
   
 .colony {
