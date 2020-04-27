@@ -12,10 +12,20 @@ class Player {
         this.roads = 15;
         this.dev_cards = 0;
         this.hand = {'wheat': 0, 'sheep': 0, 'brick': 0, 'wood': 0, 'ore': 0};
+        this.num_cards = 0;
     }
 
     get_points_actual() {
         return this.points_actual;
+    }
+
+    update_num_cards() {
+        let num_cards = 0;
+        for(let resource in Object.keys(this.hand)) {
+            if(this.hand.hasOwnPropery(resource)) {
+                sum += this.hand[resource];
+            }
+        }
     }
 }
 
@@ -136,6 +146,7 @@ class Board  {
             }
         }
     }
+    
     // shuffle everything
     shuffle_board() {
         this.shuffle_numbers();
@@ -174,6 +185,11 @@ class GameManager {
         this.players[ip].color = color;
     }
 
+    // check if player exists
+    validate_player(ip) {
+        return (typeof this.players[ip] === "undefined")
+    }
+
     // roll dice
     roll_dice() {
         let min = 2;
@@ -203,10 +219,12 @@ class GameManager {
                                 }
                             }
                         }
+                        this.players[p].update_num_cards();
                     }
                 }
             }
         }
+
     }
 }
 

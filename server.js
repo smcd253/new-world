@@ -42,6 +42,20 @@ let game_manager = game.get_game_manager();
 io.on('connection', function(socket) {
   // get client ip
   let ip = socket.handshake.address;
+
+  // new client instance, check to see if they are already registered as a player
+  socket.on('new client', function() {
+    if(ip in game_manager.players) {
+      // welcome player back
+      io.to(socket.id).emit('debug', `welcome back ${game_manager.players[ip].name}`)
+      // instruct clients to update scoreboard
+      io.sockets.emit('update scoreboard', game_manager.players);
+    }
+    else {
+      io.to(socket.id).emit('debug', `please enter your name and color to join the game.`)
+    }
+  });
+
   socket.on('new player', function(name, color) {
     if (/\S/.test(name) && /\S/.test(color)) {
       // if it is a new player 
@@ -72,7 +86,7 @@ io.on('connection', function(socket) {
 
   // if message is "shuffle"
   socket.on('shuffle', function() {
-    if(typeof game_manager.players[ip] === "undefined") {
+    if(game_manager.validate_player(ip)) {
       io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
       return;
     }
@@ -83,7 +97,7 @@ io.on('connection', function(socket) {
 
   // if message is "start"
   socket.on('start', function() {
-    if(typeof game_manager.players[ip] === "undefined") {
+    if(game_manager.validate_player(ip)) {
       io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
       return;
     }
@@ -92,7 +106,7 @@ io.on('connection', function(socket) {
   });
 
   socket.on('roll dice', function() {
-    if(typeof game_manager.players[ip] === "undefined") {
+    if(game_manager.validate_player(ip)) {
       io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
       return;
     }
@@ -104,7 +118,7 @@ io.on('connection', function(socket) {
 
   // if message is "build road"
   socket.on('build road', function() {
-    if(typeof game_manager.players[ip] === "undefined") {
+    if(game_manager.validate_player(ip)) {
       io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
       return;
     }
@@ -115,7 +129,7 @@ io.on('connection', function(socket) {
 
   // if message is "build colony"
   socket.on('build colony', function() {
-    if(typeof game_manager.players[ip] === "undefined") {
+    if(game_manager.validate_player(ip)) {
       io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
       return;
     }
@@ -126,7 +140,7 @@ io.on('connection', function(socket) {
 
   // if message is "place road"
   socket.on('place road', function(position) {
-    if(typeof game_manager.players[ip] === "undefined") {
+    if(game_manager.validate_player(ip)) {
       io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
       return;
     }
@@ -145,7 +159,7 @@ io.on('connection', function(socket) {
 
   // if message is "place colony"
   socket.on('place colony', function(position) {
-    if(typeof game_manager.players[ip] === "undefined") {
+    if(game_manager.validate_player(ip)) {
       io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
       return;
     }

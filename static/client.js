@@ -2,7 +2,8 @@
 // note: socketIO uses JSON.stringify() natively to send and receive any objects
 let socket = io();
 
-socket.emit()
+// connect to server
+socket.emit('new client');
 
 /********************** send server messages **************************/
 
@@ -10,7 +11,7 @@ socket.emit()
 function get_player_info(event) {
   let name, color;
   console.log(event);
-  if(event != "undefined") {
+  if(typeof event !== "undefined") {
     if(event.keyCode === 13) {
       name = document.getElementById("player_name").value;
       color = document.getElementById("player_color").value;
@@ -84,7 +85,7 @@ socket.on('update scoreboard', function(players) {
     if(players.hasOwnProperty(player)) {
       scoreboard_names[i].textContent = "Name: " + players[player].name;
       scoreboard_colors[i].textContent = "Color: " + players[player].color;
-      scoreboard_num_cards[i].textContent = "Num Cards: " + players[player].hand.total;
+      scoreboard_num_cards[i].textContent = "Num Cards: " + players[player].num_cards;
       scoreboard_score[i].textContent = "Score: " + players[player].points_visible;
       i++;
     }
