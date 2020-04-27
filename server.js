@@ -43,7 +43,7 @@ io.on('connection', function(socket) {
 
   function update_client() {
     // update board
-    // io.sockets.emit('state', game_manager.board.tiles);
+    // io.sockets.emit('update board', game_manager.board.tiles);
 
     // update roads
     // update colonies
@@ -68,6 +68,7 @@ io.on('connection', function(socket) {
   });
 
   socket.on('new player', function(name, color) {
+    // if both name and color fields are populated with non-white spaces
     if (/\S/.test(name) && /\S/.test(color)) {
       // if it is a new player 
       if(!(ip in game_manager.players)) {
@@ -102,9 +103,8 @@ io.on('connection', function(socket) {
       io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
       return;
     }
-    console.log("received shuffle");
     game_manager.board.shuffle_board();
-    io.sockets.emit('state', game_manager.board.tiles);
+    io.sockets.emit('update board', game_manager.board.tiles);
   });
 
   // if message is "start"
@@ -123,7 +123,8 @@ io.on('connection', function(socket) {
     }
     game_manager.roll_dice();
     game_manager.allocate_resources();
-    console.log(game_manager.players[ip]);
+
+    // instruct clients to update dice roll on scoreboard
     io.sockets.emit('new dice roll', game_manager.dice);
     // instruct this client to update their player menu
     io.to(socket.id).emit('update player menu', game_manager.players[ip]);

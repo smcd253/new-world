@@ -10,7 +10,6 @@ socket.emit('new client');
 // create or update player from player input fields
 function get_player_info(event) {
   let name, color;
-  console.log(event);
   if(typeof event !== "undefined") {
     if(event.keyCode === 13) {
       name = document.getElementById("player_name").value;
@@ -121,7 +120,7 @@ socket.on('new dice roll', function(dice) {
 /********************** update board **************************/
 
 // receive new state from server, draw new components
-socket.on('state', function(new_board) {
+socket.on('update board', function(new_board) {
   draw_new_board(new_board);
 });
 
@@ -265,13 +264,3 @@ socket.on('out of colonies', function(msg) {
   console.log(msg);
 });
 
-function expose_col_num() {
-  let expose_colonies = document.getElementsByClassName("colonies")[0];
-  console.log(expose_colonies);
-  let col = expose_colonies.querySelectorAll('*[id]:not([id="colonyGrid"]');
-  for(let i = 0; i < col.length; i++) {
-    col[i].style.visibility = "visible";
-    col[i].textContent = col[i].id.slice(1).slice(-2);
-    col[i].style.background = "black";
-  }
-}

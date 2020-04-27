@@ -17,9 +17,8 @@
   </head>
   <body>
     <script src="/static/client.js"></script>
-    <button onclick="expose_col_num()">Poop</button>
-    <button onclick="shuffle_board()">Shuffle Board</button>
-    <button onclick="start_game()">Start Game</button>
+    <button class="main_button" id="shuffle_board" onclick="shuffle_board()">Shuffle Board</button>
+    <button class="main_button" id="start_game" onclick="start_game()">Start Game</button>
     <div class="msg_board"></div>
     <div class="player_menu" id="player_window">
       <div class="box player_info">
@@ -49,10 +48,10 @@
         <div class="box player_cities">Cities: </div>
       </div>
       <div class="box game_controls">
-        <button class="box gc_r1_c1" onclick="build_road()">Build Road</button>
-        <button class="box gc_r1_c2" onclick="build_colony()">Build Colony</button>
-        <button class="box gc_r2_c1" onclick="">Build City</button>
-        <button class="box gc_r2_c2" onclick="roll_dice()">Roll Dice</button>
+        <button class="box gc_build_road" onclick="build_road()">Build Road</button>
+        <button class="box gc_build_colony" onclick="build_colony()">Build Colony</button>
+        <button class="box gc_roll_dice" onclick="roll_dice()">Roll Dice</button>
+        <button class="box gc_finish_turn" onclick="finish_turn()">Finish Turn</button>
       </div>
     </div>
     <div class="scoreboard_menu" id="scoreboard_window">
