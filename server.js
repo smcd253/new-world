@@ -48,6 +48,8 @@ io.on('connection', function(socket) {
     if(ip in game_manager.players) {
       // welcome player back
       io.to(socket.id).emit('debug', `welcome back ${game_manager.players[ip].name}`)
+      // instruct this client to update their player menu
+      io.to(socket.id).emit('update player menu', game_manager.players[ip]);
       // instruct clients to update scoreboard
       io.sockets.emit('update scoreboard', game_manager.players);
     }
@@ -64,19 +66,20 @@ io.on('connection', function(socket) {
         if(Object.keys(game_manager.players).length < 4) {
           game_manager.new_player(name, color, Object.keys(game_manager.players).length + 1, ip);
           io.to(socket.id).emit('debug', `welcome ${game_manager.players[ip].name}`)
-          // instruct clients to update scoreboard
-          io.sockets.emit('update scoreboard', game_manager.players);
         }
       }
       // else update player info
       else {
         game_manager.players[ip].name = name;
         game_manager.players[ip].color = color;
-        // instruct clients to update scoreboard
-        io.sockets.emit('update scoreboard', game_manager.players);
         // TODO: redraw all player assets on game_manager.board
         io.to(socket.id).emit('debug', `welcome back ${game_manager.players[ip].name}`)
       }
+      // instruct this client to update their player menu
+      io.to(socket.id).emit('update player menu', game_manager.players[ip]);
+      // instruct clients to update scoreboard
+      io.sockets.emit('update scoreboard', game_manager.players);;
+
     }
     else {
       io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");

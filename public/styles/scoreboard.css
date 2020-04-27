@@ -59,25 +59,25 @@
     font-size: inherit;
 }
 /* name */
-.player_info_name {
+.player_scoreboard_name {
     grid-column: 1;
     grid-row: 1;
     font-size:inherit;
 }
 /* color */
-.player_info_color{
+.player_scoreboard_color{
     grid-column: 2;
     grid-row: 1;
     font-size:inherit;
 }
 /* number of cards */
-.player_info_num_cards {
+.player_scoreboard_num_cards {
     grid-column: 1;
     grid-row: 2;
     font-size:inherit;
 }
 /* score */
-.player_info_score{
+.player_scoreboard_score{
     grid-column: 2;
     grid-row: 2;
     font-size:inherit;

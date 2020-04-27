@@ -69,15 +69,24 @@ socket.on('debug', function(data) {
   document.getElementsByClassName("msg_board")[0].textContent = data;
 });
 
+/********************** update player menu **************************/
+socket.on('update player menu', function(player) {
+  // update name and color
+  document.getElementsByClassName("player_info_name")[0].textContent = "Name: " + player.name;
+  document.getElementsByClassName("player_info_color")[0].textContent = "Color: " + player.color;
+  // update hand
+  // update number of structures left
+});
+
 /********************** update scoreboard **************************/
 // update scoreboard
 // TODO: include function to update player score and num cards with every move
 socket.on('update scoreboard', function(players) {
   // get scoreboard data
-  let scoreboard_names = document.getElementsByClassName("player_info_name");
-  let scoreboard_colors = document.getElementsByClassName("player_info_color");
-  let scoreboard_num_cards = document.getElementsByClassName("player_info_num_cards");
-  let scoreboard_score = document.getElementsByClassName("player_info_score");
+  let scoreboard_names = document.getElementsByClassName("player_scoreboard_name");
+  let scoreboard_colors = document.getElementsByClassName("player_scoreboard_color");
+  let scoreboard_num_cards = document.getElementsByClassName("player_scoreboard_num_cards");
+  let scoreboard_score = document.getElementsByClassName("player_scoreboard_score");
 
   // iterate through player object
   let i = 0;
