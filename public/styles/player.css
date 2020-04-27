@@ -3,8 +3,8 @@
     position: absolute;
     display: grid;
     grid-gap: 2%;
-    grid-template-columns: repeat(4, [col] auto ) ;
-    grid-template-rows: repeat(2, [row] auto  );
+    grid-template-columns: repeat(5, [col] auto ) ;
+    grid-template-rows: repeat(3, [row] auto  );
     background-color: gray;
     border-radius: 5%;
     font-size: 1.25vw;
@@ -28,7 +28,7 @@
 
 /* player information */
 .player_info {
-    grid-column: col / span 4;
+    grid-column: col / span 5;
     grid-row: row;
     display: grid;
     grid-gap: 2%;
@@ -56,16 +56,58 @@
     grid-row: 2;
     font-size: inherit;
 }
-.plauer_info_submit {
+.player_info_submit {
     grid-column: 1 / 3;
     grid-row: 3;
     font-size: inherit;
 }
 
+/* player hand information */
+.player_hand {
+    grid-column: col / span 5;
+    grid-row: row 2;
+    display: grid;
+    grid-gap: 2%;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    font-size: inherit;
+}
+.player_hand_title {
+    grid-column: 1 / 6;
+    grid-row: 1;
+    font-size: inherit;
+}
+.player_hand_wood {
+    grid-column: 1;
+    grid-row: 2;
+    font-size: 0.75vw;
+}
+.player_hand_brick {
+    grid-column: 2;
+    grid-row: 2;
+    font-size: 0.75vw;
+}
+.player_hand_wheat {
+    grid-column: 3;
+    grid-row: 2;
+    font-size: 0.75vw;
+}
+.player_hand_sheep {
+    grid-column: 4;
+    grid-row: 2;
+    font-size: 0.75vw;
+}
+.player_hand_ore {
+    grid-column: 5;
+    grid-row: 2;
+    font-size: 0.75vw;
+}
+
+
 /* game controls */
 .game_controls {
-    grid-column: col / span 4;
-    grid-row: row 2;
+    grid-column: col / span 5;
+    grid-row: row 3;
     display: grid;
     grid-gap: 2%;
     grid-template-columns: 1fr 1fr;
