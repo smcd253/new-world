@@ -10,7 +10,8 @@ class Player {
         this.cities = 4;
         this.roads = 15;
         this.dev_cards = 0;
-        this.hand = {'wheat': 0, 'sheep': 0, 'brick': 0, 'wood': 0, 'ore': 0};
+        // TODO: change all to zero for production (THIS IS FOR DEBUG)
+        this.hand = {'wheat': 2, 'sheep': 2, 'brick': 2, 'wood': 2, 'ore': 0};
         this.num_cards = 0;
     }
 
@@ -189,6 +190,37 @@ class GameManager {
         return (typeof this.players[ip] === "undefined")
     }
 
+    // check if this player has resources to build this item
+    has_resources(ip, structure) {
+        switch(structure) {
+            case "road":
+                return (this.players[ip].hand["wood"] > 0 && 
+                        this.players[ip].hand["brick"] > 0);
+            case "colony":
+                return (this.players[ip].hand["wood"] > 0 && 
+                        this.players[ip].hand["brick"] > 0 &&
+                        this.players[ip].hand["sheep"] > 0 &&
+                        this.players[ip].hand["wheat"] > 0);
+        }
+    }
+
+    // use resources to build this item
+    use_resources(ip, structure) {
+        switch(structure) {
+            case "road":
+                this.players[ip].hand["wood"]--; 
+                this.players[ip].hand["brick"]--;
+                this.players[ip].roads--;
+                break;
+            case "colony":
+                this.players[ip].hand["wood"]--; 
+                this.players[ip].hand["brick"]--;
+                this.players[ip].hand["sheep"]--;
+                this.players[ip].hand["wheat"]--;
+                break;
+        }
+    }
+
     // place new road based on position and user ip
     place_road(position, ip) {
         let new_road = {data: undefined, msg: ""};
@@ -198,11 +230,14 @@ class GameManager {
         else if (this.board.roads[position - 1].owner !== 0) {
             new_road.msg = "A road has already been built here.";
         }
+        else if (!this.has_resources(ip, "road")) {
+            new_road.msg = "You do not have the resources to build a road";
+        }
         else {
             this.board.roads[position - 1].owner = this.players[ip].player_number;
             new_road.data = {position: position, color: this.players[ip].color};
-            this.players[ip].roads--;
             new_road.msg = `Road built! You have ${this.players[ip].roads} roads left.`;
+            this.use_resources(ip, "road");
         }
         return new_road;
     }
@@ -216,12 +251,15 @@ class GameManager {
         else if (this.board.colonies[position - 1].owner !== 0) {
             new_colony.msg = "A colony has already been built here.";
         }
+        else if (!this.has_resources(ip, "colony")) {
+            new_colony.msg = "You do not have the resources to build a colony.";
+        }
         else {
             this.board.colonies[position - 1].owner = this.players[ip].player_number;
             new_colony.data = {position: position - 1, color: this.players[ip].color};
-            this.players[ip].colonies--;
-            this.players[ip].update_score();
             new_colony.msg = `Colony built! You have ${this.players[ip].colonies} colonies left. Your score is now ${this.players[ip].score}!`;
+            this.use_resources(ip, "colony");
+            this.players[ip].update_score();
         }
         return new_colony;
     }
