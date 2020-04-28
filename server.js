@@ -43,8 +43,11 @@ io.on('connection', function(socket) {
 
   function update_client() {
     // update board
-    io.sockets.emit('update board', game_manager.board.tiles);
+    if(game_manager.board.is_shuffled){
+      io.sockets.emit('update board', game_manager.board.tiles);
+    }
 
+    // TODO:
     // update roads
     // update colonies
   }

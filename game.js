@@ -285,6 +285,9 @@ class GameManager {
                             this.state = this.game_states[this.state].next_state;
                         }
                         break;
+                        case 'update client':
+                            permission = true;
+                            break;
                 }
                 break;
             
@@ -298,9 +301,9 @@ class GameManager {
 
     // function to update the sequence of turns for game and placement states
     update_turn_sequence() {
-        game_turn_checkpoints = {has_rolled_dice: false};
+        let game_turn_checkpoints = {has_rolled_dice: false};
         this.game_turns.push(game_turn_checkpoints);
-        placement_turn_checkpoints = {has_placed_colony: false, has_placed_road: false};
+        let placement_turn_checkpoints = {has_placed_colony: false, has_placed_road: false};
         this.placement_turns.push(placement_turn_checkpoints);
         this.placement_turns.unshift(placement_turn_checkpoints); // TODO: check complexity
     }
