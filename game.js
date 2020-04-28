@@ -10,7 +10,7 @@ class Player {
         this.cities = 4;
         this.roads = 15;
         this.dev_cards = 0;
-        // TODO: change all to zero for production (THIS IS FOR DEBUG)
+        // TODO/DEBUG: change all to zero for production 
         this.hand = {'wheat': 2, 'sheep': 2, 'brick': 2, 'wood': 2, 'ore': 0};
         this.num_cards = 0;
     }
@@ -74,15 +74,16 @@ class Board  {
             this.roads.push({owner: 0}); 
         }
         
+        /**
+         * TODO: can make this more efficient by keeping a dictionary of active colonies
+         *      and updating it every time a player places a colony.
+         */
         // initialize colonies
         this.colonies = [];
         this.init_colonies();
-
-        // keep list of active colonies
-        this.active_colonies = []
     }
 
-    // reinitialize colonies
+    // initialize colonies with resource and number mapping
     init_colonies() {
         // create an array of colonies with boardering tiles
         this.colonies = []
