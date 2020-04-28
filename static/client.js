@@ -41,6 +41,11 @@ function roll_dice() {
   socket.emit('roll dice');
 }
 
+// send server message 'finish turn' when a client presses "Finish Turn"
+function finish_turn() {
+  socket.emit('finish turn');
+}
+
 // send server message 'build road' when client presses "Build Road"
 function build_road() {
   socket.emit('build road');
@@ -116,6 +121,8 @@ socket.on('update scoreboard', function(players) {
 
 socket.on('new dice roll', function(dice) {
   document.getElementsByClassName("turn_info_dice")[0].textContent = "Dice Roll = " + dice;
+  // request new player menu information in case our hand changes
+  socket.emit('update me');
 });
 /********************** update board **************************/
 

@@ -35,6 +35,10 @@ server.listen(port, function() {
 // let game_manager.players = {};
 let game_manager = game.get_game_manager();
 
+// step out of normal game loop for debugging
+if (process.argv[2] === "debug") {
+  game_manager.state = "debug";
+}
 
 // WebSocket handlers (every time a connection is made)
 io.on('connection', function(socket) {
@@ -44,13 +48,22 @@ io.on('connection', function(socket) {
   function update_client() {
     // update board
     if(game_manager.board.is_shuffled){
-      io.sockets.emit('update board', game_manager.board.tiles);
+      io.to(socket.id).emit('update board', game_manager.board.tiles);
+    }
+    io.to(socket.id).emit('update scoreboard', game_manager.players);
+    
+    if(typeof game_manager.players[ip] !== "undefined") {
+      io.to(socket.id).emit('update player menu', game_manager.players[ip]);
     }
 
     // TODO:
     // update roads
     // update colonies
   }
+
+  socket.on('update me', function() {
+    update_client();
+  });
 
   // new client instance, check to see if they are already registered as a player
   socket.on('new client', function() {
@@ -71,6 +84,12 @@ io.on('connection', function(socket) {
   });
 
   socket.on('new player', function(name, color) {
+    // state machine filter
+    if(!game_manager.state_machine('new player', ip)){
+      io.to(socket.id).emit('debug', "Cannot add new player. Game has already begun.");
+      return;
+    }
+
     let result = game_manager.new_player(name, color, ip);
     if(result.success) {
       // instruct this client to update their player menu
@@ -87,6 +106,13 @@ io.on('connection', function(socket) {
 
   // if message is "shuffle"
   socket.on('shuffle', function() {
+    // state machine filter
+    if(!game_manager.state_machine('shuffle', ip)){
+      io.to(socket.id).emit('debug', "Action not allowed");
+      return;
+    }
+    
+    // valid player filter
     if(game_manager.validate_player(ip)) {
       io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
       return;
@@ -97,6 +123,13 @@ io.on('connection', function(socket) {
 
   // if message is "start"
   socket.on('start', function() {
+    // state machine filter
+    if(!game_manager.state_machine('start', ip)){
+      io.to(socket.id).emit('debug', "Action not allowed.");
+      return;
+    }
+    
+    // valid player filter
     if(game_manager.validate_player(ip)) {
       io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
       return;
@@ -105,6 +138,13 @@ io.on('connection', function(socket) {
   });
 
   socket.on('roll dice', function() {
+    // state machine filter
+    if(!game_manager.state_machine('roll dice', ip)){
+      io.to(socket.id).emit('debug', "Action not allowed.");
+      return;
+    }
+    
+    // valid player filter
     if(game_manager.validate_player(ip)) {
       io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
       return;
@@ -118,11 +158,35 @@ io.on('connection', function(socket) {
     // instruct this client to update their player menu
     io.to(socket.id).emit('update player menu', game_manager.players[ip]);
     // instruct clients to update scoreboard
-    io.sockets.emit('update scoreboard', game_manager.players);;
+    io.sockets.emit('update scoreboard', game_manager.players);
+  });
+
+  socket.on('finish turn', function() {
+    // state machine filter
+    if(!game_manager.state_machine('finish turn', ip)){
+      io.to(socket.id).emit('debug', "Action not allowed.");
+      return;
+    }
+    
+    // valid player filter
+    if(game_manager.validate_player(ip)) {
+      io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
+      return;
+    }
+
+  // instruct clients to update scoreboard
+    io.sockets.emit('debug', `player ${game_manager.players[ip].player_number} has finished their turn.`);
   });
 
   // if message is "build road"
   socket.on('build road', function() {
+    // state machine filter
+    if(!game_manager.state_machine('build road', ip)){
+      io.to(socket.id).emit('debug', "Action not allowed.");
+      return;
+    }
+    
+    // valid player filter
     if(game_manager.validate_player(ip)) {
       io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
       return;
@@ -134,6 +198,13 @@ io.on('connection', function(socket) {
 
   // if message is "build colony"
   socket.on('build colony', function() {
+    // state machine filter
+    if(!game_manager.state_machine('build colony', ip)){
+      io.to(socket.id).emit('debug', "Action not allowed.");
+      return;
+    }
+    
+    // valid player filter
     if(game_manager.validate_player(ip)) {
       io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
       return;
@@ -145,6 +216,11 @@ io.on('connection', function(socket) {
 
   // if message is "place road"
   socket.on('place road', function(position) {
+    /**
+     * NOTE: do not need state machine filter because we have already stopped player
+     * from building 
+     */
+    // valid player filter
     if(game_manager.validate_player(ip)) {
       io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
       return;
@@ -155,6 +231,10 @@ io.on('connection', function(socket) {
 
   // if message is "place colony"
   socket.on('place colony', function(position) {
+    /**
+     * NOTE: do not need state machine filter because we have already stopped player
+     * from building 
+     */
     if(game_manager.validate_player(ip)) {
       io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
       return;

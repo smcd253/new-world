@@ -10,8 +10,7 @@ class Player {
         this.cities = 4;
         this.roads = 15;
         this.dev_cards = 0;
-        // TODO/DEBUG: change all to zero for production 
-        this.hand = {'wheat': 2, 'sheep': 2, 'brick': 2, 'wood': 2, 'ore': 0};
+        this.hand = {'wheat': 0, 'sheep': 0, 'brick': 0, 'wood': 0, 'ore': 0};
         this.num_cards = 0;
     }
 
@@ -183,25 +182,59 @@ class GameManager {
         this.game_turns = [];
         
         // use this variable to keep track of whose turn it is
-        this.turn = 0
+        this.turn = 1;
+
+        // use this variable to reverse turn order in placement state
+        this.placement_turn_flag = false;
+
+        // use this variable to disable resoure charging in placement state
+        this.charge_resources = false;
+
+        // define minimum and maximum number of players
+        this.min_players = 2;
+        this.max_players = 4;
     }
+
+    // function to update the sequence of turns for game and placement states
+    update_turn_sequence() {
+        let game_turn_checkpoints = {has_rolled_dice: false};
+        this.game_turns.push(game_turn_checkpoints);
+        let placement_turn_checkpoints = {has_placed_colony: false, has_placed_road: false};
+        this.placement_turns.push(placement_turn_checkpoints);
+    }
+
+    refresh_turn_sequence() {
+        for (let cp of this.placement_turns) {
+            cp.has_placed_colony = false;
+            cp.has_placed_road = false;
+        }
+    }
+
+
     // next turn
     next_turn(type) {
         switch(type){
             case "placement":
-                if(this.turn < Object.keys(this.placement_turns).length) {
-                    this.turn++;
+                if(!this.placement_turn_flag) {
+                    if(this.turn < Object.keys(this.placement_turns).length) {
+                        this.turn++;
+                    }
+                    else {
+                        this.refresh_turn_sequence();
+                        this.placement_turn_flag = true;
+                    }
                 }
-                else {
-                    this.turn = 0;
+                else if (this.turn > 1) {
+                    this.turn--;
                 }
                 break;
+
             case "game":
                 if(this.turn < Object.keys(this.game_turns).length) {
                     this.turn++;
                 }
                 else {
-                    this.turn = 0;
+                    this.turn = 1;
                 }
                 break;
         }
@@ -210,38 +243,55 @@ class GameManager {
 
     // state machine
     state_machine(event, ip) {
+        console.log("STATE_MACHINE(): state = " + this.state);
+        console.log(`STATE_MACHINE(): this.turn = ${this.turn}`);
+        console.log(`STATE_MACHINE(): event = ${event}`);
         let permission = false;
         switch(this.state) {
+            case "debug":
+                permission = true;
+                break;
             case "setup":
                 switch(event) {
                     case 'shuffle':
                         permission = true;
                         break;
                     case 'start':
+                        console.log("STATE_MACHINE(): start game pressed");
                         // if we have between 2-4 players and board has been shuffled
-                        if(Object.keys(this.players).length >= 2 &&
-                            Object.keys(this.players).length <= 4 &&
+                        if(Object.keys(this.players).length >= this.min_players &&
+                            Object.keys(this.players).length <= this.max_players &&
                             this.board.is_shuffled) {
                                 // setup --> placement
-                                this.state = this.state.next_state;
+                                this.state = this.game_states[this.state].next_state;
                                 permission = true;
                             }
+                        break;
+                    case 'new player':
+                        permission = true;
                         break;
                 }
                 break;
 
             case "placement":
+                this.charge_resources = false;
                 switch(event) {
                     case 'build road':
+                        console.log(`STATE_MACHINE(): requesting to build road`);
                         if(this.players[ip].player_number === this.turn) {
-                            if(!this.placement_turns[this.turn].has_placed_road) {
+                            console.log(`STATE_MACHINE(): it's player${this.players[ip].player_number}'s turn`);
+                            if(!this.placement_turns[this.turn - 1].has_placed_road) {
+                                this.placement_turns[this.turn - 1].has_placed_road = true;
+                                console.log(`STATE_MACHINE(): this player has not placed a road yet.`);
                                 permission = true;
                             }
                         }
                         break;
                     case 'build colony':
                         if(this.players[ip].player_number === this.turn) {
-                            if(!this.placement_turns[this.turn].has_placed_colony) {
+                            console.log(`STATE_MACHINE(): player ${this.players[ip].player_number} build colony status = ${this.placement_turns[this.turn - 1].has_placed_colony}`);
+                            if(!this.placement_turns[this.turn - 1].has_placed_colony) {
+                                this.placement_turns[this.turn - 1].has_placed_colony = true;
                                 permission = true;
                             }
                         }
@@ -249,14 +299,14 @@ class GameManager {
                     case 'finish turn':
                         if(this.players[ip].player_number === this.turn) {
                             // if the player has placed pieces
-                            if(this.placement_turns[this.turn].has_placed_colony &&
-                                this.placement_turns[this.turn].has_placed_road) {
+                            if(this.placement_turns[this.turn - 1].has_placed_colony &&
+                                this.placement_turns[this.turn - 1].has_placed_road) {
                                     permission = true;
-                                    if(this.turn === this.placement_turns.length - 1) {
+                                    if(this.turn === 1 && this.placement_turn_flag) {
                                         // placement --> game
                                         this.state = this.game_states[this.state].next_state;
                                     }
-                                    this.next_turn();
+                                    this.next_turn("placement");
                                 }
                         }
                         break;
@@ -264,19 +314,30 @@ class GameManager {
                 break;
 
             case "game":
+                this.charge_resources = true;
                 switch(event) {
                     case 'roll dice':
                         if(this.players[ip].player_number === this.turn) {
-                            this.game_turns[this.turn].has_rolled_dice = true;
+                            this.game_turns[this.turn - 1].has_rolled_dice = true;
                             permission = true;
                         }
                         break;
                     case 'build road': // NOTE: both cases have same requirements --> fall-through
                     case 'build colony':
                         if(this.players[ip].player_number === this.turn) {
-                            if(this.game_turns[this.turn].has_rolled_dice) {
+                            if(this.game_turns[this.turn - 1].has_rolled_dice) {
                                 permission = true;
                             }
+                        }
+                        break;
+                    case 'finish turn':
+                        if(this.players[ip].player_number === this.turn) {
+                            // if the player has placed pieces
+                            if(this.placement_turns[this.turn - 1].has_placed_colony &&
+                                this.placement_turns[this.turn - 1].has_placed_road) {
+                                    permission = true;
+                                    this.next_turn("game");
+                                }
                         }
                         break;
                     case 'score':
@@ -299,15 +360,6 @@ class GameManager {
         return permission;
     }
 
-    // function to update the sequence of turns for game and placement states
-    update_turn_sequence() {
-        let game_turn_checkpoints = {has_rolled_dice: false};
-        this.game_turns.push(game_turn_checkpoints);
-        let placement_turn_checkpoints = {has_placed_colony: false, has_placed_road: false};
-        this.placement_turns.push(placement_turn_checkpoints);
-        this.placement_turns.unshift(placement_turn_checkpoints); // TODO: check complexity
-    }
-
     // new player
     new_player(name, color, ip) {
         let result = {success: false, msg: ""};
@@ -320,7 +372,7 @@ class GameManager {
                     this.players[ip] = new Player(name, color, Object.keys(this.players).length + 1);
                     result.success = true;
                     result.msg = `welcome ${this.players[ip].name}`;
-                    this.update_turn_sequence(ip);
+                    this.update_turn_sequence();
                 }
             }
             // else update player info
@@ -345,6 +397,9 @@ class GameManager {
 
     // check if this player has resources to build this item
     has_resources(ip, structure) {
+        if(!this.charge_resources) {
+            return true;
+        }
         switch(structure) {
             case "road":
                 return (this.players[ip].hand["wood"] > 0 && 
@@ -361,15 +416,22 @@ class GameManager {
     use_resources(ip, structure) {
         switch(structure) {
             case "road":
-                this.players[ip].hand["wood"]--; 
-                this.players[ip].hand["brick"]--;
+                // do not charge resources if we are in placement state
+                if(this.charge_resources){
+                    this.players[ip].hand["wood"]--; 
+                    this.players[ip].hand["brick"]--;
+                }
                 this.players[ip].roads--;
                 break;
             case "colony":
-                this.players[ip].hand["wood"]--; 
-                this.players[ip].hand["brick"]--;
-                this.players[ip].hand["sheep"]--;
-                this.players[ip].hand["wheat"]--;
+                // do not charge resources if we are in placement state
+                if(this.charge_resources){
+                    this.players[ip].hand["wood"]--; 
+                    this.players[ip].hand["brick"]--;
+                    this.players[ip].hand["sheep"]--;
+                    this.players[ip].hand["wheat"]--;
+                }
+                this.players[ip].colonies--;
                 break;
         }
     }
@@ -447,8 +509,8 @@ class GameManager {
                                     }
                                 }
                             }
+                            this.players[p].update_num_cards();
                         }
-                        this.players[p].update_num_cards();
                     }
                 }
             }
