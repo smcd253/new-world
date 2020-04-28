@@ -214,11 +214,6 @@ class GameManager {
         switch(this.state) {
             case "setup":
                 switch(event) {
-                    case 'new player':
-                        if(this.players[ip].player_number === 1) {
-                            this.turn = ip;
-                        }
-                        break;
                     case 'shuffle':
                         permission = true;
                         break;
