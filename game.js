@@ -70,7 +70,7 @@ class Board  {
         // create an array of roads
         this.roads = []
         for(let i = 0; i < 72; i++) {
-            this.roads.push({owner: 0}); 
+            this.roads.push({owner: 0, color: ""}); 
         }
         
         /**
@@ -451,7 +451,8 @@ class GameManager {
         }
         else {
             this.board.roads[position - 1].owner = this.players[ip].player_number;
-            new_road.data = {position: position, color: this.players[ip].color};
+            this.board.roads[position - 1].color = this.players[ip].color;
+            new_road.data = {position: position, color: this.board.roads[position - 1].color};
             new_road.msg = `Road built! You have ${this.players[ip].roads} roads left.`;
             this.use_resources(ip, "road");
         }

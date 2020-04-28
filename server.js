@@ -61,8 +61,15 @@ io.on('connection', function(socket) {
     }
 
     // TODO:
-    // update roads
-    // update colonies
+    // update roads (send client 'new road' for all roads that have been placed)
+    for (let i = 0; i < game_manager.board.roads.length; i++) {
+      if(game_manager.board.roads[i].owner !== 0) {
+        existing_road = {data: {position: i + 1, color: game_manager.board.roads[i].color},
+                          msg: "update"};
+        io.sockets.emit('update road', existing_road);
+      }
+    }
+    // update colonies (send client 'new colony' for all colonies that have been placed)
   }
 
   // new client instance, check to see if they are already registered as a player
@@ -70,11 +77,11 @@ io.on('connection', function(socket) {
     if(ip in game_manager.players) {
       // welcome player back
       io.to(socket.id).emit('debug', `welcome back ${game_manager.players[ip].name}`)
-      update_client();
     }
     else {
       io.to(socket.id).emit('debug', `Please enter your name and color to join the game.`)
     }
+    update_client();
 
   });
 
@@ -114,6 +121,7 @@ io.on('connection', function(socket) {
       return;
     }
     game_manager.board.shuffle_board();
+    io.sockets.emit('update board', game_manager.board.tiles);
     update_client();
   });
 

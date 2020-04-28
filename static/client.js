@@ -210,8 +210,14 @@ socket.on('new road', function(new_road) {
   if (typeof new_road.data !== "undefined") {
     draw_new_road(new_road.data);
   } 
-
   print_message(new_road.msg);
+});
+
+// case: client out of sync, receive update to update resources
+socket.on('update road', function(existing_road) {
+  if (typeof existing_road.data !== "undefined") {
+    draw_new_road(existing_road.data);
+  } 
 });
 
 function draw_new_road(new_road) {
