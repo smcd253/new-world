@@ -60,7 +60,7 @@ io.on('connection', function(socket) {
       io.sockets.emit('update scoreboard', game_manager.players);
     }
     else {
-      io.to(socket.id).emit('debug', `please enter your name and color to join the game.`)
+      io.to(socket.id).emit('debug', `Please enter your name and color to join the game.`)
     }
 
     // update everything else
@@ -77,7 +77,7 @@ io.on('connection', function(socket) {
     }
     
     io.to(socket.id).emit('debug', result.msg);
-    
+
     // DEBUG
     console.log(game_manager.players[ip])
   });
@@ -106,6 +106,7 @@ io.on('connection', function(socket) {
       io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
       return;
     }
+    
     game_manager.roll_dice();
     game_manager.allocate_resources();
 

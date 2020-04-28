@@ -10,6 +10,7 @@ body {
 
 .msg_board {
     margin: auto;
+    margin-top: 1%;
     z-index: -1;
     position: relative;
     width: 50%;
@@ -31,10 +32,10 @@ body {
 }
 
 #shuffle_board {
-    left: 20%;
+    left: 87.5%;
 }
 #start_game {
-    left: 70%;
+    left: 2.5%;
 }
 
 .board {

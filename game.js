@@ -203,12 +203,6 @@ class GameManager {
         return result;
     }
 
-    // update player
-    update_player(name, color, ip) {
-        this.players[ip].name = name;
-        this.players[ip].color = color;
-    }
-
     // check if player exists
     validate_player(ip) {
         return (typeof this.players[ip] === "undefined")
