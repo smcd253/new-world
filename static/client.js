@@ -213,13 +213,6 @@ socket.on('new road', function(new_road) {
   print_message(new_road.msg);
 });
 
-// case: client out of sync, receive update to update resources
-socket.on('update road', function(existing_road) {
-  if (typeof existing_road.data !== "undefined") {
-    draw_new_road(existing_road.data);
-  } 
-});
-
 function draw_new_road(new_road) {
   // draw new road
   let roads_container = document.getElementsByClassName("roads")[0];
@@ -230,6 +223,12 @@ function draw_new_road(new_road) {
   road_to_draw.style.background = new_road.color;
   road_to_draw.style.visibility = "visible";
 }
+
+socket.on('out of roads', function(msg) {
+  bring_element_back("road_buttons");
+  toggle_road_buttons("hidden");
+  console.log(msg);
+});
 
 /************************** Colony Building ****************************/
 // turn colony buttons visibility on or off
@@ -275,3 +274,20 @@ socket.on('out of colonies', function(msg) {
   console.log(msg);
 });
 
+
+/************************** Update Structures ****************************/
+// case: client out of sync, receive update to update resources
+socket.on('update structure', function(structure) {
+  if(typeof structue !== "undefined"){
+    if(structure.type === "road"){
+      if (typeof structure.data !== "undefined") {
+        draw_new_road(structure.data);
+      } 
+    }
+    else if(structure.type === "colony") {
+      if (typeof structure.data !== "undefined") {
+        draw_new_colony(structure.data);
+      } 
+    }
+  }
+});

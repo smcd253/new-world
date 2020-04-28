@@ -90,7 +90,7 @@ class Board  {
         // create an array of colonies with boardering tiles
         this.colonies = []
         for(let i = 0; i < 54; i++) {
-            this.colonies.push({owner: 0});
+            this.colonies.push({owner: 0, color: ""});
             this.colonies[i].tiles = {};
             for(let j = 0; j < this.tiles.length; j++) {
                 if(this.tiles[j].colony_positions.includes(i + 1)) {
@@ -203,6 +203,7 @@ class GameManager {
         this.placement_turns.push(placement_turn_checkpoints);
     }
 
+    // called to allow the placement turn sequence to move in reverse
     refresh_turn_sequence() {
         for (let cp of this.placement_turns) {
             cp.has_placed_colony = false;
@@ -473,7 +474,8 @@ class GameManager {
         }
         else {
             this.board.colonies[position - 1].owner = this.players[ip].player_number;
-            new_colony.data = {position: position - 1, color: this.players[ip].color};
+            this.board.colonies[position - 1].color = this.players[ip].color;
+            new_colony.data = {position: position - 1, color: this.board.colonies[position - 1].color};
             new_colony.msg = `Colony built! You have ${this.players[ip].colonies} colonies left. Your score is now ${this.players[ip].score}!`;
             this.use_resources(ip, "colony");
             this.players[ip].update_score();

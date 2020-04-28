@@ -60,16 +60,25 @@ io.on('connection', function(socket) {
       console.log("instructing client to update player menu");
     }
 
-    // TODO:
+    // TODO: this can be much more efficient
     // update roads (send client 'new road' for all roads that have been placed)
     for (let i = 0; i < game_manager.board.roads.length; i++) {
       if(game_manager.board.roads[i].owner !== 0) {
-        existing_road = {data: {position: i + 1, color: game_manager.board.roads[i].color},
+        let structure = {type: "road", 
+                          data: {position: i + 1, color: game_manager.board.roads[i].color},
                           msg: "update"};
-        io.sockets.emit('update road', existing_road);
+        io.sockets.emit('update structure', structure);
       }
     }
     // update colonies (send client 'new colony' for all colonies that have been placed)
+    for (let i = 0; i < game_manager.board.colonies.length; i++) {
+      if(game_manager.board.colonies[i].owner !== 0) {
+        let structure = {type: "colony", 
+                          data: {position: i + 1, color: game_manager.board.colonies[i].color},
+                          msg: "update"};
+        io.sockets.emit('update structure', structure);
+      }
+    }
   }
 
   // new client instance, check to see if they are already registered as a player
