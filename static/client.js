@@ -121,8 +121,6 @@ socket.on('update scoreboard', function(players) {
 
 socket.on('new dice roll', function(dice) {
   document.getElementsByClassName("turn_info_dice")[0].textContent = "Dice Roll = " + dice;
-  // request new player menu information in case our hand changes
-  socket.emit('update me');
 });
 /********************** update board **************************/
 

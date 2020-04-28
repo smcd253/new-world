@@ -249,6 +249,7 @@ class GameManager {
         let permission = false;
         switch(this.state) {
             case "debug":
+                this.charge_resources = false;
                 permission = true;
                 break;
             case "setup":
