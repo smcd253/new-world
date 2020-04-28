@@ -175,8 +175,32 @@ class GameManager {
     }
 
     // new player
-    new_player(name, color, player_num, ip) {
-        this.players[ip] = new Player(name, color, player_num);
+    new_player(name, color, ip) {
+        let result = {success: false, msg: ""};
+        // if both name and color fields are populated with non-white spaces
+        if (/\S/.test(name) && /\S/.test(color)) {
+            // if it is a new player 
+            if(!(ip in this.players)) {
+                // limit number of this.players to 4
+                if(Object.keys(this.players).length < 4) {
+                    this.players[ip] = new Player(name, color, Object.keys(this.players).length + 1);
+                    result.success = true;
+                    result.msg = `welcome ${this.players[ip].name}`;
+                }
+            }
+            // else update player info
+            else {
+                this.players[ip].name = name;
+                this.players[ip].color = color;
+                result.success = true;
+                result.msg = `welcome back ${this.players[ip].name}`;
+            }
+        }
+        else {
+            result.success = false;
+            result.msg = "You must enter a valid player name and color.";
+        }
+        return result;
     }
 
     // update player
