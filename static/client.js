@@ -261,9 +261,8 @@ socket.on('new colony', function(new_colony) {
 function draw_new_colony(new_colony) {
   let colonies_container = document.getElementsByClassName("colonies")[0];
   let colonies = colonies_container.querySelectorAll('*[id]:not([id="colonyGrid"])');
-  console.log(new_colony.position)
+  // console.log("DRAW_NEW_COLONY(): at" + new_colony.position);
   let colony_to_draw = colonies[new_colony.position];
-  console.log(colony_to_draw);
   colony_to_draw.style.setProperty('--custom-color', new_colony.color);
   colony_to_draw.style.visibility = "visible";
 }
@@ -278,7 +277,10 @@ socket.on('out of colonies', function(msg) {
 /************************** Update Structures ****************************/
 // case: client out of sync, receive update to update resources
 socket.on('update structure', function(structure) {
-  if(typeof structue !== "undefined"){
+  console.log("UPDATE_STRUCTURE(): CALLED");
+  if(typeof structure !== "undefined"){
+    console.log("UPDATE_STRUCTURE(): structure defined");
+    
     if(structure.type === "road"){
       if (typeof structure.data !== "undefined") {
         draw_new_road(structure.data);
@@ -287,6 +289,7 @@ socket.on('update structure', function(structure) {
     else if(structure.type === "colony") {
       if (typeof structure.data !== "undefined") {
         draw_new_colony(structure.data);
+        console.log("UPDATE_STRUCTURE(): new colony at position " + structure.data.position);
       } 
     }
   }

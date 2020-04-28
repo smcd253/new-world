@@ -45,8 +45,8 @@ io.on('connection', function(socket) {
   // get client ip
   let ip = socket.handshake.address;
 
-  function update_client() {
-    // update board
+  function update_clients() {
+    // update this client
     if(game_manager.board.is_shuffled){
       io.to(socket.id).emit('update board', game_manager.board.tiles);
     }
@@ -57,11 +57,12 @@ io.on('connection', function(socket) {
     
     if(typeof game_manager.players[ip] !== "undefined") {
       io.to(socket.id).emit('update player menu', game_manager.players[ip]);
-      console.log("instructing client to update player menu");
     }
 
+    // update all clients
+    io.sockets.emit('update scoreboard', game_manager.players);
     // TODO: this can be much more efficient
-    // update roads (send client 'new road' for all roads that have been placed)
+    // update roads (send clients 'new road' for all roads that have been placed)
     for (let i = 0; i < game_manager.board.roads.length; i++) {
       if(game_manager.board.roads[i].owner !== 0) {
         let structure = {type: "road", 
@@ -70,11 +71,11 @@ io.on('connection', function(socket) {
         io.sockets.emit('update structure', structure);
       }
     }
-    // update colonies (send client 'new colony' for all colonies that have been placed)
+    // update colonies (send clients 'new colony' for all colonies that have been placed)
     for (let i = 0; i < game_manager.board.colonies.length; i++) {
       if(game_manager.board.colonies[i].owner !== 0) {
         let structure = {type: "colony", 
-                          data: {position: i + 1, color: game_manager.board.colonies[i].color},
+                          data: {position: i, color: game_manager.board.colonies[i].color},
                           msg: "update"};
         io.sockets.emit('update structure', structure);
       }
@@ -90,8 +91,7 @@ io.on('connection', function(socket) {
     else {
       io.to(socket.id).emit('debug', `Please enter your name and color to join the game.`)
     }
-    update_client();
-
+    update_clients();
   });
 
   socket.on('new player', function(name, color) {
@@ -110,7 +110,7 @@ io.on('connection', function(socket) {
     }
     
     io.to(socket.id).emit('debug', result.msg);
-    update_client();
+    update_clients();
 
     // DEBUG
     console.log(game_manager.players[ip])
@@ -131,7 +131,7 @@ io.on('connection', function(socket) {
     }
     game_manager.board.shuffle_board();
     io.sockets.emit('update board', game_manager.board.tiles);
-    update_client();
+    update_clients();
   });
 
   // if message is "start"
@@ -147,7 +147,7 @@ io.on('connection', function(socket) {
       io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
       return;
     }
-    update_client();
+    update_clients();
   });
 
   socket.on('roll dice', function() {
@@ -168,7 +168,7 @@ io.on('connection', function(socket) {
 
     // instruct clients to update dice roll on scoreboard
     io.sockets.emit('new dice roll', game_manager.dice);
-    update_client();
+    update_clients();
   });
 
   socket.on('finish turn', function() {
@@ -185,7 +185,7 @@ io.on('connection', function(socket) {
     }
 
     io.sockets.emit('debug', `player ${game_manager.players[ip].player_number} has finished their turn.`);
-    update_client();
+    update_clients();
   });
 
   // if message is "build road"
@@ -204,7 +204,7 @@ io.on('connection', function(socket) {
     // send message to allow roads to appear on THIS player's screen
     // can only build road if they have the correct resources
     io.to(socket.id).emit('enable road building');
-    update_client();
+    update_clients();
   });
 
   // if message is "build colony"
@@ -223,7 +223,7 @@ io.on('connection', function(socket) {
     // send message to allow roads to appear on THIS player's screen
     // can only build road if they have the correct resources
     io.to(socket.id).emit('enable colony building');
-    update_client();
+    update_clients();
   });
 
   // if message is "place road"
@@ -239,7 +239,7 @@ io.on('connection', function(socket) {
     }
     // place new road 
     io.sockets.emit('new road', game_manager.place_road(position, ip));
-    update_client();
+    update_clients();
   });
 
   // if message is "place colony"
@@ -254,7 +254,7 @@ io.on('connection', function(socket) {
     }
     // place new colony 
     io.sockets.emit('new colony', game_manager.place_colony(position, ip));
-    update_client();
+    update_clients();
   });
   
 });

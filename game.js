@@ -15,12 +15,14 @@ class Player {
     }
 
     update_num_cards() {
-        let num_cards = 0;
-        for(let resource in Object.keys(this.hand)) {
+        this.num_cards = 0;
+        for(let resource in this.hand) {
+            console.log("UPDATE_NUM_CARDS(): this.hand[resource] = " + this.hand[resource]);
             if(this.hand.hasOwnProperty(resource)) {
-                sum += this.hand[resource];
+                this.num_cards += this.hand[resource];
             }
         }
+        console.log("UPDATE_NUM_CARDS(): num cards = " + this.num_cards);
     }
 
     update_score() {
