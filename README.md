@@ -15,10 +15,12 @@ EE599 Final Project - a full stack implementation of a board game
 10. make all client functions async !!!!!!!!
 11. UNIT TESTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 12. CHANGE EXCEPTION HANDLING SYNTAX TO TRY/CATCH
-13. update num cards on scoreboard
+13. update num cards on scoreboard (done)
 14. send proper messages based on state, turn, etc.
 15. show turn on scoreboard
 16. turn transition in placement phase should not require "finish turn"
+17. update all colonies properly (done)
+18. fix index problem colony vs road 
 
 ## Compilation Instructions
 ```bash

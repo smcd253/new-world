@@ -75,7 +75,7 @@ io.on('connection', function(socket) {
     for (let i = 0; i < game_manager.board.colonies.length; i++) {
       if(game_manager.board.colonies[i].owner !== 0) {
         let structure = {type: "colony", 
-                          data: {position: i, color: game_manager.board.colonies[i].color},
+                          data: {position: i + 1, color: game_manager.board.colonies[i].color},
                           msg: "update"};
         io.sockets.emit('update structure', structure);
       }

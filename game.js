@@ -477,7 +477,7 @@ class GameManager {
         else {
             this.board.colonies[position - 1].owner = this.players[ip].player_number;
             this.board.colonies[position - 1].color = this.players[ip].color;
-            new_colony.data = {position: position - 1, color: this.board.colonies[position - 1].color};
+            new_colony.data = {position: position, color: this.board.colonies[position - 1].color};
             new_colony.msg = `Colony built! You have ${this.players[ip].colonies} colonies left. Your score is now ${this.players[ip].score}!`;
             this.use_resources(ip, "colony");
             this.players[ip].update_score();

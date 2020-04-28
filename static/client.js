@@ -260,7 +260,7 @@ socket.on('new colony', function(new_colony) {
   // draw new colony
 function draw_new_colony(new_colony) {
   let colonies_container = document.getElementsByClassName("colonies")[0];
-  let colonies = colonies_container.querySelectorAll('*[id]:not([id="colonyGrid"])');
+  let colonies = colonies_container.querySelectorAll('*[id]:not([id=""])');
   // console.log("DRAW_NEW_COLONY(): at" + new_colony.position);
   let colony_to_draw = colonies[new_colony.position];
   colony_to_draw.style.setProperty('--custom-color', new_colony.color);
