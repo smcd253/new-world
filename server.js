@@ -43,7 +43,7 @@ io.on('connection', function(socket) {
 
   function update_client() {
     // update board
-    // io.sockets.emit('update board', game_manager.board.tiles);
+    io.sockets.emit('update board', game_manager.board.tiles);
 
     // update roads
     // update colonies
@@ -106,7 +106,7 @@ io.on('connection', function(socket) {
       io.to(socket.id).emit('debug', "You must enter your player info before beginning the game.");
       return;
     }
-    
+
     game_manager.roll_dice();
     game_manager.allocate_resources();
 

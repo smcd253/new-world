@@ -29,22 +29,17 @@ Enter "localhost:5000" into your browser.
 
 ## State Machine
 0. DEBUG MODE: do not enter state machine
-1. Registration
+1. Setup
 CAN: Enter name and color
 CANNOT: interact with board
 - disable callbacks for build road, build colony, roll dice, finish turn, shuffle board (send message to client)
-NEXT STATE: when 2 - 4 players have joined AND start game has been pressed
-2. Setup
-CAN: press "shuffle board", change player name and color
-CANNOT: interact with board
-- same as state 1
-NEXT STATE: "start game" pressed
-3. Placement (cycle from player 1 to player n and back again)
+NEXT STATE: start game has been pressed AND 2 - 4 players have joined 
+2. Placement (cycle from player 1 to player n and back again)
 Player i CAN: 
     place 1 colony and 1 road
     NEXT TURN: player i presses "Finish Turn"
 NEXT STATE: player 1 presses "Finish Turn" a 2nd time
-4. Game (cycle from player 1 to player n)
+3. Game (cycle from player 1 to player n)
 Player i CAN:
     1. Roll Dice
     CAN: press "roll dice"
@@ -52,5 +47,5 @@ Player i CAN:
     CAN: press "build road" or "build colony"
     NEXT TURN: player i presses "Finish turn"
 NEXT STATE: any player score >= 10
-5. Finish Game
+4. Finish Game
 

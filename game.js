@@ -81,6 +81,9 @@ class Board  {
         // initialize colonies
         this.colonies = [];
         this.init_colonies();
+
+        // variable to check if board has been generated (shuffled) yet
+        this.is_shuffled = false;
     }
 
     // initialize colonies with resource and number mapping
@@ -154,6 +157,7 @@ class Board  {
         this.shuffle_types();
         this.zero_desert();
         this.init_colonies();
+        this.is_shuffled = true;
     }
 }
 
@@ -163,16 +167,147 @@ class GameManager {
         this.board = new Board();
         this.players = {}
         this.game_states = {
-            "registration": {next_state: "game_setup"},
-            "game_setup": {next_state: "play_game"},
-            "play_game": {next_state: "end_game"},
-            "end_game": {next_state: "registration"}
+            "setup": {next_state: "placement"},
+            "placement": {next_state: "game"},
+            "game": {next_state: "end_game"},
+            "end_game": {next_state: "setup"}
         }
         this.turn = {} /* populated in new_player() */
-        this.state="registration";
+        this.state="setup";
 
         // dice roll result
         this.dice = 0;
+
+        // add to these lists whenever we get a new player
+        this.placement_turns = [];
+        this.game_turns = [];
+        
+        // use this variable to keep track of whose turn it is
+        this.turn = 0
+    }
+    // next turn
+    next_turn(type) {
+        switch(type){
+            case "placement":
+                if(this.turn < Object.keys(this.placement_turns).length) {
+                    this.turn++;
+                }
+                else {
+                    this.turn = 0;
+                }
+                break;
+            case "game":
+                if(this.turn < Object.keys(this.game_turns).length) {
+                    this.turn++;
+                }
+                else {
+                    this.turn = 0;
+                }
+                break;
+        }
+        
+    }
+
+    // state machine
+    state_machine(event, ip) {
+        let permission = false;
+        switch(this.state) {
+            case "setup":
+                switch(event) {
+                    case 'new player':
+                        if(this.players[ip].player_number === 1) {
+                            this.turn = ip;
+                        }
+                        break;
+                    case 'shuffle':
+                        permission = true;
+                        break;
+                    case 'start':
+                        // if we have between 2-4 players and board has been shuffled
+                        if(Object.keys(this.players).length >= 2 &&
+                            Object.keys(this.players).length <= 4 &&
+                            this.board.is_shuffled) {
+                                // setup --> placement
+                                this.state = this.state.next_state;
+                                permission = true;
+                            }
+                        break;
+                }
+                break;
+
+            case "placement":
+                switch(event) {
+                    case 'build road':
+                        if(this.players[ip].player_number === this.turn) {
+                            if(!this.placement_turns[this.turn].has_placed_road) {
+                                permission = true;
+                            }
+                        }
+                        break;
+                    case 'build colony':
+                        if(this.players[ip].player_number === this.turn) {
+                            if(!this.placement_turns[this.turn].has_placed_colony) {
+                                permission = true;
+                            }
+                        }
+                        break;
+                    case 'finish turn':
+                        if(this.players[ip].player_number === this.turn) {
+                            // if the player has placed pieces
+                            if(this.placement_turns[this.turn].has_placed_colony &&
+                                this.placement_turns[this.turn].has_placed_road) {
+                                    permission = true;
+                                    if(this.turn === this.placement_turns.length - 1) {
+                                        // placement --> game
+                                        this.state = this.game_states[this.state].next_state;
+                                    }
+                                    this.next_turn();
+                                }
+                        }
+                        break;
+                }
+                break;
+
+            case "game":
+                switch(event) {
+                    case 'roll dice':
+                        if(this.players[ip].player_number === this.turn) {
+                            this.game_turns[this.turn].has_rolled_dice = true;
+                            permission = true;
+                        }
+                        break;
+                    case 'build road': // NOTE: both cases have same requirements --> fall-through
+                    case 'build colony':
+                        if(this.players[ip].player_number === this.turn) {
+                            if(this.game_turns[this.turn].has_rolled_dice) {
+                                permission = true;
+                            }
+                        }
+                        break;
+                    case 'score':
+                        if(this.players[ip].score >= 10) {
+                            // game --> end_game
+                            this.state = this.game_states[this.state].next_state;
+                        }
+                        break;
+                }
+                break;
+            
+            case "end_game":
+                // TODO: make sure this allows you to show "game over" message
+                permission = true;
+                break;
+        }
+        return permission;
+    }
+
+    // function to update the sequence of turns for game and placement states
+    update_turn_sequence() {
+        game_turn_checkpoints = {has_rolled_dice: false};
+        this.game_turns.push(game_turn_checkpoints);
+        placement_turn_checkpoints = {has_placed_colony: false, has_placed_road: false};
+        this.placement_turns.push(placement_turn_checkpoints);
+        this.placement_turns.unshift(placement_turn_checkpoints); // TODO: check complexity
     }
 
     // new player
@@ -187,6 +322,7 @@ class GameManager {
                     this.players[ip] = new Player(name, color, Object.keys(this.players).length + 1);
                     result.success = true;
                     result.msg = `welcome ${this.players[ip].name}`;
+                    this.update_turn_sequence(ip);
                 }
             }
             // else update player info
@@ -279,6 +415,8 @@ class GameManager {
             new_colony.msg = `Colony built! You have ${this.players[ip].colonies} colonies left. Your score is now ${this.players[ip].score}!`;
             this.use_resources(ip, "colony");
             this.players[ip].update_score();
+            // check to see if anyone's score is >= 10, ip will not be checked in this case
+            this.state_machine('score', ip);
         }
         return new_colony;
     }
