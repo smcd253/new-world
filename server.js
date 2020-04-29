@@ -191,6 +191,7 @@ io.on('connection', function(socket) {
     for(let p_ip in game_manager.players) {
       if(game_manager.players[p_ip].player_number === game_manager.turn) {
         io.sockets.emit('next turn', game_manager.players[p_ip].name);
+        break;
       } 
     }
 

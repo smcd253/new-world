@@ -6,23 +6,37 @@ let socket = io();
 socket.emit('new client');
 
 /********************** send server messages **************************/
-
+function is_valid_color(color_string) {
+    color_string = color_string.toLowerCase();
+    let s = new Option().style;
+    s.color = color_string;
+    return (s.color == color_string);
+}
 // create or update player from player input fields
 function get_player_info(event) {
   let name, color;
+  let valid_player_info = false;
   if(typeof event !== "undefined") {
     if(event.keyCode === 13) {
       name = document.getElementById("player_name").value;
       color = document.getElementById("player_color").value;
-      // send server message: 'new player' and new player info when a new connection (this script) is formed
-      socket.emit('new player', name, color);
+      valid_player_info = true;
     }
   }
   else {
     name = document.getElementById("player_name").value;
     color = document.getElementById("player_color").value;
-    // send server message: 'new player' and new player info when a new connection (this script) is formed
-    socket.emit('new player', name, color);
+    valid_player_info = true;
+  }
+
+  if(valid_player_info) {
+    if(is_valid_color(color)){
+      // send server message: 'new player' and new player info when a new connection (this script) is formed
+      socket.emit('new player', name, color);
+    }
+    else{
+      print_message("Please enter a valid color.")
+    }
   }
 }
 

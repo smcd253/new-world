@@ -17,11 +17,19 @@ EE599 Final Project - a full stack implementation of a board game
 12. CHANGE EXCEPTION HANDLING SYNTAX TO TRY/CATCH
 13. update num cards on scoreboard (done)
 14. send proper messages based on state, turn, etc.
-15. show turn on scoreboard
+15. show turn on scoreboard (done)
 16. turn transition in placement phase should not require "finish turn"
 17. update all colonies properly (done)
 18. fix index problem colony vs road (done)
 19. problem with num_cards on scoreboard (done, don't think this was a problem?)
+20. validate color
+
+
+## TODO before demo
+1. any client updates should be called as async
+2. state machine should be async and await
+3. move game manager to separate file
+4. move backend to its own file
 
 ## Compilation Instructions
 ```bash
