@@ -184,7 +184,16 @@ io.on('connection', function(socket) {
       return;
     }
 
-    io.sockets.emit('debug', `player ${game_manager.players[ip].player_number} has finished their turn.`);
+    // inform all clients that this player has finished their turn
+    io.sockets.emit('debug', `${game_manager.players[ip].name} has finished their turn.`);
+    
+    // instruct clients to redraw scoreboard with new turn player
+    for(let p_ip in game_manager.players) {
+      if(game_manager.players[p_ip].player_number === game_manager.turn) {
+        io.sockets.emit('next turn', game_manager.players[p_ip].name);
+      } 
+    }
+
     update_clients();
   });
 

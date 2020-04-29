@@ -122,6 +122,10 @@ socket.on('update scoreboard', function(players) {
 socket.on('new dice roll', function(dice) {
   document.getElementsByClassName("turn_info_dice")[0].textContent = "Dice Roll = " + dice;
 });
+
+socket.on('next turn', function(player_name) {
+  document.getElementsByClassName("turn_info_turn")[0].textContent = player_name + "'s turn";
+})
 /********************** update board **************************/
 
 // receive new state from server, draw new components

@@ -20,7 +20,8 @@ EE599 Final Project - a full stack implementation of a board game
 15. show turn on scoreboard
 16. turn transition in placement phase should not require "finish turn"
 17. update all colonies properly (done)
-18. fix index problem colony vs road 
+18. fix index problem colony vs road (done)
+19. problem with num_cards on scoreboard (done, don't think this was a problem?)
 
 ## Compilation Instructions
 ```bash
