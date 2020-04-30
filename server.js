@@ -10,7 +10,7 @@ const io = socketIO(server);
 const port = 5000
 
 // game dependencies 
-const game = require("./game.js");
+const game = require("./game_manager.js");
 
 app.set('port', port);
 
@@ -29,28 +29,30 @@ server.listen(port, function() {
     console.log('Starting server on port 5000');
   });
 
-
 // game objects
-// let game_manager.board = game.get_board();
-// let game_manager.players = {};
-let game_manager = game.get_game_manager();
+let game_manager = game.get_new_game_manager();
 
 // step out of normal game loop for debugging
 if (process.argv[2] === "debug") {
   game_manager.state = "debug";
 }
 
+// create room for active players to join (to receive player-specific messages)
+let game_room = "game_room";
+
 // WebSocket handlers (every time a connection is made)
 io.on('connection', function(socket) {
   // get client ip
   let ip = socket.handshake.address;
-
+  
+  
+  // update clients with relevant information
   function update_clients() {
     // update this client
     if(game_manager.board.is_shuffled){
       io.to(socket.id).emit('update board', game_manager.board.tiles);
     }
-
+  
     if(Object.keys(game_manager.players).length > 0){
       io.to(socket.id).emit('update scoreboard', game_manager.players);
     }
@@ -58,7 +60,7 @@ io.on('connection', function(socket) {
     if(typeof game_manager.players[ip] !== "undefined") {
       io.to(socket.id).emit('update player menu', game_manager.players[ip]);
     }
-
+  
     // update all clients
     io.sockets.emit('update scoreboard', game_manager.players);
     // TODO: this can be much more efficient
@@ -87,6 +89,8 @@ io.on('connection', function(socket) {
     if(ip in game_manager.players) {
       // welcome player back
       io.to(socket.id).emit('debug', `welcome back ${game_manager.players[ip].name}`)
+      // re-add player to chat room
+      socket.join(game_room);
     }
     else {
       io.to(socket.id).emit('debug', `Please enter your name and color to join the game.`)
@@ -107,9 +111,12 @@ io.on('connection', function(socket) {
       io.to(socket.id).emit('update player menu', game_manager.players[ip]);
       // instruct clients to update scoreboard
       io.sockets.emit('update scoreboard', game_manager.players);
+      // add player to chat room
+      socket.join(game_room);
     }
     
     io.to(socket.id).emit('debug', result.msg);
+    if(result.bcast !== "") socket.broadcast.emit('debug', result.bcast);
     update_clients();
 
     // DEBUG
@@ -267,4 +274,31 @@ io.on('connection', function(socket) {
     update_clients();
   });
   
+  // log room events
+  let room = io.sockets.in(game_room);
+  room.on('join', function(socket) {
+    let ip = socket.handshake.address
+    if(typeof game_manager.players[ip] !== "undefined") {
+      console.log(game_manager.players[ip].name + "has joined the game room.");
+    }
+  });
+  room.on('leave', function(socket) {
+    let ip = socket.handshake.address
+    if(typeof game_manager.players[ip] !== "undefined") {
+      console.log(game_manager.players[ip].name + "has left the game room.");
+    }
+  });
+
+
 });
+
+// send periodic instructions to players in game_room based on the state of the game
+let instruction_period = 5000; // every 3s
+let instruction_number = 0;
+setInterval(function() {
+  io.to(game_room).emit('debug', game_manager.player_instructions[game_manager.state][instruction_number]);
+  // update instruciton number (loop through instruction set)
+  if(instruction_number < game_manager.player_instructions[game_manager.state].length - 1) instruction_number++;
+  else instruction_number = 0;
+}, instruction_period);
+

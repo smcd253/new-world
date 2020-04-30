@@ -41,58 +41,60 @@ function get_player_info(event) {
 }
 
 // send server message 'shuffle' when a client presses "Shuffle Board"
-function shuffle_board() {
+async function shuffle_board() {
   socket.emit('shuffle');
 }
 
 // send server message 'start' when a client presses "Start Game"
-function start_game() {
+async function start_game() {
   socket.emit('start');
 }
 
 // send server message 'roll dice' when a client presses "Roll Dice"
-function roll_dice() {
+async function roll_dice() {
   socket.emit('roll dice');
 }
 
 // send server message 'finish turn' when a client presses "Finish Turn"
-function finish_turn() {
+async function finish_turn() {
   socket.emit('finish turn');
 }
 
 // send server message 'build road' when client presses "Build Road"
-function build_road() {
+async function build_road() {
   socket.emit('build road');
 }
 
 // send server message 'build road' when client presses "Build Road"
-function build_colony() {
+// nice
+async function build_colony() {
   socket.emit('build colony');
 }
 
 // send server message 'place road' when a client presses a button corrsponding to road at position pos
-function place_road(pos) {
+async function place_road(pos) {
   socket.emit('place road', pos);
 }
 
 // send server message 'place colony' when a client presses a button corrsponding to colony at position pos
-function place_colony(pos) {
+async function place_colony(pos) {
   socket.emit('place colony', pos);
 }
 
 /********************** server messages **************************/
-function print_message(msg) {
+async function print_message(msg) {
   document.getElementsByClassName("msg_board")[0].textContent = msg;
 }
+
 // debug print
-socket.on('debug', function(data) {
+socket.on('debug', async function(data) {
   console.log("------------------------- Server Debug Msg -------------------------")
   console.log(data);
   print_message(data);
 });
 
 /********************** update player menu **************************/
-socket.on('update player menu', function(player) {
+socket.on('update player menu', async function(player) {
   // update name and color
   document.getElementsByClassName("player_info_name")[0].textContent = "Name: " + player.name;
   document.getElementsByClassName("player_info_color")[0].textContent = "Color: " + player.color;
@@ -113,7 +115,7 @@ socket.on('update player menu', function(player) {
 /********************** update scoreboard **************************/
 // update scoreboard
 // TODO: include function to update player score and num cards with every move
-socket.on('update scoreboard', function(players) {
+socket.on('update scoreboard', async function(players) {
   // get scoreboard data
   let scoreboard_names = document.getElementsByClassName("player_scoreboard_name");
   let scoreboard_colors = document.getElementsByClassName("player_scoreboard_color");
@@ -133,21 +135,21 @@ socket.on('update scoreboard', function(players) {
   }
 });
 
-socket.on('new dice roll', function(dice) {
+socket.on('new dice roll', async function(dice) {
   document.getElementsByClassName("turn_info_dice")[0].textContent = "Dice Roll = " + dice;
 });
 
-socket.on('next turn', function(player_name) {
+socket.on('next turn', async function(player_name) {
   document.getElementsByClassName("turn_info_turn")[0].textContent = player_name + "'s turn";
 })
 /********************** update board **************************/
 
 // receive new state from server, draw new components
-socket.on('update board', function(new_board) {
+socket.on('update board', async function(new_board) {
   draw_new_board(new_board);
 });
 
-function draw_new_board(new_board) {
+async function draw_new_board(new_board) {
   let tiles = document.getElementsByClassName("hex")
   console.log(tiles)
   let i = 0
@@ -195,19 +197,19 @@ let z_indices = {
 };
 
 // bring layer forward so we can interact with it
-function bring_element_forward(element) {
+async function bring_element_forward(element) {
   let container = document.getElementsByClassName(element)[0];
   container.style.zIndex = z_indices["front"];
 }
 // bring layer back
-function bring_element_back(element) {
+async function bring_element_back(element) {
   let container = document.getElementsByClassName(element)[0];
   container.style.zIndex = z_indices[element];
 }
 
 /************************** Road Building ****************************/
 // turn road buttons visibility on or off
-function toggle_road_buttons(_visibility) {
+async function toggle_road_buttons(_visibility) {
   let road_buttons = document.getElementsByClassName("road_button_click");
   for(let r of road_buttons) {
     r.style.visibility = _visibility;
@@ -215,13 +217,13 @@ function toggle_road_buttons(_visibility) {
 }
 
 // receive enable road building, set all road buttons to visible
-socket.on('enable road building', function() {
+socket.on('enable road building', async function() {
   bring_element_forward("road_buttons");
   toggle_road_buttons("visible");
 });
 
 // receive new state from server, draw new components
-socket.on('new road', function(new_road) {
+socket.on('new road', async function(new_road) {
   bring_element_back("road_buttons");
   toggle_road_buttons("hidden");
 
@@ -231,7 +233,7 @@ socket.on('new road', function(new_road) {
   print_message(new_road.msg);
 });
 
-function draw_new_road(new_road) {
+async function draw_new_road(new_road) {
   // draw new road
   let roads_container = document.getElementsByClassName("roads")[0];
   let roads = roads_container.querySelectorAll('*[id]:not([id=""]');
@@ -242,7 +244,7 @@ function draw_new_road(new_road) {
   road_to_draw.style.visibility = "visible";
 }
 
-socket.on('out of roads', function(msg) {
+socket.on('out of roads', async function(msg) {
   bring_element_back("road_buttons");
   toggle_road_buttons("hidden");
   console.log(msg);
@@ -250,7 +252,7 @@ socket.on('out of roads', function(msg) {
 
 /************************** Colony Building ****************************/
 // turn colony buttons visibility on or off
-function toggle_colony_buttons(_visibility) {
+async function toggle_colony_buttons(_visibility) {
   let colony_buttons = document.getElementsByClassName("colony_button_click");
   for(let c of colony_buttons) {
     c.style.visibility = _visibility;
@@ -258,13 +260,13 @@ function toggle_colony_buttons(_visibility) {
 }
 
 // receive enable colony building, set all road buttons to visible
-socket.on('enable colony building', function() {
+socket.on('enable colony building', async function() {
   bring_element_forward("colony_buttons");
   toggle_colony_buttons("visible");
 });
 
 // receive new state from server, draw new components
-socket.on('new colony', function(new_colony) {
+socket.on('new colony', async function(new_colony) {
   bring_element_back("colony_buttons");
   toggle_colony_buttons("hidden");
 
@@ -276,7 +278,7 @@ socket.on('new colony', function(new_colony) {
 });
 
   // draw new colony
-function draw_new_colony(new_colony) {
+async function draw_new_colony(new_colony) {
   let colonies_container = document.getElementsByClassName("colonies")[0];
   let colonies = colonies_container.querySelectorAll('*[id]:not([id=""])');
   // console.log("DRAW_NEW_COLONY(): at" + new_colony.position);
@@ -294,7 +296,7 @@ socket.on('out of colonies', function(msg) {
 
 /************************** Update Structures ****************************/
 // case: client out of sync, receive update to update resources
-socket.on('update structure', function(structure) {
+socket.on('update structure', async function(structure) {
   console.log("UPDATE_STRUCTURE(): CALLED");
   if(typeof structure !== "undefined"){
     console.log("UPDATE_STRUCTURE(): structure defined");

@@ -26,10 +26,12 @@ EE599 Final Project - a full stack implementation of a board game
 
 
 ## TODO before demo
+0. set interval emit for game state instructions.
 1. any client updates should be called as async
 2. state machine should be async and await
-3. move game manager to separate file
-4. move backend to its own file
+3. move game manager to separate file (done)
+4. move backend to its own folder
+5. get licensing
 
 ## Compilation Instructions
 ```bash
