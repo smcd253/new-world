@@ -273,27 +273,11 @@ io.on('connection', function(socket) {
     io.sockets.emit('new colony', game_manager.place_colony(position, ip));
     update_clients();
   });
-  
-  // log room events
-  let room = io.sockets.in(game_room);
-  room.on('join', function(socket) {
-    let ip = socket.handshake.address
-    if(typeof game_manager.players[ip] !== "undefined") {
-      console.log(game_manager.players[ip].name + "has joined the game room.");
-    }
-  });
-  room.on('leave', function(socket) {
-    let ip = socket.handshake.address
-    if(typeof game_manager.players[ip] !== "undefined") {
-      console.log(game_manager.players[ip].name + "has left the game room.");
-    }
-  });
-
 
 });
 
 // send periodic instructions to players in game_room based on the state of the game
-let instruction_period = 5000; // every 3s
+let instruction_period = 5000; // every 5s
 let instruction_number = 0;
 setInterval(function() {
   io.to(game_room).emit('debug', game_manager.player_instructions[game_manager.state][instruction_number]);
