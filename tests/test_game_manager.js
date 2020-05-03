@@ -228,3 +228,167 @@ describe("game_manager.use_resources(ip, structure)", function() {
     });
 });
 
+describe("game_manager.place_road(position, ip)", function() {
+    it("Should return 'Road built!' if I have the proper amount of resources.", function() {
+        let game_manager = game.get_new_game_manager();
+        game_manager.charge_resources = true;
+        let name = "mocha", color = "brown", ip = "0.0.0.0";
+        game_manager.new_player(name, color, ip);
+        game_manager.players[ip].hand['wood'] = 1;
+        game_manager.players[ip].hand['brick'] = 1;
+        let position = 1;
+        let expected_num_roads_left = 14;
+        let result = game_manager.place_road(position, ip);
+        assert.equal(result.msg, `Road built! You have ${expected_num_roads_left} roads left.`);
+        assert.equal(result.data.position, position);
+        assert.equal(result.data.color, color);
+    });
+
+    it("Should return 'Road built!' if game_manager.charge_resources is false.", function() {
+        let game_manager = game.get_new_game_manager();
+        let name = "mocha", color = "brown", ip = "0.0.0.0";
+        game_manager.new_player(name, color, ip);
+        let position = 1;
+        let expected_num_roads_left = 14;
+        let result = game_manager.place_road(position, ip);
+        assert.equal(result.msg, `Road built! You have ${expected_num_roads_left} roads left.`);
+        assert.equal(result.data.position, position);
+        assert.equal(result.data.color, color);
+    });
+
+
+    it("Should return 'You are out of roads.' if the player has no more roads.", function() {
+        let game_manager = game.get_new_game_manager();
+        game_manager.charge_resources = true;
+        let name = "mocha", color = "brown", ip = "0.0.0.0";
+        game_manager.new_player(name, color, ip);
+        game_manager.players[ip].hand['wood'] = 1;
+        game_manager.players[ip].hand['brick'] = 1;
+        game_manager.players[ip].roads = 0;
+        let position = 1;
+        let result = game_manager.place_road(position, ip);
+        assert.equal(result.msg, `You are out of roads.`);
+    });
+
+    it("Should return 'Position out of range.' if the position is out of range.", function() {
+        let game_manager = game.get_new_game_manager();
+        game_manager.charge_resources = true;
+        let name = "mocha", color = "brown", ip = "0.0.0.0";
+        game_manager.new_player(name, color, ip);
+        game_manager.players[ip].hand['wood'] = 1;
+        game_manager.players[ip].hand['brick'] = 1;
+        let position = -1;
+        let result = game_manager.place_road(position, ip);
+        assert.equal(result.msg, `Position out of range.`);
+    });
+
+    it("Should return 'A road has already been built here.' if there is already a road at this position.", function() {
+        let game_manager = game.get_new_game_manager();
+        game_manager.charge_resources = true;
+        let name = "mocha", color = "brown", ip = "0.0.0.0";
+        game_manager.new_player(name, color, ip);
+        game_manager.players[ip].hand['wood'] = 2;
+        game_manager.players[ip].hand['brick'] = 2;
+        let position = 1;
+        game_manager.place_road(position, ip);
+        let result = game_manager.place_road(position, ip);
+        assert.equal(result.msg, `A road has already been built here.`);
+    });
+
+    it("Should return 'You do not have the resourecs to build a road.' if the player does not have enough resources to build a road.", function() {
+        let game_manager = game.get_new_game_manager();
+        game_manager.charge_resources = true;
+        let name = "mocha", color = "brown", ip = "0.0.0.0";
+        game_manager.new_player(name, color, ip);
+        let position = 1;
+        let result = game_manager.place_road(position, ip);
+        assert.equal(result.msg, `You do not have the resources to build a road.`);
+    });
+});
+
+describe("game_manager.place_colony(position, ip)", function() {
+    it("Should return 'Colony built!' if I have the proper amount of resources.", function() {
+        let game_manager = game.get_new_game_manager();
+        game_manager.charge_resources = true;
+        let name = "mocha", color = "brown", ip = "0.0.0.0";
+        game_manager.new_player(name, color, ip);
+        game_manager.players[ip].hand['wood'] = 1;
+        game_manager.players[ip].hand['brick'] = 1;
+        game_manager.players[ip].hand['wheat'] = 1;
+        game_manager.players[ip].hand['sheep'] = 1;
+        let position = 1;
+        let expected_num_colonies_left = 4;
+        let expected_score = 1;
+        let result = game_manager.place_colony(position, ip);
+        assert.equal(result.msg, `Colony built! You have ${expected_num_colonies_left} colonies left. Your score is now ${expected_score}!`);
+        assert.equal(result.data.position, position);
+        assert.equal(result.data.color, color);
+    });
+
+    it("Should return 'Colony built!' if game_manager.charge_resources is false.", function() {
+        let game_manager = game.get_new_game_manager();
+        let name = "mocha", color = "brown", ip = "0.0.0.0";
+        game_manager.new_player(name, color, ip);
+        let position = 1;
+        let expected_num_colonies_left = 4;
+        let expected_score = 1;
+        let result = game_manager.place_colony(position, ip);
+        assert.equal(result.msg, `Colony built! You have ${expected_num_colonies_left} colonies left. Your score is now ${expected_score}!`);
+        assert.equal(result.data.position, position);
+        assert.equal(result.data.color, color);
+    });
+
+    it("Should return 'You are out of colonies.' if the player has no more colonies.", function() {
+        let game_manager = game.get_new_game_manager();
+        game_manager.charge_resources = true;
+        let name = "mocha", color = "brown", ip = "0.0.0.0";
+        game_manager.new_player(name, color, ip);
+        game_manager.players[ip].hand['wood'] = 1;
+        game_manager.players[ip].hand['brick'] = 1;
+        game_manager.players[ip].hand['wheat'] = 1;
+        game_manager.players[ip].hand['sheep'] = 1;
+        game_manager.players[ip].colonies = 0;
+        let position = 1;
+        let result = game_manager.place_colony(position, ip);
+        assert.equal(result.msg, `You are out of colonies.`);
+    });
+
+    it("Should return 'Position out of range.' if the position is out of range.", function() {
+        let game_manager = game.get_new_game_manager();
+        game_manager.charge_resources = true;
+        let name = "mocha", color = "brown", ip = "0.0.0.0";
+        game_manager.new_player(name, color, ip);
+        game_manager.players[ip].hand['wood'] = 1;
+        game_manager.players[ip].hand['brick'] = 1;
+        game_manager.players[ip].hand['wheat'] = 1;
+        game_manager.players[ip].hand['sheep'] = 1;
+        let position = -1;
+        let result = game_manager.place_colony(position, ip);
+        assert.equal(result.msg, `Position out of range.`);
+    });
+
+    it("Should return 'A colony has already been built here.' if there is already a colony at this position.", function() {
+        let game_manager = game.get_new_game_manager();
+        game_manager.charge_resources = true;
+        let name = "mocha", color = "brown", ip = "0.0.0.0";
+        game_manager.new_player(name, color, ip);
+        game_manager.players[ip].hand['wood'] = 2;
+        game_manager.players[ip].hand['brick'] = 2;
+        game_manager.players[ip].hand['wheat'] = 2;
+        game_manager.players[ip].hand['sheep'] = 2;
+        let position = 1;
+        game_manager.place_colony(position, ip);
+        let result = game_manager.place_colony(position, ip);
+        assert.equal(result.msg, `A colony has already been built here.`);
+    });
+
+    it("Should return 'You do not have the resourecs to build a colony.' if the player does not have enough resources to build a colony.", function() {
+        let game_manager = game.get_new_game_manager();
+        game_manager.charge_resources = true;
+        let name = "mocha", color = "brown", ip = "0.0.0.0";
+        game_manager.new_player(name, color, ip);
+        let position = 1;
+        let result = game_manager.place_colony(position, ip);
+        assert.equal(result.msg, `You do not have the resources to build a colony.`);
+    });
+});

@@ -136,8 +136,6 @@ class GameManager {
      * @param {string} ip 
      */
     state_machine(event, ip) {
-        console.log("STATE_MACHINE(): state = " + this.state);
-        console.log(`STATE_MACHINE(): turn = Player ${this.turn}`);
         let permission = false;
         switch(this.state) {
             case "debug":
@@ -373,11 +371,14 @@ class GameManager {
         if(this.players[ip].roads === 0) {
             new_road.msg = "You are out of roads.";
         } 
+        else if (position < 1 || position > this.board.num_roads) {
+            new_road.msg = "Position out of range.";
+        }
         else if (this.board.roads[position - 1].owner !== 0) {
             new_road.msg = "A road has already been built here.";
         }
         else if (!this.has_resources(ip, "road")) {
-            new_road.msg = "You do not have the resources to build a road";
+            new_road.msg = "You do not have the resources to build a road.";
         }
         else {
             this.board.roads[position - 1].owner = this.players[ip].player_number;
@@ -398,6 +399,9 @@ class GameManager {
         let new_colony = {data: undefined, msg: ""};
         if(this.players[ip].colonies === 0) {
             new_colony.msg = "You are out of colonies.";
+        }
+        else if (position < 1 || position > this.board.num_colonies) {
+            new_colony.msg = "Position out of range.";
         } 
         else if (this.board.colonies[position - 1].owner !== 0) {
             new_colony.msg = "A colony has already been built here.";

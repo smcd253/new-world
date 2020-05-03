@@ -97,7 +97,8 @@ class Board  {
         
         // create an array of roads
         this.roads = []
-        for(let i = 0; i < 72; i++) {
+        this.num_roads = 72;
+        for(let i = 0; i < this.num_roads; i++) {
             this.roads.push({owner: 0, color: ""}); 
         }
         
@@ -107,6 +108,7 @@ class Board  {
          */
         // initialize colonies
         this.colonies = [];
+        this.num_colonies = 54;
         this.init_colonies();
 
         // variable to check if board has been generated (shuffled) yet
@@ -119,7 +121,7 @@ class Board  {
     init_colonies() {
         // create an array of colonies with boardering tiles
         this.colonies = []
-        for(let i = 0; i < 54; i++) {
+        for(let i = 0; i < this.num_colonies; i++) {
             this.colonies.push({owner: 0, color: ""});
             this.colonies[i].tiles = {};
             for(let j = 0; j < this.tiles.length; j++) {
