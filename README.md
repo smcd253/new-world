@@ -65,3 +65,11 @@ The game finishes when a player places a piece and their score crosses the "winn
 
 ## Demonstration
 [YouTube](https://www.youtube.com/watch?v=OT_Ji8IMt7c&feature=youtu.be)
+
+## Future Work
+* Make backend more efficient with asynchronous message handling, state machine calls, and client updates
+* Clean up front end with bootstrap4
+* Implement full game 
+* Create game lobby and messaging platform
+* Consult original game creators and then deploy to public
+* Implement redis on backend to be able to handle a large number of simultanous connections
