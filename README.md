@@ -28,9 +28,19 @@ Enter "localhost:5000" into your browser.
 ```bash
 npm install mocha
 sudo apt-get install mocha # for linux users
-
+```
+**Client-Server Communincation**
+```bash
 cd tests
-mocha mocha_test_server.js
+# in terminal 1
+node server.js
+# in terminal 2
+mocha test_server.js
+```
+**Game Manager Unit Tests**
+```bash
+cd tests
+mocha test_game_manager.js
 ```
 
 ## Client-Server Game Model
