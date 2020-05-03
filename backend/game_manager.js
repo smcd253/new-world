@@ -261,7 +261,7 @@ class GameManager {
     new_player(name, color, ip) {
         let result = {success: false, msg: "", bcast: ""};
         // if both name and color fields are populated with non-white spaces
-        if (/\S/.test(name) && /\S/.test(color)) {
+        if (/\S/.test(name) && /\S/.test(color) && /\S/.test(ip)) {
             // if it is a new player 
             if(!(ip in this.players)) {
                 // limit number of this.players to 4
@@ -271,6 +271,9 @@ class GameManager {
                     result.msg = `welcome ${this.players[ip].name}`;
                     result.bcast = `${this.players[ip].name} has joined the game.`;
                     this.update_turn_sequence();
+                }
+                else {
+                    result.msg = "Cannot create player. There are already 4 players in this game."
                 }
             }
             // else update player info
