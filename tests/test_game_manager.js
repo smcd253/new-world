@@ -1,6 +1,71 @@
 const assert = require('chai').assert;
 const game = require("../backend/game_manager.js");
 
+describe("game_manager.state_machine(event, ip)", function() {
+    // state = debug
+    it("Should return true when event = 'any' and state = 'debug'.", function() {
+        let game_manager = game.get_new_game_manager();
+        game_manager.state = "debug";
+        let result = game_manager.state_machine("any", "0.0.0.0");
+        assert.equal(result, true);
+    });
+
+    // state = setup
+    it("Should return true when event = 'shuffle' and state = 'setup'.", function() {
+        let game_manager = game.get_new_game_manager();
+        game_manager.state = "setup";
+        let result = game_manager.state_machine("shuffle", "0.0.0.0");
+        assert.equal(result, true);
+    });
+
+    it("Should return true when event = 'new player' and state = 'setup'.", function() {
+        let game_manager = game.get_new_game_manager();
+        game_manager.state = "setup";
+        let result = game_manager.state_machine("new player", "0.0.0.0");
+        assert.equal(result, true);
+    });
+
+    it("Should return true when event = 'start', state = 'setup', the board has been shuffled, \
+        and there are enough players registered.", function() {
+        let game_manager = game.get_new_game_manager();
+        game_manager.state = "setup";
+        game_manager.board.shuffle_board();
+        let name = "mocha", color = "brown", ip = "0.0.0.";
+        for(let i = 0; i < 4; i++) {
+            game_manager.new_player(name + i, color, ip + i);
+        }
+        let result = game_manager.state_machine("start", "0.0.0.0");
+        assert.equal(result, true);
+    });
+
+    it("Should iterate to the next state when event = 'start', state = 'setup', the board has been shuffled, \
+        and there are enough players registered.", function() {
+        let game_manager = game.get_new_game_manager();
+        game_manager.state = "setup";
+        game_manager.board.shuffle_board();
+        let name = "mocha", color = "brown", ip = "0.0.0.";
+        for(let i = 0; i < 4; i++) {
+            game_manager.new_player(name + i, color, ip + i);
+        }
+        game_manager.state_machine("start", "0.0.0.0");
+        assert.equal(game_manager.state, "placement");
+    });
+
+    // state = placement
+    it("Should not charge resources when state = 'placement'.", function() {
+        let game_manager = game.get_new_game_manager();
+        game_manager.state = "placement";
+        assert.equal(game_manager.charge_resources, false);
+    });
+
+    // state = game
+    it("Should not charge resources when state = 'placement'.", function() {
+        let game_manager = game.get_new_game_manager();
+        game_manager.state = "game";
+        assert.equal(game_manager.charge_resources, false);
+    });
+});
+
 describe("game_manager.new_player(name, color, ip)", function() {
     it("Should create a new player if proper inputs and few enough existing players.", function() {
         let game_manager = game.get_new_game_manager();

@@ -150,7 +150,6 @@ class GameManager {
                         permission = true;
                         break;
                     case 'start':
-                        console.log("STATE_MACHINE(): start game pressed");
                         // if we have between 2-4 players and board has been shuffled
                         if(Object.keys(this.players).length >= this.min_players &&
                             Object.keys(this.players).length <= this.max_players &&
