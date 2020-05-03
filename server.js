@@ -40,12 +40,17 @@ if (process.argv[2] === "debug") {
 // create room for active players to join (to receive player-specific messages)
 let game_room = "game_room";
 
-// WebSocket handlers (every time a connection is made)
+/**
+ * WebSocket handlers (every time a connection is made)
+ * @param {Object} socket
+ */
 io.on('connection', function(socket) {
   // get client ip
   let ip = socket.handshake.address;
   
-  // update clients with relevant information
+  /**
+   * update clients with relevant information
+   */
   function update_clients() {
     // update this client
     if(game_manager.board.is_shuffled){
@@ -83,7 +88,9 @@ io.on('connection', function(socket) {
     }
   }
 
-  // new client instance, check to see if they are already registered as a player
+  /**
+   * new client instance, check to see if they are already registered as a player
+   */
   socket.on('new client', function() {
     if(game_manager.state === "setup") {
       if(ip in game_manager.players) {
@@ -102,6 +109,12 @@ io.on('connection', function(socket) {
     update_clients();
   });
 
+  /**
+   * Create a new player if we are not already playing the game and there are
+   * less than 4 players already registered.
+   * @param {string} name
+   * @param {string} color
+   */
   socket.on('new player', function(name, color) {
     // state machine filter
     if(!game_manager.state_machine('new player', ip)){
@@ -127,7 +140,11 @@ io.on('connection', function(socket) {
     console.log(game_manager.players[ip])
   });
 
-  // if message is "shuffle"
+  /**
+   * instruct the clients to redraw their boards
+   * if the game state machine allows it and
+   * if the message comes from a valid player.
+   */
   socket.on('shuffle', function() {
     // state machine filter
     if(!game_manager.state_machine('shuffle', ip)){
@@ -145,7 +162,11 @@ io.on('connection', function(socket) {
     update_clients();
   });
 
-  // if message is "start"
+  /**
+   * move the game into the 'placement'
+   * state if the game state machine allows it and
+   * if the message comes from a valid player.
+   */
   socket.on('start', function() {
     // state machine filter
     if(!game_manager.state_machine('start', ip)){
@@ -162,6 +183,11 @@ io.on('connection', function(socket) {
     update_clients();
   });
 
+  /**
+   *  generate a new dice roll result
+   * if the game state machine allows it and
+   * if the message comes from a valid player.
+   */
   socket.on('roll dice', function() {
     // state machine filter
     if(!game_manager.state_machine('roll dice', ip)){
@@ -183,6 +209,11 @@ io.on('connection', function(socket) {
     update_clients();
   });
 
+  /**
+   * increment the turn number
+   * if the game state machine allows it and
+   * if the message comes from a valid player.
+   */
   socket.on('finish turn', function() {
     // state machine filter
     if(!game_manager.state_machine('finish turn', ip)){
@@ -210,7 +241,11 @@ io.on('connection', function(socket) {
     update_clients();
   });
 
-  // if message is "build road"
+  /**
+   * instruct the client to enable road building
+   * if the game state machine allows it and
+   * if the message comes from a valid player.
+   */
   socket.on('build road', function() {
     // state machine filter
     if(!game_manager.state_machine('build road', ip)){
@@ -229,7 +264,11 @@ io.on('connection', function(socket) {
     update_clients();
   });
 
-  // if message is "build colony"
+  /**
+   * instruct the client to enable colony building
+   * if the game state machine allows it and
+   * if the message comes from a valid player.
+   */
   socket.on('build colony', function() {
     // state machine filter
     if(!game_manager.state_machine('build colony', ip)){
@@ -248,7 +287,12 @@ io.on('connection', function(socket) {
     update_clients();
   });
 
-  // if message is "place road"
+  /**
+   * instruct all clients to draw a new road at 
+   * the given position and with this client's color
+   * if the message comes from a valid player.
+   * @param {Number} position
+   */
   socket.on('place road', function(position) {
     /**
      * NOTE: do not need state machine filter because we have already stopped this 
@@ -264,7 +308,12 @@ io.on('connection', function(socket) {
     update_clients();
   });
 
-  // if message is "place colony"
+  /**
+   * instruct all clients to draw a new colony at 
+   * the given position and with this client's color
+   * if the message comes from a valid player.
+   * @param {Number} position
+   */
   socket.on('place colony', function(position) {
     /**
      * NOTE: do not need state machine filter because we have already stopped this 
@@ -279,7 +328,12 @@ io.on('connection', function(socket) {
     update_clients();
   });
 
-  // if message is 'new game' (only for testing)
+  /**
+   * create a new game_manager object to refresh 
+   * the game for testing. 
+   * TODO: implement this with redraw functions to allow
+   * clients to replay after the game is over.
+   */
   socket.on('new game', function() {
     console.log("NEW GAME");
     game_manager = game.get_new_game_manager();
@@ -287,7 +341,9 @@ io.on('connection', function(socket) {
 
 });
 
-// send periodic instructions to players in game_room based on the state of the game
+/**
+ * send periodic instructions to players in game_room based on the state of the game
+ */
 let instruction_period = 5000; // every 5s
 let instruction_number = 0;
 setInterval(function() {
