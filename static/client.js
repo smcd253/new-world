@@ -87,8 +87,8 @@ async function print_message(msg) {
 }
 
 // debug print
-socket.on('debug', async function(data) {
-  console.log("------------------------- Server Debug Msg -------------------------")
+socket.on('server message', async function(data) {
+  console.log("------------------------- Message -------------------------")
   console.log(data);
   print_message(data);
 });
