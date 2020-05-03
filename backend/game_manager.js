@@ -3,6 +3,9 @@ const game_objects = require("./game_objects.js");
 
 // on object to run the game state machine and keep track of all game objects
 class GameManager {
+    /**
+     * GameManager constructor.
+     */
     constructor() {
         this.board = new game_objects.get_new_board();
         this.players = {}
