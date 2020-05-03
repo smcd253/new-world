@@ -70,7 +70,9 @@ class GameManager {
         }
     }
 
-    // function to update the sequence of turns for game and placement states
+    /**
+     * update the sequence of turns for game and placement states
+     */
     update_turn_sequence() {
         let game_turn_checkpoints = {has_rolled_dice: false};
         this.game_turns.push(game_turn_checkpoints);
@@ -78,7 +80,9 @@ class GameManager {
         this.placement_turns.push(placement_turn_checkpoints);
     }
 
-    // called to allow the placement turn sequence to move in reverse
+    /**
+     * allow the placement turn sequence to move in reverse
+     */
     refresh_turn_sequence() {
         for (let cp of this.placement_turns) {
             cp.has_placed_colony = false;
@@ -86,7 +90,10 @@ class GameManager {
         }
     }
 
-    // next turn
+    /**
+     * iterate the turn number based on turn type
+     * @param {string} type 
+     */
     next_turn(type) {
         switch(type){
             case "placement":
@@ -117,7 +124,14 @@ class GameManager {
     }
 
 
-    // state machine
+    /**
+     * The main game state machine.
+     * This function takes client action and ip
+     * to determine if the action is permissable based on the state.
+     * Moves to the next state if the conditions permit.
+     * @param {string} event 
+     * @param {string} ip 
+     */
     state_machine(event, ip) {
         console.log("STATE_MACHINE(): state = " + this.state);
         console.log(`STATE_MACHINE(): turn = Player ${this.turn}`);
@@ -183,7 +197,6 @@ class GameManager {
                         }
                         break;
                 }
-
                 break;
 
             case "game":
@@ -235,6 +248,13 @@ class GameManager {
     }
 
     // new player
+    /**
+     * Creates a new player or updates an existing player if the conditions permit. 
+     * Returns a result object indicating if player creation or update was successful.
+     * @param {string} name 
+     * @param {string} color 
+     * @param {string} ip 
+     */
     new_player(name, color, ip) {
         let result = {success: false, msg: "", bcast: ""};
         // if both name and color fields are populated with non-white spaces
@@ -266,12 +286,19 @@ class GameManager {
         return result;
     }
 
-    // check if player exists
+    /**
+     * Check if player from this ip is registered.
+     * @param {string} ip 
+     */
     validate_player(ip) {
         return (typeof this.players[ip] === "undefined")
     }
 
-    // check if this player has resources to build this item
+    /**
+     * check if this player has resources to build this item
+     * @param {string} ip 
+     * @param {string} structure 
+     */
     has_resources(ip, structure) {
         if(!this.charge_resources) {
             return true;
@@ -288,7 +315,11 @@ class GameManager {
         }
     }
 
-    // use resources to build this item
+    /**
+     * Subtract resources from player hand depending on the structure type.
+     * @param {string} ip 
+     * @param {string} structure 
+     */
     use_resources(ip, structure) {
         switch(structure) {
             case "road":
@@ -312,7 +343,11 @@ class GameManager {
         }
     }
 
-    // place new road based on position and user ip
+    /**
+     * Place new road based on position and user ip
+     * @param {Number} position 
+     * @param {string} ip 
+     */
     place_road(position, ip) {
         let new_road = {data: undefined, msg: ""};
         if(this.players[ip].roads === 0) {
@@ -334,7 +369,11 @@ class GameManager {
         return new_road;
     }
 
-    // place new colony based on position and user ip
+    /**
+     * Place new colony based on position and user ip
+     * @param {Number} position 
+     * @param {string} ip 
+     */
     place_colony(position, ip) {
         let new_colony = {data: undefined, msg: ""};
         if(this.players[ip].colonies === 0) {
@@ -359,15 +398,20 @@ class GameManager {
         return new_colony;
     }
 
-    // roll dice
+    /**
+     * Roll dice.
+     */
     roll_dice() {
         let min = 2;
         let max = 12;
         this.dice = Math.floor(Math.random() * (max - min + 1)) + min; ;
     }
 
-    // allocate resources
-    // TODO: make this better!
+    /**
+     * Allocate resources to each user boarding a tile with a number 
+     * matching the result of this dice roll.
+     * TODO: reduce complexity with active colonies dictionary.
+     */
     allocate_resources() {
         // loop through all colonies
         for(let i = 0; i < this.board.colonies.length; i++) {
@@ -396,6 +440,9 @@ class GameManager {
     }
 }
 
+/**
+ * Returns an instance of GameManager.
+ */
 exports.get_new_game_manager = function() {
     return new GameManager();
 }
