@@ -62,14 +62,10 @@ class GameManager {
             "The turn order will be as follows: Player 1 --> Player n, Player 1 --> Player n, etc...",
             `The game will finish when a player reaches ${this.winning_score} or more points.`
         ];
-        this.end_game_instructions = [
-            "The game has finished!"
-        ];
         this.player_instructions = {
             "setup": this.setup_instructions,
             "placement": this.placement_instructions,
             "game": this.game_instructions,
-            "end_game": this.game_instructions
         }
     }
 
@@ -245,20 +241,17 @@ class GameManager {
                         if(this.players[ip].score >= this.winning_score) {
                             // game --> end_game
                             this.state = this.game_states[this.state].next_state;
-                            console.log("STATE_MACHINE(): *************** time to end game! ***************");
                         }
                         break;
-                        case 'update client':
-                            permission = true;
-                            break;
                 }
                 break;
             
             case "end_game":
                 // TODO: make sure this allows you to show "game over" message
-                permission = true;
-                break;
-        }
+                case 'game over':
+                        permission = true;
+                        break;
+        }   
         return permission;
     }
 

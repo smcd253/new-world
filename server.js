@@ -86,6 +86,13 @@ io.on('connection', function(socket) {
         io.sockets.emit('update structure', structure);
       }
     }
+
+    // if this player has won the game, let everyone know!
+    if(game_manager.state_machine('game over', ip)){
+      if(typeof game_manager.players[ip] !== "undefined") {
+        io.to(socket.id).emit('server message all clients', `${game_manager.players[ip].name} wins!`);
+      }
+    }
   }
 
   /**
@@ -137,7 +144,7 @@ io.on('connection', function(socket) {
     update_clients();
 
     // DEBUG
-    console.log(game_manager.players[ip])
+    // console.log(game_manager.players[ip])
   });
 
   /**
@@ -344,7 +351,7 @@ io.on('connection', function(socket) {
    * clients to replay after the game is over.
    */
   socket.on('new game', function() {
-    console.log("NEW GAME");
+    console.log("FORCE NEW GAME");
     game_manager = game.get_new_game_manager();
   });
 
@@ -356,9 +363,12 @@ io.on('connection', function(socket) {
 let instruction_period = 5000; // every 5s
 let instruction_number = 0;
 setInterval(function() {
-  io.to(game_room).emit('game instructions', game_manager.player_instructions[game_manager.state][instruction_number]);
-  // update instruciton number (loop through instruction set)
-  if(instruction_number < game_manager.player_instructions[game_manager.state].length - 1) instruction_number++;
-  else instruction_number = 0;
+  // don't print on end game
+  if(game_manager.state !== "end_game") {
+    io.to(game_room).emit('game instructions', game_manager.player_instructions[game_manager.state][instruction_number]);
+    // update instruciton number (loop through instruction set)
+    if(instruction_number < game_manager.player_instructions[game_manager.state].length - 1) instruction_number++;
+    else instruction_number = 0;
+  }
 }, instruction_period);
 
