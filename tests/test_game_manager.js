@@ -392,3 +392,31 @@ describe("game_manager.place_colony(position, ip)", function() {
         assert.equal(result.msg, `You do not have the resources to build a colony.`);
     });
 });
+
+describe("game_manager.roll_dice()", function() {
+    it("Should produce a number between 2 and 12.", function() {
+        let game_manager = game.get_new_game_manager();
+        game_manager.roll_dice();
+        assert.isAtLeast(game_manager.dice, 1);
+        assert.isAtMost(game_manager.dice, 12);
+    });
+});
+
+describe("game_manager.allocate_resources()", function() {
+    it("Should give me resources if I have colonies all over the board.", function() {
+        let game_manager = game.get_new_game_manager();
+        game_manager.state = "debug";
+        let name = "mocha", color = "brown", ip = "0.0.0.0";
+        game_manager.new_player(name, color, ip);
+        game_manager.board.shuffle_board();
+        game_manager.players[ip].colonies = game_manager.board.num_colonies;
+        for (let i = 0; i < game_manager.board.num_colonies; i++) {
+            game_manager.place_colony(i + 1, ip);
+        }
+        game_manager.roll_dice();
+        game_manager.allocate_resources();
+        assert.isAtLeast(game_manager.players[ip].num_cards, 1);
+        // confirm we still have a score of 5 becase we have unloaded all of our colonies
+        assert.equal(game_manager.players[ip].score, 5);
+    });
+});
