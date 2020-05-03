@@ -258,6 +258,7 @@ io.on('connection', function(socket) {
       io.to(socket.id).emit('server message', "You must enter your player info before beginning the game.");
       return;
     }
+
     // send message to allow roads to appear on THIS player's screen
     // can only build road if they have the correct resources
     io.to(socket.id).emit('enable road building');
@@ -281,6 +282,7 @@ io.on('connection', function(socket) {
       io.to(socket.id).emit('server message', "You must enter your player info before beginning the game.");
       return;
     }
+
     // send message to allow roads to appear on THIS player's screen
     // can only build road if they have the correct resources
     io.to(socket.id).emit('enable colony building');
@@ -294,15 +296,18 @@ io.on('connection', function(socket) {
    * @param {Number} position
    */
   socket.on('place road', function(position) {
-    /**
-     * NOTE: do not need state machine filter because we have already stopped this 
-     * player from building if it is not appropriate to build in this state or turn
-     */
+    // state machine filter
+    if(!game_manager.state_machine('place road', ip)){
+      io.to(socket.id).emit('server message', "Action not allowed.");
+      return;
+    }
+
     // valid player filter
     if(game_manager.validate_player(ip)) {
       io.to(socket.id).emit('server message', "You must enter your player info before beginning the game.");
       return;
     }
+
     // place new road 
     io.sockets.emit('new road', game_manager.place_road(position, ip));
     update_clients();
@@ -315,14 +320,18 @@ io.on('connection', function(socket) {
    * @param {Number} position
    */
   socket.on('place colony', function(position) {
-    /**
-     * NOTE: do not need state machine filter because we have already stopped this 
-     * player from building if it is not appropriate to build in this state or turn
-     */
+    // state machine filter
+    if(!game_manager.state_machine('place colony', ip)){
+      io.to(socket.id).emit('server message', "Action not allowed.");
+      return;
+    }
+
+    // validate plauer filter
     if(game_manager.validate_player(ip)) {
       io.to(socket.id).emit('server message', "You must enter your player info before beginning the game.");
       return;
     }
+
     // place new colony 
     io.sockets.emit('new colony', game_manager.place_colony(position, ip));
     update_clients();

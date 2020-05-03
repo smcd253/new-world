@@ -227,3 +227,4 @@ describe("game_manager.use_resources(ip, structure)", function() {
         assert.equal(game_manager.players[ip].hand['sheep'], 0);
     });
 });
+

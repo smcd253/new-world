@@ -171,12 +171,26 @@ class GameManager {
                     case 'build road':
                         if(this.players[ip].player_number === this.turn) {
                             if(!this.placement_turns[this.turn - 1].has_placed_road) {
+                                permission = true;
+                            }
+                        }
+                        break;
+                    case 'place road':
+                        if(this.players[ip].player_number === this.turn) {
+                            if(!this.placement_turns[this.turn - 1].has_placed_road) {
                                 this.placement_turns[this.turn - 1].has_placed_road = true;
                                 permission = true;
                             }
                         }
                         break;
                     case 'build colony':
+                        if(this.players[ip].player_number === this.turn) {
+                            if(!this.placement_turns[this.turn - 1].has_placed_colony) {
+                                permission = true;
+                            }
+                        }
+                        break;
+                    case 'place colony':
                         if(this.players[ip].player_number === this.turn) {
                             if(!this.placement_turns[this.turn - 1].has_placed_colony) {
                                 this.placement_turns[this.turn - 1].has_placed_colony = true;
@@ -210,8 +224,10 @@ class GameManager {
                             permission = true;
                         }
                         break;
-                    case 'build road': // NOTE: both cases have same requirements --> fall-through
+                    case 'build road': // NOTE: all cases have same requirements --> fall-through
+                    case 'place road':
                     case 'build colony':
+                    case 'place colony':
                         if(this.players[ip].player_number === this.turn) {
                             if(this.game_turns[this.turn - 1].has_rolled_dice) {
                                 permission = true;
@@ -221,8 +237,7 @@ class GameManager {
                     case 'finish turn':
                         if(this.players[ip].player_number === this.turn) {
                             // if the player has placed pieces
-                            if(this.placement_turns[this.turn - 1].has_placed_colony &&
-                                this.placement_turns[this.turn - 1].has_placed_road) {
+                            if(this.game_turns[this.turn - 1].has_rolled_dice) {
                                     permission = true;
                                     this.next_turn("game");
                                 }
