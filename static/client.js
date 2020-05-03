@@ -6,13 +6,21 @@ let socket = io();
 socket.emit('new client');
 
 /********************** send server messages **************************/
+/**
+ * Checks if input is a valid css color/
+ * @param {string} color_string 
+ */
 function is_valid_color(color_string) {
     color_string = color_string.toLowerCase();
     let s = new Option().style;
     s.color = color_string;
     return (s.color == color_string);
 }
-// create or update player from player input fields
+
+/**
+ * create or update player from player input fields
+ * @param {KeyBoardEvent} event 
+ */
 function get_player_info(event) {
   let name, color;
   let valid_player_info = false;
@@ -66,7 +74,6 @@ async function build_road() {
 }
 
 // send server message 'build road' when client presses "Build Road"
-// nice
 async function build_colony() {
   socket.emit('build colony');
 }
@@ -81,19 +88,56 @@ async function place_colony(pos) {
   socket.emit('place colony', pos);
 }
 
-/********************** server messages **************************/
+/********************** handle server messages **************************/
+/**
+ * Print message to message board textbox.
+ * @param {string} msg 
+ */
 async function print_message(msg) {
   document.getElementsByClassName("msg_board")[0].textContent = msg;
 }
 
-// debug print
+/**
+ * Receive server message.
+ * @param {string} data 
+ */
 socket.on('server message', async function(data) {
-  console.log("------------------------- Message -------------------------")
+  console.log("------------------------- Server Message -------------------------")
   console.log(data);
   print_message(data);
 });
 
+/**
+ * Receive server message directed to all clients.
+ * @param {string} data 
+ */
+socket.on('server message all clients', async function(data) {
+  console.log("------------------------- Server Message All Clients-------------------------")
+  console.log(data);
+  print_message(data);
+});
+
+/**
+ * Receive server message directed to all clients except client who initiated the message.
+ * @param {string} data 
+ */
+socket.on('broadcast', async function(data) {
+  print_message(data);
+});
+
+/**
+ * Receive game instructions from server.
+ * @param {string} data 
+ */
+socket.on('game instructions', async function(data) {
+  print_message(data);
+});
+
 /********************** update player menu **************************/
+/**
+ * Updates player menu with all relevant player information.
+ * @param {Object} player
+ */
 socket.on('update player menu', async function(player) {
   // update name and color
   document.getElementsByClassName("player_info_name")[0].textContent = "Name: " + player.name;
@@ -114,7 +158,10 @@ socket.on('update player menu', async function(player) {
 
 /********************** update scoreboard **************************/
 // update scoreboard
-// TODO: include function to update player score and num cards with every move
+/**
+ * Updates scoreboard with all relevant player information for all players.
+ * @param {Object} players
+ */
 socket.on('update scoreboard', async function(players) {
   // get scoreboard data
   let scoreboard_names = document.getElementsByClassName("player_scoreboard_name");
@@ -135,20 +182,35 @@ socket.on('update scoreboard', async function(players) {
   }
 });
 
+/**
+ * Draws result of dice roll.
+ * @param {Number} dice
+ */
 socket.on('new dice roll', async function(dice) {
   document.getElementsByClassName("turn_info_dice")[0].textContent = "Dice Roll = " + dice;
 });
 
+/**
+ * Draws name of player whose turn it is.
+ * @param {string} player_name
+ */
 socket.on('next turn', async function(player_name) {
   document.getElementsByClassName("turn_info_turn")[0].textContent = player_name + "'s turn";
-})
-/********************** update board **************************/
+});
 
-// receive new state from server, draw new components
+/********************** update board **************************/
+/** 
+ * receive new state from server, draw new components
+ * @param {Object} new_board
+ */
 socket.on('update board', async function(new_board) {
   draw_new_board(new_board);
 });
 
+/**
+ * Assigns new pictures and numbers to board tiles.
+ * @param {Object} new_board 
+ */
 async function draw_new_board(new_board) {
   let tiles = document.getElementsByClassName("hex")
   console.log(tiles)
@@ -196,19 +258,29 @@ let z_indices = {
   "player": "100",  
 };
 
-// bring layer forward so we can interact with it
+/**
+ * bring layer forward so we can interact with it
+ * @param {string} element 
+ */
 async function bring_element_forward(element) {
   let container = document.getElementsByClassName(element)[0];
   container.style.zIndex = z_indices["front"];
 }
-// bring layer back
+
+/**
+ * bring layer back
+ * @param {string} element 
+ */
 async function bring_element_back(element) {
   let container = document.getElementsByClassName(element)[0];
   container.style.zIndex = z_indices[element];
 }
 
 /************************** Road Building ****************************/
-// turn road buttons visibility on or off
+/**
+ * turn road buttons visibility on or off
+ * @param {string} _visibility 
+ */
 async function toggle_road_buttons(_visibility) {
   let road_buttons = document.getElementsByClassName("road_button_click");
   for(let r of road_buttons) {
@@ -216,13 +288,18 @@ async function toggle_road_buttons(_visibility) {
   }
 }
 
-// receive enable road building, set all road buttons to visible
+/**
+ * receive enable road building, set all road buttons to visible
+ */
 socket.on('enable road building', async function() {
   bring_element_forward("road_buttons");
   toggle_road_buttons("visible");
 });
 
-// receive new state from server, draw new components
+/**
+ * receive new state from server, draw new components
+ * @param {Object} new_road
+ */
 socket.on('new road', async function(new_road) {
   bring_element_back("road_buttons");
   toggle_road_buttons("hidden");
@@ -233,6 +310,10 @@ socket.on('new road', async function(new_road) {
   print_message(new_road.msg);
 });
 
+/**
+ * Draws new road at desired position.
+ * @param {Object} new_road 
+ */
 async function draw_new_road(new_road) {
   // draw new road
   let roads_container = document.getElementsByClassName("roads")[0];
@@ -244,6 +325,10 @@ async function draw_new_road(new_road) {
   road_to_draw.style.visibility = "visible";
 }
 
+/**
+ * Reset road buttons if server instructs us the user is out of roads.
+ * @param {string} msg
+ */
 socket.on('out of roads', async function(msg) {
   bring_element_back("road_buttons");
   toggle_road_buttons("hidden");
@@ -251,7 +336,10 @@ socket.on('out of roads', async function(msg) {
 });
 
 /************************** Colony Building ****************************/
-// turn colony buttons visibility on or off
+/**
+ * turn colony buttons visibility on or off
+ * @param {string} _visibility 
+ */
 async function toggle_colony_buttons(_visibility) {
   let colony_buttons = document.getElementsByClassName("colony_button_click");
   for(let c of colony_buttons) {
@@ -259,13 +347,18 @@ async function toggle_colony_buttons(_visibility) {
   }
 }
 
-// receive enable colony building, set all road buttons to visible
+/**
+ * receive enable colony building, set all road buttons to visible
+ */
 socket.on('enable colony building', async function() {
   bring_element_forward("colony_buttons");
   toggle_colony_buttons("visible");
 });
 
-// receive new state from server, draw new components
+/**
+ * receive new state from server, draw new components
+ * @param {Object} new_colony
+ */
 socket.on('new colony', async function(new_colony) {
   bring_element_back("colony_buttons");
   toggle_colony_buttons("hidden");
@@ -277,7 +370,10 @@ socket.on('new colony', async function(new_colony) {
   print_message(new_colony.msg);
 });
 
-  // draw new colony
+/**
+ * Draw new colony at the desired position.
+ * @param {Object} new_colony 
+ */
 async function draw_new_colony(new_colony) {
   let colonies_container = document.getElementsByClassName("colonies")[0];
   let colonies = colonies_container.querySelectorAll('*[id]:not([id=""])');
@@ -287,6 +383,10 @@ async function draw_new_colony(new_colony) {
   colony_to_draw.style.visibility = "visible";
 }
 
+/**
+ * Reset colonies buttons if server instructs us the user is out of colonies.
+ * @param {string} msg
+ */
 socket.on('out of colonies', function(msg) {
   bring_element_back("colony_buttons");
   toggle_colony_buttons("hidden");
@@ -295,7 +395,10 @@ socket.on('out of colonies', function(msg) {
 
 
 /************************** Update Structures ****************************/
-// case: client out of sync, receive update to update resources
+/**
+ * Redraw this structure.
+ * @param {Object} structure
+ */
 socket.on('update structure', async function(structure) {
   console.log("UPDATE_STRUCTURE(): CALLED");
   if(typeof structure !== "undefined"){

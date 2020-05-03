@@ -10,7 +10,7 @@ const io = socketIO(server);
 const port = 5000
 
 // game dependencies 
-const game = require("./game_manager.js");
+const game = require("./backend/game_manager.js");
 
 app.set('port', port);
 
@@ -20,7 +20,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 // Main Page
 app.get('/', function(request, response) {
-    response.sendFile(path.join(__dirname, 'index.html'));
+    response.sendFile(path.join(__dirname, '/public/index.html'));
   });
 
 
@@ -85,7 +85,7 @@ io.on('connection', function(socket) {
 
   // new client instance, check to see if they are already registered as a player
   socket.on('new client', function() {
-    if(game_manager.state !== "setup") {
+    if(game_manager.state === "setup") {
       if(ip in game_manager.players) {
         // welcome player back
         io.to(socket.id).emit('server message', `welcome back ${game_manager.players[ip].name}`)
@@ -97,7 +97,7 @@ io.on('connection', function(socket) {
       }
     }
     else {
-      io.to(socket.id).emit('server message', `Please enter your name and color to join the game.`)
+      io.to(socket.id).emit('server message', `Game already in progress. You are welcome to stay as a spectator.`)
     }  
     update_clients();
   });
@@ -120,7 +120,7 @@ io.on('connection', function(socket) {
     }
     
     io.to(socket.id).emit('server message', result.msg);
-    if(result.bcast !== "") socket.broadcast.emit('server message', result.bcast);
+    if(result.bcast !== "") socket.broadcast.emit('broadcast', result.bcast);
     update_clients();
 
     // DEBUG
@@ -131,7 +131,7 @@ io.on('connection', function(socket) {
   socket.on('shuffle', function() {
     // state machine filter
     if(!game_manager.state_machine('shuffle', ip)){
-      io.to(socket.id).emit('server message', "Action not allowed");
+      io.to(socket.id).emit('server message', "Action not allowed.");
       return;
     }
     
@@ -158,6 +158,7 @@ io.on('connection', function(socket) {
       io.to(socket.id).emit('server message', "You must enter your player info before beginning the game.");
       return;
     }
+    io.sockets.emit('server message all clients', "The game has begun!");
     update_clients();
   });
 
@@ -196,7 +197,7 @@ io.on('connection', function(socket) {
     }
 
     // inform all clients that this player has finished their turn
-    io.sockets.emit('server message', `${game_manager.players[ip].name} has finished their turn.`);
+    io.sockets.emit('server message all clients', `${game_manager.players[ip].name} has finished their turn.`);
     
     // instruct clients to redraw scoreboard with new turn player
     for(let p_ip in game_manager.players) {
@@ -278,13 +279,19 @@ io.on('connection', function(socket) {
     update_clients();
   });
 
+  // if message is 'new game' (only for testing)
+  socket.on('new game', function() {
+    console.log("NEW GAME");
+    game_manager = game.get_new_game_manager();
+  });
+
 });
 
 // send periodic instructions to players in game_room based on the state of the game
 let instruction_period = 5000; // every 5s
 let instruction_number = 0;
 setInterval(function() {
-  io.to(game_room).emit('server message', game_manager.player_instructions[game_manager.state][instruction_number]);
+  io.to(game_room).emit('game instructions', game_manager.player_instructions[game_manager.state][instruction_number]);
   // update instruciton number (loop through instruction set)
   if(instruction_number < game_manager.player_instructions[game_manager.state].length - 1) instruction_number++;
   else instruction_number = 0;
