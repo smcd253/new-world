@@ -52,3 +52,47 @@ describe("game_manager.new_player(name, color, ip)", function() {
         assert.equal(result.bcast, "");
     });
 });
+
+describe("game_manager.has_resources(ip, structure)", function() {
+    it("Should return true if this player has enough resources to build a road.", function() {
+        let game_manager = game.get_new_game_manager();
+        game_manager.charge_resources = true;
+        let name = "mocha", color = "brown", ip = "0.0.0.0";
+        game_manager.new_player(name, color, ip);
+        game_manager.players[ip].hand['wood'] = 1;
+        game_manager.players[ip].hand['brick'] = 1;
+        let result = game_manager.has_resources(ip, "road");
+        assert.equal(result, true);
+    });
+
+    it("Should return true if this player DOES NOT have enough resources to build a road.", function() {
+        let game_manager = game.get_new_game_manager();
+        game_manager.charge_resources = true;
+        let name = "mocha", color = "brown", ip = "0.0.0.0";
+        game_manager.new_player(name, color, ip);
+        let result = game_manager.has_resources(ip, "road");
+        assert.equal(result, false);
+    });
+
+    it("Should return true if this player has enough resources to build a colony.", function() {
+        let game_manager = game.get_new_game_manager();
+        game_manager.charge_resources = true;
+        let name = "mocha", color = "brown", ip = "0.0.0.0";
+        game_manager.new_player(name, color, ip);
+        game_manager.players[ip].hand['wood'] = 1;
+        game_manager.players[ip].hand['brick'] = 1;
+        game_manager.players[ip].hand['wheat'] = 1;
+        game_manager.players[ip].hand['sheep'] = 1;
+        let result = game_manager.has_resources(ip, "colony");
+        assert.equal(result, true);
+    });
+    
+    it("Should return true if this player DOES NOT have enough resources to build a road.", function() {
+        let game_manager = game.get_new_game_manager();
+        game_manager.charge_resources = true;
+        let name = "mocha", color = "brown", ip = "0.0.0.0";
+        game_manager.new_player(name, color, ip);
+        let result = game_manager.has_resources(ip, "colony");
+        assert.equal(result, false);
+    });
+});
