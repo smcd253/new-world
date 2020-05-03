@@ -60,3 +60,6 @@ Once the setup phase is over, the state machine moves into the game state where 
 The second phase of each turn allows the player whose turn it is to place pieces if they have the proper resources. This phase matches the "board setup" state described earlier except now each player is charged resources for placing a piece.
 ![*Figure 6*](info/diagram6.png) <br>
 The game finishes when a player places a piece and their score crosses the "winning_score" threshold. This forcees the game to enter into the "end_game" state where no more modifications can be made.
+
+## Demonstration
+[YouTube](https://www.youtube.com/watch?v=OT_Ji8IMt7c&feature=youtu.be)
