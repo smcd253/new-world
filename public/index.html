@@ -1,0 +1,1331 @@
+<!-- src: https://github.com/web-tiki/responsive-grid-of-hexagons/blob/master/index.html -->
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="/socket.io/socket.io.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="./styles/player.css">
+    <link rel="stylesheet" type="text/css" href="./styles/scoreboard.css">
+    <link rel="stylesheet" type="text/css" href="./styles/board.css">
+    <link rel="stylesheet" type="text/css" href="./styles/colonies.css">
+    <link rel="stylesheet" type="text/css" href="./styles/roads.css">
+    <link rel="stylesheet" type="text/css" href="./styles/road_buttons.css">
+    <link rel="stylesheet" type="text/css" href="./styles/colony_buttons.css">
+    <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Raleway:300'>
+  </head>
+  <body>
+    <script src="/static/client.js"></script>
+    <button class="main_button" id="shuffle_board" onclick="shuffle_board()">Shuffle Board</button>
+    <button class="main_button" id="start_game" onclick="start_game()">Start Game</button>
+    <div class="msg_board"></div>
+    <div class="player_menu" id="player_window">
+      <div class="box player_info">
+        <div class="box player_info_name">Name</div>
+        <div class="box player_info_name_field">
+          <form action="#" onkeypress="get_player_info(event)">
+            <input type="text" class="player_text_field" id="player_name" value=""/>
+          </form>
+        </div>
+        <div class="box player_info_color">Color</div>
+        <div class="box player_info_color_field">
+          <form action="#" onkeypress="get_player_info(event)">
+            <input type="text" class="player_text_field" id="player_color" value=""/>
+          </form>
+        </div>
+        <button class="box player_info_submit" onclick="get_player_info()">Submit</button>
+      </div>
+      <div class="box player_hand">
+        <div class="box player_hand_title">Your Hand</div>
+        <div class="box player_hand_wood">Wood: </div>
+        <div class="box player_hand_brick">Brick: </div>
+        <div class="box player_hand_wheat">Wheat: </div>
+        <div class="box player_hand_sheep">Sheep: </div>
+        <div class="box player_hand_ore">Ore: </div>
+        <div class="box player_roads">Roads: </div>
+        <div class="box player_colonies">Colonies: </div>
+        <div class="box player_cities">Cities: </div>
+      </div>
+      <div class="box game_controls">
+        <button class="box gc_build_road" onclick="build_road()">Build Road</button>
+        <button class="box gc_build_colony" onclick="build_colony()">Build Colony</button>
+        <button class="box gc_roll_dice" onclick="roll_dice()">Roll Dice</button>
+        <button class="box gc_finish_turn" onclick="finish_turn()">Finish Turn</button>
+      </div>
+    </div>
+    <div class="scoreboard_menu" id="scoreboard_window">
+      <div class="box player1">
+        <div class="box player_scoreboard_name"></div>
+        <div class="box player_scoreboard_color"></div>
+        <div class="box player_scoreboard_num_cards"></div>
+        <div class="box player_scoreboard_score"></div>
+      </div>
+      <div class="box player2">
+        <div class="box player_scoreboard_name"></div>
+        <div class="box player_scoreboard_color"></div>
+        <div class="box player_scoreboard_num_cards"></div>
+        <div class="box player_scoreboard_score"></div>
+      </div>
+      <div class="box player3">
+        <div class="box player_scoreboard_name"></div>
+        <div class="box player_scoreboard_color"></div>
+        <div class="box player_scoreboard_num_cards"></div>
+        <div class="box player_scoreboard_score"></div>
+      </div>
+      <div class="box player4">
+        <div class="box player_scoreboard_name"></div>
+        <div class="box player_scoreboard_color"></div>
+        <div class="box player_scoreboard_num_cards"></div>
+        <div class="box player_scoreboard_score"></div>
+      </div>
+      <div class="box turn_info">
+        <div class="box turn_info_turn"></div>
+        <div class="box turn_info_dice"></div>
+      </div>
+    </div>
+    <div class="colony_buttons">
+      <ul id="colony_buttonGrid">
+        <li class="colony_button" style="z-index: 19;">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_a">
+              <button class="colony_button_click" onclick="place_colony(1)"></button>
+            </rd_b>
+            <rd_b class="colony_button_b">
+              <button class="colony_button_click" onclick="place_colony(2)"></button>
+            </rd_b>
+            <rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(3)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(4)"></button>
+            </rd_b>
+            <rd_b class="colony_button_e">
+              <button class="colony_button_click" onclick="place_colony(5)"></button>
+            </rd_b>
+            <rd_b class="colony_button_f">
+              <button class="colony_button_click" onclick="place_colony(6)"></button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="colony_button" style="z-index: 18;">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_a">
+              <button class="colony_button_click" onclick="place_colony(7)"></button>
+            </rd_b>
+            <rd_b class="colony_button_b">
+              <button class="colony_button_click" onclick="place_colony(8)"></button>
+            </rd_b>
+            <rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(9)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(10)"></button>
+            </rd_b>
+            
+          </div>
+        </li>
+        <li class="colony_button" style="z-index: 17;">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_a">
+              <button class="colony_button_click" onclick="place_colony(11)"></button>
+            </rd_b>
+            <rd_b class="colony_button_b">
+              <button class="colony_button_click" onclick="place_colony(12)"></button>
+            </rd_b>
+            <rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(13)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(14)"></button>
+            </rd_b>
+            
+          </div>
+        </li>
+        <li class="colony_button" style="z-index: 16;">
+          <div class="colony_buttonRhombus">
+            
+            <rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(15)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(16)"></button>
+            </rd_b>
+            <rd_b class="colony_button_e">
+              <button class="colony_button_click" onclick="place_colony(17)"></button>
+            </rd_b>
+            <rd_b class="colony_button_f">
+              <button class="colony_button_click" onclick="place_colony(18)"></button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="colony_button" style="z-index: 15;">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(19)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(20)"></button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="colony_button" style="z-index: 14;">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(21)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(22)"></button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="colony_button" style="z-index: 13;">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_b">
+            <button class="colony_button_click" onclick="place_colony(23)"></button>
+          </rd_b><rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(24)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(25)"></button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="colony_button" style="z-index: 12;">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(26)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(27)"></button>
+            </rd_b>
+            <rd_b class="colony_button_e">
+              <button class="colony_button_click" onclick="place_colony(28)"></button>
+            </rd_b>
+            <rd_b class="colony_button_f">
+              <button class="colony_button_click" onclick="place_colony(29)"></button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="colony_button" style="z-index: 11;">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(30)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(31)"></button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="colony_button" style="z-index: 10;">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(32)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(33)"></button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="colony_button" style="z-index: 9;">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(34)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(35)"></button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="colony_button" style="z-index: 8;">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_b">
+              <button class="colony_button_click" onclick="place_colony(36)"></button>
+            </rd_b>
+            <rd_b class="colony_button_c">
+                <button class="colony_button_click" onclick="place_colony(37)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(38)"></button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="colony_button" style="z-index: 7;">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(39)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(40)"></button>
+            </rd_b>
+            <rd_b class="colony_button_e">
+              <button class="colony_button_click" onclick="place_colony(41)"></button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="colony_button" style="z-index: 6;">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(42)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(43)"></button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="colony_button" style="z-index: 5;">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(44)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(45)"></button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="colony_button" style="z-index: 4;">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(46)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(47)"></button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="colony_button" style="z-index: 3;">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(48)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(49)"></button>
+            </rd_b>
+            <rd_b class="colony_button_e">
+                <button class="colony_button_click" onclick="place_colony(50)"></button>
+            </rd_b></div>
+        </li>
+        <li class="colony_button" style="z-index: 2;">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(51)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(52)"></button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="colony_button" style="z-index: 1;">
+          <div class="colony_buttonRhombus">
+            <rd_b class="colony_button_c">
+              <button class="colony_button_click" onclick="place_colony(53)"></button>
+            </rd_b>
+            <rd_b class="colony_button_d">
+              <button class="colony_button_click" onclick="place_colony(54)"></button>
+            </rd_b>
+          </div>
+        </li></ul>
+    </div>
+    <div class="colonies">
+      <ul id="colonyGrid">
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_a" id="colony1">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_b" id="colony2">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_c" id="colony3">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony4">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_e" id="colony5">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_f" id="colony6">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_a" id="colony7">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_b" id="colony8">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_c" id="colony9">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony10">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_a" id="colony11">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_b" id="colony12">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_c" id="colony13">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony14">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_c" id="colony15">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony16">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_e" id="colony17">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_f" id="colony18">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_c" id="colony19">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony20">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_c" id="colony21">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony22">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_b" id="colony23">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_c" id="colony24">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony25">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_c" id="colony26">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony27">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_e" id="colony28">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_f" id="colony29">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_c" id="colony30">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony31">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_c" id="colony32">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony33">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_c" id="colony34">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony35">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_b" id="colony36">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_c" id="colony37">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony38">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_c" id="colony39">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony40">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_e" id="colony41">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_c" id="colony42">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony43">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_c" id="colony44">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony45">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_c" id="colony46">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony47">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_c" id="colony48">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony49">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_e" id="colony50">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_c" id="colony51">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony52">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+        <li class="colony">
+          <div class="colonyRhombus">
+            <a class="colonyRectangle" href="#">
+              <c class="colony_c" id="colony53">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+              <c class="colony_d" id="colony54">
+                <div class="roofR"></div>
+                <div class="roofL"></div>
+              </c>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="road_buttons">
+      <ul id="road_buttonGrid">
+        <li class="road_button" style="z-index: 19;">
+          <div class="road_buttonRhombus">
+            <rd_b class="road_button_top_right">
+              <button class="road_button_click" onclick="place_road(1)"></button>
+            </rd_b>
+            <rd_b class="road_button_right">
+              <button class="road_button_click" onclick="place_road(2)"></button>
+            </rd_b>
+            <rd_b class="road_button_bottom_right">
+              <button class="road_button_click" onclick="place_road(3)"></button>
+            </rd_b>
+            <rd_b class="road_button_bottom_left">
+              <button class="road_button_click" onclick="place_road(4)"></button>
+            </rd_b>
+            <rd_b class="road_button_left">
+              <button class="road_button_click" onclick="place_road(5)"></button>
+            </rd_b>
+            <rd_b class="road_button_top_left">
+              <button class="road_button_click" onclick="place_road(6)"></button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="road_button" style="z-index: 18;">
+          <div class="road_buttonRhombus">
+            <rd_b class="road_button_top_right">
+              <button class="road_button_click" onclick="place_road(7)"></button>
+            </rd_b>
+            <rd_b class="road_button_right">
+              <button class="road_button_click" onclick="place_road(8)"></button>
+            </rd_b>
+            <rd_b class="road_button_bottom_right">
+              <button class="road_button_click" onclick="place_road(9)"></button>
+            </rd_b>
+            <rd_b class="road_button_bottom_left">
+              <button class="road_button_click" onclick="place_road(10)"></button>
+            </rd_b>
+            <rd_b class="road_button_top_left">
+              <button class="road_button_click" onclick="place_road(11)"></button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="road_button" style="z-index: 17;">
+          <div class="road_buttonRhombus">
+            <rd_b class="road_button_top_right">
+              <button class="road_button_click" onclick="place_road(12)"></button>
+            </rd_b>
+            <rd_b class="road_button_right">
+              <button class="road_button_click" onclick="place_road(13)"></button>
+            </rd_b>
+            <rd_b class="road_button_bottom_right">
+              <button class="road_button_click" onclick="place_road(14)"></button>
+            </rd_b>
+            <rd_b class="road_button_bottom_left">
+              <button class="road_button_click" onclick="place_road(15)"></button>
+            </rd_b>
+            <rd_b class="road_button_top_left">
+              <button class="road_button_click" onclick="place_road(16)"></button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="road_button" style="z-index: 16;">
+          <div class="road_buttonRhombus">
+            <rd_b class="road_button_right">
+              <button class="road_button_click" onclick="place_road(17)"></button>
+            </rd_b>
+            <rd_b class="road_button_bottom_right">
+              <button class="road_button_click" onclick="place_road(18)"></button>
+            </rd_b>
+            <rd_b class="road_button_bottom_left">
+              <button class="road_button_click" onclick="place_road(19)"></button>
+            </rd_b>
+            <rd_b class="road_button_left">
+              <button class="road_button_click" onclick="place_road(20)"></button>
+            </rd_b>
+            <rd_b class="road_button_top_left">
+              <button class="road_button_click" onclick="place_road(21)"></button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="road_button" style="z-index: 15;">
+          <div class="road_buttonRhombus">
+            <rd_b class="road_button_right">
+              <button class="road_button_click" onclick="place_road(22)"></button>
+            </rd_b>
+            <rd_b class="road_button_bottom_right">
+              <button class="road_button_click" onclick="place_road(23)"></button>
+            </rd_b>
+            <rd_b class="road_button_bottom_left">
+              <button class="road_button_click" onclick="place_road(24)"></button>
+            </rd_b>
+          </div>
+        </li>
+        <li class="road_button" style="z-index: 14;">
+          <div class="road_buttonRhombus"><rd_b class="road_button_right">
+                <button class="road_button_click" onclick="place_road(25)"></button>
+              </rd_b>
+              <rd_b class="road_button_bottom_right">
+                <button class="road_button_click" onclick="place_road(26)"></button>
+              </rd_b>
+              <rd_b class="road_button_bottom_left">
+                <button class="road_button_click" onclick="place_road(27)"></button>
+              </rd_b>
+          </div>
+        </li>
+        <li class="road_button" style="z-index: 13;">
+          <div class="road_buttonRhombus"><rd_b class="road_button_top_right">
+                <button class="road_button_click" onclick="place_road(28)"></button>
+              </rd_b>
+              <rd_b class="road_button_right">
+                <button class="road_button_click" onclick="place_road(29)"></button>
+              </rd_b>
+              <rd_b class="road_button_bottom_right">
+                <button class="road_button_click" onclick="place_road(30)"></button>
+              </rd_b>
+              <rd_b class="road_button_bottom_left">
+                <button class="road_button_click" onclick="place_road(31)"></button>
+              </rd_b>
+          </div>
+        </li>
+        <li class="road_button" style="z-index: 12;">
+          <div class="road_buttonRhombus"><rd_b class="road_button_right">
+                <button class="road_button_click" onclick="place_road(32)"></button>
+              </rd_b>
+              <rd_b class="road_button_bottom_right">
+                <button class="road_button_click" onclick="place_road(33)"></button>
+              </rd_b>
+              <rd_b class="road_button_bottom_left">
+                <button class="road_button_click" onclick="place_road(34)"></button>
+              </rd_b>
+              <rd_b class="road_button_left">
+                <button class="road_button_click" onclick="place_road(35)"></button>
+              </rd_b>
+              <rd_b class="road_button_top_left">
+                <button class="road_button_click" onclick="place_road(36)"></button>
+              </rd_b>
+          </div>
+        </li>
+        <li class="road_button" style="z-index: 11;">
+          <div class="road_buttonRhombus"><rd_b class="road_button_right">
+                <button class="road_button_click" onclick="place_road(37)"></button>
+              </rd_b>
+              <rd_b class="road_button_bottom_right">
+                <button class="road_button_click" onclick="place_road(38)"></button>
+              </rd_b>
+              <rd_b class="road_button_bottom_left">
+                <button class="road_button_click" onclick="place_road(39)"></button>
+              </rd_b>
+          </div>
+        </li>
+        <li class="road_button" style="z-index: 10;">
+          <div class="road_buttonRhombus"><rd_b class="road_button_right">
+                <button class="road_button_click" onclick="place_road(40)"></button>
+              </rd_b>
+              <rd_b class="road_button_bottom_right">
+                <button class="road_button_click" onclick="place_road(41)"></button>
+              </rd_b>
+              <rd_b class="road_button_bottom_left">
+                <button class="road_button_click" onclick="place_road(42)"></button>
+              </rd_b>
+          </div>
+        </li>
+        <li class="road_button" style="z-index: 9;">
+          <div class="road_buttonRhombus"><rd_b class="road_button_right">
+                <button class="road_button_click" onclick="place_road(43)"></button>
+              </rd_b>
+              <rd_b class="road_button_bottom_right">
+                <button class="road_button_click" onclick="place_road(44)"></button>
+              </rd_b>
+              <rd_b class="road_button_bottom_left">
+                <button class="road_button_click" onclick="place_road(45)"></button>
+              </rd_b>
+          </div>
+        </li>
+        <li class="road_button" style="z-index: 8;">
+          <div class="road_buttonRhombus"><rd_b class="road_button_top_right">
+                <button class="road_button_click" onclick="place_road(46)"></button>
+              </rd_b>
+              <rd_b class="road_button_right">
+                <button class="road_button_click" onclick="place_road(47)"></button>
+              </rd_b>
+              <rd_b class="road_button_bottom_right">
+                <button class="road_button_click" onclick="place_road(48)"></button>
+              </rd_b>
+              <rd_b class="road_button_bottom_left">
+                <button class="road_button_click" onclick="place_road(49)"></button>
+              </rd_b>
+          </div>
+        </li>
+        <li class="road_button" style="z-index: 7;">
+          <div class="road_buttonRhombus"><rd_b class="road_button_right">
+                <button class="road_button_click" onclick="place_road(50)"></button>
+              </rd_b>
+              <rd_b class="road_button_bottom_right">
+                <button class="road_button_click" onclick="place_road(51)"></button>
+              </rd_b>
+              <rd_b class="road_button_bottom_left">
+                <button class="road_button_click" onclick="place_road(52)"></button>
+              </rd_b>
+              <rd_b class="road_button_left">
+                <button class="road_button_click" onclick="place_road(53)"></button>
+              </rd_b>
+          </div>
+        </li>
+        <li class="road_button" style="z-index: 6;">
+          <div class="road_buttonRhombus"><rd_b class="road_button_right">
+                <button class="road_button_click" onclick="place_road(54)"></button>
+              </rd_b>
+              <rd_b class="road_button_bottom_right">
+                <button class="road_button_click" onclick="place_road(55)"></button>
+              </rd_b>
+              <rd_b class="road_button_bottom_left">
+                <button class="road_button_click" onclick="place_road(56)"></button>
+              </rd_b>
+          </div>
+        </li>
+        <li class="road_button" style="z-index: 5;">
+          <div class="road_buttonRhombus"><rd_b class="road_button_right">
+                <button class="road_button_click" onclick="place_road(57)"></button>
+              </rd_b>
+              <rd_b class="road_button_bottom_right">
+                <button class="road_button_click" onclick="place_road(58)"></button>
+              </rd_b>
+              <rd_b class="road_button_bottom_left">
+                <button class="road_button_click" onclick="place_road(59)"></button>
+              </rd_b>
+          </div>
+        </li>
+        <li class="road_button" style="z-index: 4;">
+          <div class="road_buttonRhombus"><rd_b class="road_button_right">
+                <button class="road_button_click" onclick="place_road(60)"></button>
+              </rd_b>
+              <rd_b class="road_button_bottom_right">
+                <button class="road_button_click" onclick="place_road(61)"></button>
+              </rd_b>
+              <rd_b class="road_button_bottom_left">
+                <button class="road_button_click" onclick="place_road(62)"></button>
+              </rd_b>
+          </div>
+        </li>
+        <li class="road_button" style="z-index: 3;">
+          <div class="road_buttonRhombus"><rd_b class="road_button_right">
+                <button class="road_button_click" onclick="place_road(63)"></button>
+              </rd_b>
+              <rd_b class="road_button_bottom_right">
+                <button class="road_button_click" onclick="place_road(64)"></button>
+              </rd_b>
+              <rd_b class="road_button_bottom_left">
+                <button class="road_button_click" onclick="place_road(65)"></button>
+              </rd_b>
+              <rd_b class="road_button_left">
+                <button class="road_button_click" onclick="place_road(66)"></button>
+              </rd_b>
+          </div>
+        </li>
+        <li class="road_button" style="z-index: 2;">
+          <div class="road_buttonRhombus"><rd_b class="road_button_right">
+                <button class="road_button_click" onclick="place_road(67)"></button>
+              </rd_b>
+              <rd_b class="road_button_bottom_right">
+                <button class="road_button_click" onclick="place_road(68)"></button>
+              </rd_b>
+              <rd_b class="road_button_bottom_left">
+                <button class="road_button_click" onclick="place_road(69)"></button>
+              </rd_b>
+          </div>
+        </li>
+        <li class="road_button" style="z-index: 1;">
+          <div class="road_buttonRhombus"><rd_b class="road_button_right">
+                <button class="road_button_click" onclick="place_road(70)"></button>
+              </rd_b>
+              <rd_b class="road_button_bottom_right">
+                <button class="road_button_click" onclick="place_road(71)"></button>
+              </rd_b>
+              <rd_b class="road_button_bottom_left">
+                <button class="road_button_click" onclick="place_road(72)"></button>
+              </rd_b>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="roads">
+      <ul id="roadGrid"> 
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_top_right" id="road1"></rd>
+              <rd class="road_right"  id="road2"></rd>
+              <rd class="road_bottom_right" id="road3"></rd>
+              <rd class="road_bottom_left" id="road4"></rd>
+              <rd class="road_left" id="road5"></rd>
+              <rd class="road_top_left" id="road6"></rd>
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_top_right" id="road7"></rd>
+              <rd class="road_right" id="road8"></rd>
+              <rd class="road_bottom_right" id="road9"></rd>
+              <rd class="road_bottom_left" id="road10"></rd>
+              <rd class="road_top_left"  id="road11"></rd>
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_top_right" id="road12"></rd>
+              <rd class="road_right" id="road13"></rd>
+              <rd class="road_bottom_right" id="road14"></rd>
+              <rd class="road_bottom_left" id="road15"></rd>
+              <rd class="road_top_left"  id="road16"></rd>
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_right" id="road17"></rd>
+              <rd class="road_bottom_right" id="road18"></rd>
+              <rd class="road_bottom_left" id="road19"></rd>
+              <rd class="road_left" id="road20"></rd>
+              <rd class="road_top_left" id="road21"></rd>
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_right" id="road22"></rd>
+              <rd class="road_bottom_right" id="road23"></rd>
+              <rd class="road_bottom_left" id="road24"></rd>
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_right" id="road25"></rd>
+              <rd class="road_bottom_right" id="road26"></rd>
+              <rd class="road_bottom_left" id="road27"></rd>
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_top_right" id="road28"></rd>
+              <rd class="road_right" id="road29"></rd>
+              <rd class="road_bottom_right" id="road30"></rd>
+              <rd class="road_bottom_left" id="road31"></rd>
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_right" id="road32"></rd>
+              <rd class="road_bottom_right" id="road33"></rd>
+              <rd class="road_bottom_left" id="road34"></rd>
+              <rd class="road_left" id="road35"></rd>
+              <rd class="road_top_left" id="road36"></rd>
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_right" id="road37"></rd>
+              <rd class="road_bottom_right" id="road38"></rd>
+              <rd class="road_bottom_left" id="road39"></rd>
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_right" id="road40"></rd>
+              <rd class="road_bottom_right" id="road41"></rd>
+              <rd class="road_bottom_left" id="road42"></rd>
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_right" id="road43"></rd>
+              <rd class="road_bottom_right" id="road44"></rd>
+              <rd class="road_bottom_left" id="road45"></rd>
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_top_right" id="road46"></rd>
+              <rd class="road_right" id="road47"></rd>
+              <rd class="road_bottom_right" id="road48"></rd>
+              <rd class="road_bottom_left" id="road49"></rd>
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_right" id="road50"></rd>
+              <rd class="road_bottom_right" id="road51"></rd>
+              <rd class="road_bottom_left" id="road52"></rd>
+              <rd class="road_left" id="road53"></rd>
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_right" id="road54"></rd>
+              <rd class="road_bottom_right" id="road55"></rd>
+              <rd class="road_bottom_left" id="road56"></rd>
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_right" id="road57"></rd>
+              <rd class="road_bottom_right" id="road58"></rd>
+              <rd class="road_bottom_left" id="road59"></rd>
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_right" id="road60"></rd>
+              <rd class="road_bottom_right" id="road61"></rd>
+              <rd class="road_bottom_left" id="road62"></rd>
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_right" id="road63"></rd>
+              <rd class="road_bottom_right" id="road64"></rd>
+              <rd class="road_bottom_left" id="road65"></rd>
+              <rd class="road_left" id="road66"></rd>
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_right" id="road67"></rd>
+              <rd class="road_bottom_right" id="road68"></rd>
+              <rd class="road_bottom_left" id="road69"></rd>
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="road">
+          <div class="roadRhombus">
+            <a class="roadRectangle" href="#">
+              <rd class="road_right" id="road70"></rd>
+              <rd class="road_bottom_right" id="road71"></rd>
+              <rd class="road_bottom_left" id="road72"></rd>
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>  
+    <div class="board">
+      <ul id="hexGrid">
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+        <li class="hex">
+          <div class="hexRhombus">
+            <a class="hexRectangle" href="#">
+              <img src="./images/dirt.jpg" alt="" />
+  
+              <circle></circle>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+    
+  </body>
+</html>
