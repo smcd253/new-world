@@ -7,8 +7,9 @@ Final Project - a full-stack implementation of a popular board game
 ## Introduction
 This application is a light-weight multiplayer implementation of the popular board game "Settlers of Catan." It makes use of NodeJS express to run the backend and SocketIO as the communication framework. The front end serves purely as a viewport and input source for each client. All functionality is reserved for the backend save for some simple input handling. When a client connection is made, the server consults an internal game state machine and connection counter to regulate the admission of the client into the game. If they are admitted, all following actions are again filtered and regulated based on the internal game state machine and connection statistics. 
 
-The major advantage of using SocketIO as the communication framework as opposed to a typical REST API is that server --> client communication is made much easier. Whenever a sta
-A visual description of the process can be found at the end of this readme.
+The major advantage of using SocketIO as the communication framework as opposed to a typical REST API is that server --> client communication is made much easier. When a client connects to the server, the connection remains open for the duration of the game. Only when the client closes their browser or refreshes the page is the connection terminated. This allows the server to asynchronously update the clients without the clients needing to issue a request to do so.
+
+A visual description of this process can be found at the end of this readme.
 
 ## Compilation Instructions
 ```bash
