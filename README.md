@@ -27,9 +27,9 @@ mocha mocha_test_server.js
 ```
 
 ## Client-Server Game Model
-[*Figure 1*](info/diagram1.png) <br>
-[*Figure 2*](info/diagram2.png) <br>
-[*Figure 3*](info/diagram3.png) <br>
-[*Figure 4*](info/diagram4.png) <br>
-[*Figure 5*](info/diagram5.png) <br>
-[*Figure 6*](info/diagram6.png) <br>
+![*Figure 1*](info/diagram1.png) <br>
+![*Figure 2*](info/diagram2.png) <br>
+![*Figure 3*](info/diagram3.png) <br>
+![*Figure 4*](info/diagram4.png) <br>
+![*Figure 5*](info/diagram5.png) <br>
+![*Figure 6*](info/diagram6.png) <br>
