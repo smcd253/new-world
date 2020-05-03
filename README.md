@@ -11,6 +11,9 @@ The major advantage of using SocketIO as the communication framework as opposed 
 
 A visual description of this process can be found at the end of this readme.
 
+## Game Play
+Here's an example of what the front end currently looks like for a full game:
+![GamePlay](info/gameplay.png)
 ## Compilation Instructions
 ```bash
 git clone https://github.com/smcd253/new-world.git
