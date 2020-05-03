@@ -4,6 +4,8 @@ University of Southern California Viterbi School of Engineering
 
 Final Project - a full-stack implementation of a popular board game
 
+Author(s): Spencer McDonough
+
 ## Introduction
 This application is a light-weight multiplayer implementation of the popular board game "Settlers of Catan." It makes use of NodeJS express to run the backend and SocketIO as the communication framework. The front end serves purely as a viewport and input source for each client. All functionality is reserved for the backend save for some simple input handling. When a client connection is made, the server consults an internal game state machine and connection counter to regulate the admission of the client into the game. If they are admitted, all following actions are again filtered and regulated based on the internal game state machine and connection statistics. 
 
