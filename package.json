@@ -9,7 +9,7 @@
     "mocha": "^7.1.2",
     "require": "^2.4.20",
     "should": "^13.2.3",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.5.0"
   },
   "devDependencies": {},
   "scripts": {
